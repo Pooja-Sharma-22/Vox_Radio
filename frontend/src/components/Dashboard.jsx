@@ -36,12 +36,7 @@ const Dashboard = () => {
   const renderTabContent = () => {
     switch(activeTab) {
       case 'current-weather':
-        return (
-          <div>
-            <CurrentWeather />
-            <FlightInfo />
-          </div>
-        );
+        return <CurrentWeather />;
       case 'whatsapp':
         return <WhatsAppSection />;
       case 'submit-testimony':
