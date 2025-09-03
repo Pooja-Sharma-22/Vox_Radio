@@ -80,6 +80,12 @@ const Dashboard = () => {
           {renderTabContent()}
         </div>
       </div>
+      
+      {/* Radio Player */}
+      <RadioPlayer 
+        isVisible={showRadioPlayer} 
+        onClose={() => setShowRadioPlayer(false)} 
+      />
     </div>
   );
 };
