@@ -29,7 +29,6 @@ const SubmitTestimony = () => {
       return;
     }
 
-    // Mock submission
     console.log('Testimony submitted:', formData);
     
     toast({
@@ -37,7 +36,6 @@ const SubmitTestimony = () => {
       description: "Your testimony has been received and will be reviewed shortly.",
     });
 
-    // Reset form
     setFormData({
       name: '',
       phone: '',
@@ -63,7 +61,6 @@ const SubmitTestimony = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Submission Form */}
         <Card>
           <CardHeader>
             <CardTitle>Share Your Testimony</CardTitle>
@@ -100,7 +97,7 @@ const SubmitTestimony = () => {
 
               <div>
                 <Label htmlFor="category">Testimony Category *</Label>
-                <Select onValueChange={(value) => handleInputChange('category', value)}>
+                <Select value={formData.category} onValueChange={(value) => handleInputChange('category', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
@@ -140,7 +137,6 @@ const SubmitTestimony = () => {
           </CardContent>
         </Card>
 
-        {/* Recent Testimonies */}
         <Card>
           <CardHeader>
             <CardTitle>Recent Testimonies</CardTitle>

@@ -7,6 +7,7 @@ import WhatsAppSection from './WhatsAppSection';
 import SubmitTestimony from './SubmitTestimony';
 import LogPhoneCall from './LogPhoneCall';
 import RecentSubmissions from './RecentSubmissions';
+import AIAnalytics from './AIAnalytics';
 import FlightInfo from './FlightInfo';
 import { Button } from './ui/button';
 import { Download } from 'lucide-react';
@@ -15,17 +16,24 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('current-weather');
 
   const handleDownloadExcel = () => {
-    // Mock download functionality
     const data = {
       weather: 'Current weather data for Liberian cities',
       flights: 'Flight arrivals and departures for Monrovia',
       testimonies: 'Recent testimonies submitted',
       phoneCalls: 'Phone call logs',
-      whatsapp: 'WhatsApp message statistics'
+      whatsapp: 'WhatsApp message statistics',
+      analytics: 'AI-powered analytics and insights'
     };
     
-    console.log('Downloading Excel report:', data);
-    alert('Excel report downloaded successfully!');
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `vox-radio-report-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const renderTabContent = () => {
@@ -45,6 +53,8 @@ const Dashboard = () => {
         return <LogPhoneCall />;
       case 'recent-submissions':
         return <RecentSubmissions />;
+      case 'ai-analytics':
+        return <AIAnalytics />;
       default:
         return <CurrentWeather />;
     }
@@ -62,7 +72,7 @@ const Dashboard = () => {
             className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center gap-2 shadow-lg border border-black"
           >
             <Download size={16} />
-            Download as Excel
+            Download Report
           </Button>
         </div>
         <div className="bg-white rounded-lg shadow-lg border border-gray-200 min-h-96 mt-4">

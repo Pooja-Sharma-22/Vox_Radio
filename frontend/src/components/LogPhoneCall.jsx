@@ -33,7 +33,6 @@ const LogPhoneCall = () => {
       return;
     }
 
-    // Mock phone call logging
     console.log('Phone call logged:', callData);
     
     toast({
@@ -41,7 +40,6 @@ const LogPhoneCall = () => {
       description: "The phone call has been recorded in the system.",
     });
 
-    // Reset form
     setCallData({
       caller: '',
       phone: '',
@@ -74,7 +72,6 @@ const LogPhoneCall = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Log Call Form */}
         <Card>
           <CardHeader>
             <CardTitle>Record New Phone Call</CardTitle>
@@ -110,7 +107,7 @@ const LogPhoneCall = () => {
 
               <div>
                 <Label htmlFor="topic">Call Topic/Category *</Label>
-                <Select onValueChange={(value) => handleInputChange('topic', value)}>
+                <Select value={callData.topic} onValueChange={(value) => handleInputChange('topic', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select call topic" />
                   </SelectTrigger>
@@ -128,7 +125,7 @@ const LogPhoneCall = () => {
 
               <div>
                 <Label htmlFor="presenter">Presenter *</Label>
-                <Select onValueChange={(value) => handleInputChange('presenter', value)}>
+                <Select value={callData.presenter} onValueChange={(value) => handleInputChange('presenter', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select presenter" />
                   </SelectTrigger>
@@ -192,7 +189,6 @@ const LogPhoneCall = () => {
           </CardContent>
         </Card>
 
-        {/* Recent Phone Calls */}
         <Card>
           <CardHeader>
             <CardTitle>Recent Phone Calls</CardTitle>
