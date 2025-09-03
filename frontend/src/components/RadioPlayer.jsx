@@ -8,29 +8,55 @@ const RadioPlayer = ({ isVisible, onClose }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(0.7);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [connectionStatus, setConnectionStatus] = useState('connecting');
-  const iframeRef = useRef(null);
+  const [connectionStatus, setConnectionStatus] = useState('stopped');
+  const audioRef = useRef(null);
 
   const handlePlayPause = () => {
     if (isPlaying) {
-      // Reload iframe to stop stream (low bandwidth friendly)
-      if (iframeRef.current) {
-        iframeRef.current.src = '';
+      // Stop the stream
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = '';
       }
       setIsPlaying(false);
       setConnectionStatus('stopped');
     } else {
-      // Load stream
-      if (iframeRef.current) {
-        iframeRef.current.src = 'https://radio.galcom.org/?station=VOXRadio';
-      }
-      setIsPlaying(true);
-      setConnectionStatus('connecting');
+      // Start the stream - open in new window for better compatibility
+      const radioUrl = 'https://radio.galcom.org/?station=VOXRadio';
+      const radioWindow = window.open(
+        radioUrl,
+        'VoxRadioStream',
+        `
+          width=400,
+          height=300,
+          left=${(window.screen.width - 400) / 2},
+          top=${(window.screen.height - 300) / 2},
+          scrollbars=no,
+          resizable=yes,
+          toolbar=no,
+          menubar=no,
+          location=no,
+          directories=no,
+          status=yes
+        `.replace(/\s/g, '')
+      );
       
-      // Simulate connection status for user feedback
-      setTimeout(() => {
+      if (radioWindow) {
+        setIsPlaying(true);
         setConnectionStatus('connected');
-      }, 3000);
+        radioWindow.focus();
+        
+        // Check if window is closed
+        const checkClosed = setInterval(() => {
+          if (radioWindow.closed) {
+            setIsPlaying(false);
+            setConnectionStatus('stopped');
+            clearInterval(checkClosed);
+          }
+        }, 1000);
+      } else {
+        alert('Please allow popups to listen to Vox Radio live stream');
+      }
     }
   };
 
@@ -49,7 +75,7 @@ const RadioPlayer = ({ isVisible, onClose }) => {
       case 'connecting': return 'Connecting...';
       case 'connected': return 'Live Stream Active';
       case 'stopped': return 'Stream Stopped';
-      default: return 'Ready';
+      default: return 'Ready to Play';
     }
   };
 
@@ -113,7 +139,7 @@ const RadioPlayer = ({ isVisible, onClose }) => {
                   {getConnectionStatusText()}
                 </div>
                 <div className="text-xs text-gray-400 mt-1">
-                  Optimized for Low Bandwidth
+                  Opens in separate window - Low bandwidth optimized
                 </div>
               </div>
 
@@ -131,33 +157,14 @@ const RadioPlayer = ({ isVisible, onClose }) => {
                 </Button>
               </div>
 
-              {/* Volume Control */}
-              <div className="flex items-center space-x-2">
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={handleVolumeToggle}
-                  className="text-white hover:bg-gray-800 p-1"
-                >
-                  {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-                </Button>
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.1"
-                  value={isMuted ? 0 : volume}
-                  onChange={handleVolumeChange}
-                  className="flex-1 h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer"
-                  style={{
-                    background: `linear-gradient(to right, #f97316 0%, #f97316 ${(isMuted ? 0 : volume) * 100}%, #374151 ${(isMuted ? 0 : volume) * 100}%, #374151 100%)`
-                  }}
-                />
-              </div>
-
-              {/* Low Bandwidth Notice */}
-              <div className="mt-3 p-2 bg-gray-900 rounded text-xs text-gray-300 text-center">
-                <span className="text-orange-400">💡</span> Stream uses minimal data for low-speed connections
+              {/* Info */}
+              <div className="text-center">
+                <div className="text-xs text-gray-300 mb-2">
+                  {isPlaying ? 'Stream active in popup window' : 'Click play to open stream'}
+                </div>
+                <div className="text-xs text-orange-400">
+                  💡 Optimized for low-speed internet connections
+                </div>
               </div>
             </div>
           )}
@@ -188,15 +195,12 @@ const RadioPlayer = ({ isVisible, onClose }) => {
             </div>
           )}
 
-          {/* Hidden iframe for stream */}
-          {isPlaying && (
-            <iframe
-              ref={iframeRef}
-              src="https://radio.galcom.org/?station=VOXRadio"
-              style={{ display: 'none' }}
-              title="Vox Radio Stream"
-            />
-          )}
+          {/* Hidden audio element for future use */}
+          <audio
+            ref={audioRef}
+            style={{ display: 'none' }}
+            preload="none"
+          />
         </CardContent>
       </Card>
     </div>
