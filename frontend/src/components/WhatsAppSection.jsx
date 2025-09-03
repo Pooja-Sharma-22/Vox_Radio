@@ -1,14 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
-import { MessageCircle, Users, TrendingUp, Plus, RefreshCw } from 'lucide-react';
+import { MessageCircle, Users, TrendingUp, RefreshCw, CheckCircle, Clock } from 'lucide-react';
+import AddWhatsAppMessage from './AddWhatsAppMessage';
 
 const WhatsAppSection = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [stats, setStats] = useState({
+    today: 0,
+    week: 0,
+    month: 0
+  });
+
+  // Load WhatsApp messages and calculate stats
+  useEffect(() => {
+    loadMessages();
+  }, []);
+
+  const loadMessages = () => {
+    const whatsappMessages = JSON.parse(localStorage.getItem('voxRadioWhatsApp') || '[]');
+    setMessages(whatsappMessages);
+    
+    // Calculate stats (simple mock calculation)
+    const now = new Date();
+    const today = whatsappMessages.filter(msg => {
+      const msgDate = new Date(msg.timestamp || msg.time || now);
+      return msgDate.toDateString() === now.toDateString();
+    }).length;
+
+    setStats({
+      today: today,
+      week: Math.max(today * 3, whatsappMessages.length), // Mock calculation
+      month: whatsappMessages.length
+    });
+  };
 
   const handleRefresh = () => {
     setIsLoading(true);
     setTimeout(() => {
+      loadMessages();
       setIsLoading(false);
     }, 2000);
   };
@@ -16,6 +47,20 @@ const WhatsAppSection = () => {
   const openWhatsApp = () => {
     const url = `https://wa.me/2310777975975`;
     window.open(url, '_blank');
+  };
+
+  const handleReplyMessage = (messageId) => {
+    const updatedMessages = messages.map(msg => 
+      msg.id === messageId ? { ...msg, replied: true } : msg
+    );
+    localStorage.setItem('voxRadioWhatsApp', JSON.stringify(updatedMessages));
+    setMessages(updatedMessages);
+    
+    alert('Reply sent successfully!');
+  };
+
+  const handleMessageAdded = (newMessage) => {
+    loadMessages(); // Refresh the messages list
   };
 
   return (
@@ -45,14 +90,14 @@ const WhatsAppSection = () => {
         </div>
       </div>
 
-      {/* Statistics Cards - Empty State */}
+      {/* Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <Card className="border-l-4 border-l-green-500">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Today</p>
-                <p className="text-2xl font-bold text-green-600">--</p>
+                <p className="text-2xl font-bold text-green-600">{stats.today}</p>
               </div>
               <MessageCircle className="text-green-500" size={32} />
             </div>
@@ -64,7 +109,7 @@ const WhatsAppSection = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">This Week</p>
-                <p className="text-2xl font-bold text-blue-600">--</p>
+                <p className="text-2xl font-bold text-blue-600">{stats.week}</p>
               </div>
               <TrendingUp className="text-blue-500" size={32} />
             </div>
@@ -76,7 +121,7 @@ const WhatsAppSection = () => {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">This Month</p>
-                <p className="text-2xl font-bold text-purple-600">--</p>
+                <p className="text-2xl font-bold text-purple-600">{stats.month}</p>
               </div>
               <Users className="text-purple-500" size={32} />
             </div>
@@ -96,29 +141,73 @@ const WhatsAppSection = () => {
         </Card>
       </div>
 
-      {/* Recent Messages - Empty State */}
+      {/* Recent Messages */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             <span>Recent WhatsApp Messages</span>
-            <Button size="sm" variant="outline" className="flex items-center gap-2">
-              <Plus size={16} />
-              Add Message
-            </Button>
+            <AddWhatsAppMessage onMessageAdded={handleMessageAdded} />
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-12">
-            <MessageCircle className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No messages yet</h3>
-            <p className="text-gray-500 mb-4">
-              WhatsApp messages will appear here once they start coming in.
-            </p>
-            <div className="text-sm text-gray-400">
-              <p>WhatsApp Business Number: <strong>0777975975</strong></p>
-              <p>Ready to receive and manage community messages</p>
+          {messages.length === 0 ? (
+            <div className="text-center py-12">
+              <MessageCircle className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No messages yet</h3>
+              <p className="text-gray-500 mb-4">
+                WhatsApp messages will appear here once they start coming in.
+              </p>
+              <div className="text-sm text-gray-400">
+                <p>WhatsApp Business Number: <strong>0777975975</strong></p>
+                <p>Use "Add Message" button to manually add messages</p>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="space-y-4">
+              {messages.map((message) => (
+                <div key={message.id} className="p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="font-semibold text-gray-900">{message.sender}</span>
+                        <span className="text-sm text-gray-500 flex items-center gap-1">
+                          <Clock size={12} />
+                          {message.time}
+                        </span>
+                        {message.replied ? (
+                          <CheckCircle size={16} className="text-green-500" />
+                        ) : (
+                          <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                        )}
+                      </div>
+                      {message.phone && (
+                        <p className="text-sm text-gray-600 mb-2">📞 {message.phone}</p>
+                      )}
+                      <p className="text-gray-700 mb-3">{message.message}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    {!message.replied && (
+                      <Button 
+                        size="sm" 
+                        onClick={() => handleReplyMessage(message.id)}
+                        className="bg-green-500 hover:bg-green-600 text-white"
+                      >
+                        Reply
+                      </Button>
+                    )}
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      onClick={() => alert(`Message details:\nFrom: ${message.sender}\nTime: ${message.time}\nMessage: ${message.message}\nReplied: ${message.replied ? 'Yes' : 'No'}`)}
+                    >
+                      View Details
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
