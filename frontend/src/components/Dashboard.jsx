@@ -58,13 +58,23 @@ const Dashboard = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-6 border-b border-gray-300">
           <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
-          <Button 
-            onClick={handleDownloadExcel}
-            className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center gap-2 shadow-lg border border-black"
-          >
-            <Download size={16} />
-            Download Report
-          </Button>
+          <div className="flex items-center gap-3">
+            <Button 
+              onClick={() => setShowRadioPlayer(!showRadioPlayer)}
+              variant="outline"
+              className="flex items-center gap-2 border-orange-500 text-orange-600 hover:bg-orange-50"
+            >
+              <Radio size={16} />
+              {showRadioPlayer ? 'Hide Player' : 'Show Player'}
+            </Button>
+            <Button 
+              onClick={handleDownloadExcel}
+              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center gap-2 shadow-lg border border-black"
+            >
+              <Download size={16} />
+              Download Report
+            </Button>
+          </div>
         </div>
         <div className="bg-white rounded-lg shadow-lg border border-gray-200 min-h-96 mt-4">
           {renderTabContent()}
