@@ -181,6 +181,12 @@ const FlightInfo = () => {
                   <span className="text-gray-600">Gate: </span>
                   <span className="font-bold text-orange-600">{flight.gate}</span>
                 </div>
+                {flight.days && (
+                  <div className="text-xs text-gray-500 mt-2">
+                    <span className="font-medium">Operating days: </span>
+                    {flight.days}
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
