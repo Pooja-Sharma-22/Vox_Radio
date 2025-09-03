@@ -1,26 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Badge } from './ui/badge';
 import { CheckCircle, XCircle, Clock, Search, Filter, Eye, Trash2, MessageSquare, Phone } from 'lucide-react';
-import { mockTestimonies, mockPhoneCalls, mockWhatsAppData } from '../data/mockData';
+import { useToast } from '../hooks/use-toast';
 
 const RecentSubmissions = () => {
+  const { toast } = useToast();
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('all');
+  const [allSubmissions, setAllSubmissions] = useState([]);
 
-  // Empty submissions - to be populated with real data
-  const allSubmissions = [];
+  // Load submissions from localStorage
+  useEffect(() => {
+    const loadSubmissions = () => {
+      const testimonies = JSON.parse(localStorage.getItem('voxRadioTestimonies') || '[]');
+      const phoneCalls = JSON.parse(localStorage.getItem('voxRadioPhoneCalls') || '[]');
+      const whatsappMessages = JSON.parse(localStorage.getItem('voxRadioWhatsApp') || '[]');
+
+      // Combine all submissions with proper structure
+      const combined = [
+        ...testimonies.map(t => ({ 
+          ...t, 
+          type: 'testimony', 
+          icon: MessageSquare,
+          name: t.name || 'Unknown',
+          content: t.message || '',
+          date: t.timestamp || new Date().toLocaleString(),
+          approved: t.approved !== undefined ? t.approved : false
+        })),
+        ...phoneCalls.map(c => ({ 
+          ...c, 
+          type: 'phone_call', 
+          icon: Phone, 
+          name: c.caller || 'Unknown Caller',
+          content: c.notes || c.topic || '',
+          date: c.timestamp || new Date().toLocaleString(),
+          approved: true // Phone calls are automatically approved
+        })),
+        ...whatsappMessages.map(w => ({ 
+          ...w, 
+          type: 'whatsapp', 
+          icon: MessageSquare,
+          name: w.sender || w.name || 'WhatsApp User',
+          content: w.message || '',
+          date: w.time || w.timestamp || new Date().toLocaleString(),
+          approved: w.replied || false
+        }))
+      ];
+
+      // Sort by date (newest first)
+      combined.sort((a, b) => new Date(b.date) - new Date(a.date));
+      setAllSubmissions(combined);
+    };
+
+    loadSubmissions();
+    
+    // Set up interval to refresh data every 10 seconds
+    const interval = setInterval(loadSubmissions, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   const filteredSubmissions = allSubmissions.filter(submission => {
     const matchesSearch = searchTerm === '' || 
       submission.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      submission.caller?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      submission.sender?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      submission.message?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      submission.content?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       submission.topic?.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesType = selectedType === 'all' || submission.type === selectedType;
@@ -33,18 +80,73 @@ const RecentSubmissions = () => {
   });
 
   const handleApprove = (id, type) => {
-    console.log(`Approving ${type} with id ${id}`);
-    alert(`${type} approved successfully!`);
+    if (type === 'testimony') {
+      const testimonies = JSON.parse(localStorage.getItem('voxRadioTestimonies') || '[]');
+      const updated = testimonies.map(t => t.id === id ? { ...t, approved: true } : t);
+      localStorage.setItem('voxRadioTestimonies', JSON.stringify(updated));
+    } else if (type === 'whatsapp') {
+      const messages = JSON.parse(localStorage.getItem('voxRadioWhatsApp') || '[]');
+      const updated = messages.map(m => m.id === id ? { ...m, replied: true } : m);
+      localStorage.setItem('voxRadioWhatsApp', JSON.stringify(updated));
+    }
+    
+    // Refresh submissions
+    const loadSubmissions = () => {
+      const testimonies = JSON.parse(localStorage.getItem('voxRadioTestimonies') || '[]');
+      const phoneCalls = JSON.parse(localStorage.getItem('voxRadioPhoneCalls') || '[]');
+      const whatsappMessages = JSON.parse(localStorage.getItem('voxRadioWhatsApp') || '[]');
+
+      const combined = [
+        ...testimonies.map(t => ({ ...t, type: 'testimony', icon: MessageSquare, name: t.name || 'Unknown', content: t.message || '', date: t.timestamp || new Date().toLocaleString(), approved: t.approved !== undefined ? t.approved : false })),
+        ...phoneCalls.map(c => ({ ...c, type: 'phone_call', icon: Phone, name: c.caller || 'Unknown Caller', content: c.notes || c.topic || '', date: c.timestamp || new Date().toLocaleString(), approved: true })),
+        ...whatsappMessages.map(w => ({ ...w, type: 'whatsapp', icon: MessageSquare, name: w.sender || w.name || 'WhatsApp User', content: w.message || '', date: w.time || w.timestamp || new Date().toLocaleString(), approved: w.replied || false }))
+      ];
+
+      combined.sort((a, b) => new Date(b.date) - new Date(a.date));
+      setAllSubmissions(combined);
+    };
+    
+    loadSubmissions();
+    
+    toast({
+      title: "Approved Successfully",
+      description: `${type.replace('_', ' ')} has been approved.`,
+    });
   };
 
   const handleReject = (id, type) => {
-    console.log(`Rejecting ${type} with id ${id}`);
-    alert(`${type} rejected successfully!`);
+    if (type === 'testimony') {
+      const testimonies = JSON.parse(localStorage.getItem('voxRadioTestimonies') || '[]');
+      const updated = testimonies.filter(t => t.id !== id);
+      localStorage.setItem('voxRadioTestimonies', JSON.stringify(updated));
+    } else if (type === 'whatsapp') {
+      const messages = JSON.parse(localStorage.getItem('voxRadioWhatsApp') || '[]');
+      const updated = messages.filter(m => m.id !== id);
+      localStorage.setItem('voxRadioWhatsApp', JSON.stringify(updated));
+    }
+    
+    // Refresh submissions
+    setAllSubmissions(prev => prev.filter(s => s.id !== id));
+    
+    toast({
+      title: "Rejected Successfully",
+      description: `${type.replace('_', ' ')} has been removed.`,
+    });
   };
 
   const handleView = (submission) => {
-    console.log('Viewing submission:', submission);
-    alert(`Viewing ${submission.type}: ${submission.message || submission.topic}`);
+    const details = `
+Type: ${submission.type.replace('_', ' ').toUpperCase()}
+Name: ${submission.name}
+Date: ${submission.date}
+Content: ${submission.content}
+${submission.phone ? `Phone: ${submission.phone}` : ''}
+${submission.category ? `Category: ${submission.category}` : ''}
+${submission.presenter ? `Presenter: ${submission.presenter}` : ''}
+${submission.followUpRequired ? 'Follow-up Required: Yes' : ''}
+    `.trim();
+    
+    alert(details);
   };
 
   const getStatusBadge = (submission) => {
@@ -57,16 +159,13 @@ const RecentSubmissions = () => {
     return <Badge className="bg-orange-100 text-orange-800">Pending</Badge>;
   };
 
-  const getSubmissionName = (submission) => {
-    return submission.name || submission.caller || submission.sender || 'Unknown';
-  };
-
-  const getSubmissionContent = (submission) => {
-    return submission.message || submission.topic || submission.notes || 'No content';
-  };
-
-  const getSubmissionDate = (submission) => {
-    return submission.date || submission.timestamp || submission.time || 'Unknown date';
+  const getTypeLabel = (type) => {
+    switch(type) {
+      case 'testimony': return 'Testimony';
+      case 'phone_call': return 'Phone Call';
+      case 'whatsapp': return 'WhatsApp';
+      default: return type;
+    }
   };
 
   return (
@@ -128,7 +227,7 @@ const RecentSubmissions = () => {
 
       {/* Submissions List */}
       <div className="space-y-4">
-        {allSubmissions.length === 0 ? (
+        {filteredSubmissions.length === 0 ? (
           <Card>
             <CardContent className="p-12 text-center">
               <div className="flex flex-col items-center">
@@ -171,11 +270,11 @@ const RecentSubmissions = () => {
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <span className="font-semibold text-gray-900">
-                            {getSubmissionName(submission)}
+                            {submission.name}
                           </span>
                           {getStatusBadge(submission)}
-                          <span className="text-xs text-gray-500 capitalize">
-                            {submission.type.replace('_', ' ')}
+                          <span className="text-xs text-gray-500">
+                            {getTypeLabel(submission.type)}
                           </span>
                         </div>
                         
@@ -190,11 +289,11 @@ const RecentSubmissions = () => {
                         )}
                         
                         <p className="text-sm text-gray-700 mt-2 line-clamp-2">
-                          {getSubmissionContent(submission)}
+                          {submission.content}
                         </p>
                         
                         <p className="text-xs text-gray-500 mt-2">
-                          {getSubmissionDate(submission)}
+                          {submission.date}
                         </p>
                       </div>
                     </div>
