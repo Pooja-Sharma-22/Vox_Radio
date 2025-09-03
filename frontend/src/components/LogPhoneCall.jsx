@@ -20,7 +20,9 @@ const LogPhoneCall = () => {
     followUpRequired: false
   });
 
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!callData.caller || !callData.topic || !callData.presenter) {
@@ -32,22 +34,50 @@ const LogPhoneCall = () => {
       return;
     }
 
-    console.log('Phone call logged:', callData);
-    
-    toast({
-      title: "Phone Call Logged Successfully!",
-      description: "The phone call has been recorded in the system.",
-    });
+    setIsSubmitting(true);
 
-    setCallData({
-      caller: '',
-      phone: '',
-      topic: '',
-      duration: '',
-      notes: '',
-      presenter: '',
-      followUpRequired: false
-    });
+    try {
+      // Create phone call object with timestamp
+      const phoneCallData = {
+        ...callData,
+        id: Date.now(),
+        timestamp: new Date().toLocaleString(),
+        type: 'phone_call'
+      };
+
+      // Save to localStorage for persistence
+      const existingCalls = JSON.parse(localStorage.getItem('voxRadioPhoneCalls') || '[]');
+      existingCalls.unshift(phoneCallData);
+      localStorage.setItem('voxRadioPhoneCalls', JSON.stringify(existingCalls));
+
+      console.log('Phone call logged:', phoneCallData);
+      
+      toast({
+        title: "Phone Call Logged Successfully!",
+        description: "The phone call has been recorded in the system.",
+      });
+
+      // Reset form
+      setCallData({
+        caller: '',
+        phone: '',
+        topic: '',
+        duration: '',
+        notes: '',
+        presenter: '',
+        followUpRequired: false
+      });
+
+    } catch (error) {
+      console.error('Error logging phone call:', error);
+      toast({
+        title: "Logging Error",
+        description: "There was an error logging the phone call. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field, value) => {
@@ -66,15 +96,18 @@ const LogPhoneCall = () => {
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="max-w-2xl mx-auto">
         <Card>
           <CardHeader>
             <CardTitle>Record New Phone Call</CardTitle>
+            <p className="text-gray-600">
+              Log all incoming calls for better listener engagement and follow-up management.
+            </p>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <Label htmlFor="caller" className="flex items-center gap-2">
+                <Label htmlFor="caller" className="flex items-center gap-2 text-base font-medium">
                   <User size={16} />
                   Caller Name *
                 </Label>
@@ -84,11 +117,12 @@ const LogPhoneCall = () => {
                   onChange={(e) => handleInputChange('caller', e.target.value)}
                   placeholder="Enter caller's name or 'Anonymous'"
                   required
+                  className="mt-2"
                 />
               </div>
 
               <div>
-                <Label htmlFor="phone" className="flex items-center gap-2">
+                <Label htmlFor="phone" className="flex items-center gap-2 text-base font-medium">
                   <Phone size={16} />
                   Phone Number
                 </Label>
@@ -97,13 +131,14 @@ const LogPhoneCall = () => {
                   value={callData.phone}
                   onChange={(e) => handleInputChange('phone', e.target.value)}
                   placeholder="0777123456 (optional)"
+                  className="mt-2"
                 />
               </div>
 
               <div>
-                <Label htmlFor="topic">Call Topic/Category *</Label>
+                <Label htmlFor="topic" className="text-base font-medium">Call Topic/Category *</Label>
                 <Select value={callData.topic} onValueChange={(value) => handleInputChange('topic', value)}>
-                  <SelectTrigger>
+                  <SelectTrigger className="mt-2">
                     <SelectValue placeholder="Select call topic" />
                   </SelectTrigger>
                   <SelectContent>
@@ -119,9 +154,9 @@ const LogPhoneCall = () => {
               </div>
 
               <div>
-                <Label htmlFor="presenter">Presenter *</Label>
+                <Label htmlFor="presenter" className="text-base font-medium">Presenter *</Label>
                 <Select value={callData.presenter} onValueChange={(value) => handleInputChange('presenter', value)}>
-                  <SelectTrigger>
+                  <SelectTrigger className="mt-2">
                     <SelectValue placeholder="Select presenter" />
                   </SelectTrigger>
                   <SelectContent>
@@ -134,7 +169,7 @@ const LogPhoneCall = () => {
               </div>
 
               <div>
-                <Label htmlFor="duration" className="flex items-center gap-2">
+                <Label htmlFor="duration" className="flex items-center gap-2 text-base font-medium">
                   <Clock size={16} />
                   Call Duration
                 </Label>
@@ -143,11 +178,12 @@ const LogPhoneCall = () => {
                   value={callData.duration}
                   onChange={(e) => handleInputChange('duration', e.target.value)}
                   placeholder="e.g., 5:30"
+                  className="mt-2"
                 />
               </div>
 
               <div>
-                <Label htmlFor="notes" className="flex items-center gap-2">
+                <Label htmlFor="notes" className="flex items-center gap-2 text-base font-medium">
                   <FileText size={16} />
                   Notes
                 </Label>
@@ -157,18 +193,19 @@ const LogPhoneCall = () => {
                   onChange={(e) => handleInputChange('notes', e.target.value)}
                   placeholder="Add any relevant notes about the call..."
                   rows={4}
+                  className="mt-2"
                 />
               </div>
 
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-3">
                 <input
                   type="checkbox"
                   id="followUp"
                   checked={callData.followUpRequired}
                   onChange={(e) => handleInputChange('followUpRequired', e.target.checked)}
-                  className="rounded border-gray-300"
+                  className="w-4 h-4 rounded border-gray-300 text-orange-500 focus:ring-orange-500"
                 />
-                <Label htmlFor="followUp" className="flex items-center gap-2">
+                <Label htmlFor="followUp" className="flex items-center gap-2 text-base">
                   <AlertTriangle size={16} className="text-orange-500" />
                   Follow-up Required
                 </Label>
@@ -176,37 +213,12 @@ const LogPhoneCall = () => {
 
               <Button 
                 type="submit" 
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                disabled={isSubmitting}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg font-semibold"
               >
-                Log Phone Call
+                {isSubmitting ? 'Logging Call...' : 'Log Phone Call'}
               </Button>
             </form>
-          </CardContent>
-        </Card>
-
-        {/* Recent Phone Calls - Empty State */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
-              <span>Recent Phone Calls</span>
-              <Button size="sm" variant="outline" className="flex items-center gap-2">
-                <Plus size={16} />
-                Import Calls
-              </Button>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-center py-12">
-              <Phone className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No phone calls logged yet</h3>
-              <p className="text-gray-500 mb-4">
-                Phone call records will appear here once you start logging calls.
-              </p>
-              <div className="text-sm text-gray-400">
-                <p>Use the form on the left to log incoming calls</p>
-                <p>Track caller information, topics, and follow-up needs</p>
-              </div>
-            </div>
           </CardContent>
         </Card>
       </div>
