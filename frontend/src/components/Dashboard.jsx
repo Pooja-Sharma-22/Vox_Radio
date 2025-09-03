@@ -7,7 +7,6 @@ import WhatsAppSection from './WhatsAppSection';
 import SubmitTestimony from './SubmitTestimony';
 import LogPhoneCall from './LogPhoneCall';
 import RecentSubmissions from './RecentSubmissions';
-import AIAnalytics from './AIAnalytics';
 import FlightInfo from './FlightInfo';
 import { Button } from './ui/button';
 import { Download } from 'lucide-react';
@@ -21,8 +20,7 @@ const Dashboard = () => {
       flights: 'Flight arrivals and departures for Monrovia',
       testimonies: 'Recent testimonies submitted',
       phoneCalls: 'Phone call logs',
-      whatsapp: 'WhatsApp message statistics',
-      analytics: 'AI-powered analytics and insights'
+      whatsapp: 'WhatsApp message statistics'
     };
     
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -53,8 +51,6 @@ const Dashboard = () => {
         return <LogPhoneCall />;
       case 'recent-submissions':
         return <RecentSubmissions />;
-      case 'ai-analytics':
-        return <AIAnalytics />;
       default:
         return <CurrentWeather />;
     }

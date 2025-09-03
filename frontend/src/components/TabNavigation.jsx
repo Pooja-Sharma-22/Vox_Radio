@@ -7,8 +7,7 @@ const TabNavigation = ({ activeTab, setActiveTab }) => {
     { id: 'whatsapp', label: 'WhatsApp', icon: '💬' },
     { id: 'submit-testimony', label: 'Submit Testimony', icon: '✍️' },
     { id: 'log-phone-call', label: 'Log a Phone Call', icon: '📞' },
-    { id: 'recent-submissions', label: 'Recent Submissions', icon: '📋' },
-    { id: 'ai-analytics', label: 'AI Analytics', icon: '🤖' }
+    { id: 'recent-submissions', label: 'Recent Submissions', icon: '📋' }
   ];
 
   return (

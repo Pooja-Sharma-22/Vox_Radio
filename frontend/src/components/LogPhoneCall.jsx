@@ -6,8 +6,7 @@ import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { useToast } from '../hooks/use-toast';
-import { Phone, Clock, User, FileText, AlertTriangle } from 'lucide-react';
-import { mockPhoneCalls } from '../data/mockData';
+import { Phone, Clock, User, FileText, AlertTriangle, Plus } from 'lucide-react';
 
 const LogPhoneCall = () => {
   const { toast } = useToast();
@@ -56,10 +55,6 @@ const LogPhoneCall = () => {
       ...prev,
       [field]: value
     }));
-  };
-
-  const formatDuration = (duration) => {
-    return duration || 'N/A';
   };
 
   return (
@@ -189,52 +184,28 @@ const LogPhoneCall = () => {
           </CardContent>
         </Card>
 
+        {/* Recent Phone Calls - Empty State */}
         <Card>
           <CardHeader>
-            <CardTitle>Recent Phone Calls</CardTitle>
+            <CardTitle className="flex items-center justify-between">
+              <span>Recent Phone Calls</span>
+              <Button size="sm" variant="outline" className="flex items-center gap-2">
+                <Plus size={16} />
+                Import Calls
+              </Button>
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4 max-h-96 overflow-y-auto">
-              {mockPhoneCalls.map((call) => (
-                <div key={call.id} className="p-4 border rounded-lg hover:bg-gray-50 transition-colors">
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <span className="font-semibold text-gray-900 flex items-center gap-2">
-                        <User size={16} />
-                        {call.caller}
-                      </span>
-                      <p className="text-sm text-gray-600 flex items-center gap-2 mt-1">
-                        <Phone size={14} />
-                        {call.phone}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-xs text-gray-500">{call.timestamp}</span>
-                      <p className="text-sm font-medium text-orange-600">
-                        Duration: {formatDuration(call.duration)}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="mb-2">
-                    <span className="text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded-full">
-                      {call.topic}
-                    </span>
-                  </div>
-                  
-                  <p className="text-sm text-gray-700 mb-2">{call.notes}</p>
-                  
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-gray-600">Presenter: {call.presenter}</span>
-                    {call.followUpRequired && (
-                      <span className="text-orange-600 flex items-center gap-1">
-                        <AlertTriangle size={12} />
-                        Follow-up needed
-                      </span>
-                    )}
-                  </div>
-                </div>
-              ))}
+            <div className="text-center py-12">
+              <Phone className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No phone calls logged yet</h3>
+              <p className="text-gray-500 mb-4">
+                Phone call records will appear here once you start logging calls.
+              </p>
+              <div className="text-sm text-gray-400">
+                <p>Use the form on the left to log incoming calls</p>
+                <p>Track caller information, topics, and follow-up needs</p>
+              </div>
             </div>
           </CardContent>
         </Card>
