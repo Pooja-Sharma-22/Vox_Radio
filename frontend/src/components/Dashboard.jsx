@@ -16,7 +16,6 @@ const Dashboard = () => {
   const handleDownloadExcel = () => {
     const data = {
       weather: 'Current weather data for Liberian cities',
-      flights: 'Flight arrivals and departures for Monrovia',
       testimonies: 'Recent testimonies submitted',
       phoneCalls: 'Phone call logs',
       whatsapp: 'WhatsApp message statistics'
