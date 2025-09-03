@@ -194,11 +194,21 @@ const FlightInfo = () => {
       </div>
       
       <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-        <p className="text-sm text-gray-600">
-          <strong>Note:</strong> Roberts International Airport serves as Liberia's main international gateway. 
-          Major airlines include Ethiopian Airlines, Brussels Airlines, Royal Air Maroc, ASKY Airlines, and Air Côte d'Ivoire.
-          Flight information updates every 15 minutes.
+        <p className="text-sm text-gray-600 mb-2">
+          <strong>Roberts International Airport (ROB)</strong> - Liberia's main international gateway
         </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-gray-600">
+          <div>
+            <p><strong>Ethiopian Airlines:</strong> 3x weekly (Mon, Wed, Sat inbound / Tue, Thu, Sun outbound)</p>
+            <p><strong>Brussels Airlines:</strong> 4x weekly (Tue, Wed, Fri, Sat)</p>
+          </div>
+          <div>
+            <p><strong>Royal Air Maroc:</strong> 3x weekly (varies by season)</p>
+            <p><strong>ASKY Airlines:</strong> Daily flights to Accra</p>
+            <p><strong>Air Côte d'Ivoire:</strong> 6x weekly to Abidjan</p>
+          </div>
+        </div>
+        <p className="text-xs text-gray-500 mt-2">Flight information updates every 15 minutes. Schedules subject to change.</p>
       </div>
     </div>
   );
