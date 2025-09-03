@@ -13,6 +13,7 @@ import { Download, Radio } from 'lucide-react';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('current-weather');
+  const [showRadioPlayer, setShowRadioPlayer] = useState(false);
 
   const handleDownloadExcel = () => {
     const data = {
