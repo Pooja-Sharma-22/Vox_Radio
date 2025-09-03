@@ -1,23 +1,143 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import WeatherCard from './WeatherCard';
-import { mockWeatherData } from '../data/mockData';
+import { getCurrentWeatherData } from '../data/mockData';
 
 const CurrentWeather = () => {
+  const [weatherData, setWeatherData] = useState(getCurrentWeatherData());
+  const [lastUpdate, setLastUpdate] = useState(new Date());
+  const [nextRotation, setNextRotation] = useState('');
+
+  // Calculate next rotation time
+  const calculateNextRotation = () => {
+    const now = new Date();
+    const minutes = now.getMinutes();
+    const nextRotationMinute = Math.ceil((minutes + 1) / 15) * 15;
+    const nextRotationTime = new Date(now);
+    
+    if (nextRotationMinute >= 60) {
+      nextRotationTime.setHours(nextRotationTime.getHours() + 1);
+      nextRotationTime.setMinutes(0);
+    } else {
+      nextRotationTime.setMinutes(nextRotationMinute);
+    }
+    
+    nextRotationTime.setSeconds(0);
+    return nextRotationTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  };
+
+  // Update weather data every 15 minutes
+  useEffect(() => {
+    const updateWeatherData = () => {
+      const newData = getCurrentWeatherData();
+      setWeatherData(newData);
+      setLastUpdate(new Date());
+      setNextRotation(calculateNextRotation());
+    };
+
+    // Initial calculation
+    setNextRotation(calculateNextRotation());
+
+    // Set up interval to update every minute to check for rotation
+    const interval = setInterval(() => {
+      const now = new Date();
+      const minutes = now.getMinutes();
+      
+      // Update at 0, 15, 30, 45 minutes
+      if (minutes % 15 === 0 && now.getSeconds() < 10) {
+        updateWeatherData();
+      } else {
+        // Update next rotation time display
+        setNextRotation(calculateNextRotation());
+      }
+    }, 10000); // Check every 10 seconds for smoother updates
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const getCurrentSetInfo = () => {
+    const now = new Date();
+    const minutes = now.getMinutes();
+    const rotationIndex = Math.floor(minutes / 15);
+    
+    const setNames = [
+      "Major Cities",
+      "Coastal Cities", 
+      "Northern Cities",
+      "Central/Eastern Cities",
+      "Mining/Rural Areas"
+    ];
+    
+    return setNames[rotationIndex % setNames.length];
+  };
+
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-2xl font-bold text-gray-900 flex items-center">
-          <span className="mr-3">🌤️</span>
-          Current Weather - Liberia
-        </h3>
-        <div className="text-sm text-gray-500">
-          Last updated: {new Date().toLocaleString()}
+        <div>
+          <h3 className="text-2xl font-bold text-gray-900 flex items-center">
+            <span className="mr-3">🌤️</span>
+            Current Weather - Liberia
+          </h3>
+          <p className="text-sm text-gray-600 mt-1">
+            Showing: <span className="font-medium text-orange-600">{getCurrentSetInfo()}</span>
+          </p>
+        </div>
+        <div className="text-right">
+          <div className="text-sm text-gray-500">
+            Last updated: {lastUpdate.toLocaleString()}
+          </div>
+          <div className="text-xs text-orange-600 mt-1">
+            Next rotation: {nextRotation}
+          </div>
         </div>
       </div>
+      
+      {/* Rotation Info Banner */}
+      <div className="mb-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+          <p className="text-sm text-orange-800">
+            <strong>Auto-Rotation:</strong> Cities change automatically every 15 minutes to show different regions across Liberia
+          </p>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {mockWeatherData.map((weather, index) => (
-          <WeatherCard key={index} weather={weather} />
+        {weatherData.map((weather, index) => (
+          <WeatherCard key={`${weather.city}-${index}`} weather={weather} />
         ))}
+      </div>
+      
+      {/* Rotation Schedule */}
+      <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+        <h4 className="font-medium text-gray-900 mb-3">15-Minute Rotation Schedule:</h4>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-3 text-xs">
+          <div className="p-2 bg-white rounded border">
+            <div className="font-medium text-gray-900">:00 - :14</div>
+            <div className="text-gray-600">Major Cities</div>
+            <div className="text-gray-500">Monrovia, Gbarnga, Buchanan, Kakata</div>
+          </div>
+          <div className="p-2 bg-white rounded border">
+            <div className="font-medium text-gray-900">:15 - :29</div>
+            <div className="text-gray-600">Coastal Cities</div>
+            <div className="text-gray-500">Harper, Greenville, Grand Bassa, River Cess</div>
+          </div>
+          <div className="p-2 bg-white rounded border">
+            <div className="font-medium text-gray-900">:30 - :44</div>
+            <div className="text-gray-600">Northern Cities</div>
+            <div className="text-gray-500">Voinjama, Kolahun, Foya, Zorzor</div>
+          </div>
+          <div className="p-2 bg-white rounded border">
+            <div className="font-medium text-gray-900">:45 - :59</div>
+            <div className="text-gray-600">Central/Eastern</div>
+            <div className="text-gray-500">Zwedru, Pleebo, Tubmanburg, Robertsport</div>
+          </div>
+          <div className="p-2 bg-white rounded border">
+            <div className="font-medium text-gray-900">Next Hour</div>
+            <div className="text-gray-600">Mining/Rural Areas</div>
+            <div className="text-gray-500">Yekepa, Bong Mines, Harbel, Bomi Hills</div>
+          </div>
+        </div>
       </div>
     </div>
   );
