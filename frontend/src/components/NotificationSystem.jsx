@@ -51,7 +51,7 @@ const NotificationSystem = () => {
       }
 
       if (lastCheckCounts.whatsapp > 0 && currentCounts.whatsapp > lastCheckCounts.whatsapp) {
-        const newCount = currentCounts.whatsapp - lastCheckCounts.whatsamp;
+        const newCount = currentCounts.whatsapp - lastCheckCounts.whatsapp;
         toast({
           title: "New WhatsApp Message!",
           description: `${newCount} new WhatsApp message${newCount > 1 ? 's' : ''} received`,
