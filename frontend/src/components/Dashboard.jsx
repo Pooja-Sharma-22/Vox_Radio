@@ -7,8 +7,9 @@ import WhatsAppSection from './WhatsAppSection';
 import SubmitTestimony from './SubmitTestimony';
 import LogPhoneCall from './LogPhoneCall';
 import RecentSubmissions from './RecentSubmissions';
+import RadioPlayer from './RadioPlayer';
 import { Button } from './ui/button';
-import { Download } from 'lucide-react';
+import { Download, Radio } from 'lucide-react';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('current-weather');
