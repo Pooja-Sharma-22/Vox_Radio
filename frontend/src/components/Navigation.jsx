@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from './ui/button';
+import LiberiaTime from './LiberiaTime';
 
 const Navigation = () => {
   const [isRadioPlaying, setIsRadioPlaying] = useState(false);
@@ -67,6 +68,11 @@ const Navigation = () => {
               <h1 className="text-2xl font-bold text-white">Vox Radio</h1>
               <p className="text-orange-400 font-medium">97.5 FM - The Voice of the Community</p>
             </div>
+          </div>
+
+          {/* Center - Liberia Time (One of a Kind) */}
+          <div className="flex-1 flex justify-center">
+            <LiberiaTime />
           </div>
 
           {/* Listen Live button with streaming indicator */}
