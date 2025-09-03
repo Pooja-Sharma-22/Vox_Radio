@@ -7,7 +7,6 @@ import WhatsAppSection from './WhatsAppSection';
 import SubmitTestimony from './SubmitTestimony';
 import LogPhoneCall from './LogPhoneCall';
 import RecentSubmissions from './RecentSubmissions';
-import FlightInfo from './FlightInfo';
 import { Button } from './ui/button';
 import { Download } from 'lucide-react';
 
