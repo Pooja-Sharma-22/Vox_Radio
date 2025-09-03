@@ -6,7 +6,7 @@ import { Label } from './ui/label';
 import { Textarea } from './ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { useToast } from '../hooks/use-toast';
-import { CheckCircle, Clock, User, Phone, MessageSquare } from 'lucide-react';
+import { User, Phone, MessageSquare, CheckCircle } from 'lucide-react';
 
 const SubmitTestimony = () => {
   const { toast } = useToast();
@@ -17,7 +17,9 @@ const SubmitTestimony = () => {
     message: ''
   });
 
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!formData.name || !formData.phone || !formData.message || !formData.category) {
@@ -29,19 +31,48 @@ const SubmitTestimony = () => {
       return;
     }
 
-    console.log('Testimony submitted:', formData);
-    
-    toast({
-      title: "Testimony Submitted Successfully!",
-      description: "Your testimony has been received and will be reviewed shortly.",
-    });
+    setIsSubmitting(true);
 
-    setFormData({
-      name: '',
-      phone: '',
-      category: '',
-      message: ''
-    });
+    try {
+      // Create testimony object with timestamp
+      const testimonyData = {
+        ...formData,
+        id: Date.now(),
+        timestamp: new Date().toLocaleString(),
+        approved: false,
+        type: 'testimony'
+      };
+
+      // Save to localStorage for persistence
+      const existingTestimonies = JSON.parse(localStorage.getItem('voxRadioTestimonies') || '[]');
+      existingTestimonies.unshift(testimonyData);
+      localStorage.setItem('voxRadioTestimonies', JSON.stringify(existingTestimonies));
+
+      console.log('Testimony submitted:', testimonyData);
+      
+      toast({
+        title: "Testimony Submitted Successfully!",
+        description: "Your testimony has been received and will be reviewed shortly.",
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        phone: '',
+        category: '',
+        message: ''
+      });
+
+    } catch (error) {
+      console.error('Error submitting testimony:', error);
+      toast({
+        title: "Submission Error",
+        description: "There was an error submitting your testimony. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field, value) => {
@@ -60,15 +91,21 @@ const SubmitTestimony = () => {
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="max-w-2xl mx-auto">
         <Card>
           <CardHeader>
-            <CardTitle>Share Your Testimony</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <CheckCircle className="text-orange-500" />
+              Share Your Testimony with Vox Radio Community
+            </CardTitle>
+            <p className="text-gray-600">
+              Your testimony will be reviewed and may be shared on air to encourage others in the community.
+            </p>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <Label htmlFor="name" className="flex items-center gap-2">
+                <Label htmlFor="name" className="flex items-center gap-2 text-base font-medium">
                   <User size={16} />
                   Full Name *
                 </Label>
@@ -78,11 +115,12 @@ const SubmitTestimony = () => {
                   onChange={(e) => handleInputChange('name', e.target.value)}
                   placeholder="Enter your full name"
                   required
+                  className="mt-2"
                 />
               </div>
 
               <div>
-                <Label htmlFor="phone" className="flex items-center gap-2">
+                <Label htmlFor="phone" className="flex items-center gap-2 text-base font-medium">
                   <Phone size={16} />
                   Phone Number *
                 </Label>
@@ -92,13 +130,14 @@ const SubmitTestimony = () => {
                   onChange={(e) => handleInputChange('phone', e.target.value)}
                   placeholder="0777123456"
                   required
+                  className="mt-2"
                 />
               </div>
 
               <div>
-                <Label htmlFor="category">Testimony Category *</Label>
+                <Label htmlFor="category" className="text-base font-medium">Testimony Category *</Label>
                 <Select value={formData.category} onValueChange={(value) => handleInputChange('category', value)}>
-                  <SelectTrigger>
+                  <SelectTrigger className="mt-2">
                     <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
                   <SelectContent>
@@ -113,7 +152,7 @@ const SubmitTestimony = () => {
               </div>
 
               <div>
-                <Label htmlFor="message" className="flex items-center gap-2">
+                <Label htmlFor="message" className="flex items-center gap-2 text-base font-medium">
                   <MessageSquare size={16} />
                   Your Testimony *
                 </Label>
@@ -122,69 +161,37 @@ const SubmitTestimony = () => {
                   value={formData.message}
                   onChange={(e) => handleInputChange('message', e.target.value)}
                   placeholder="Share your testimony with our community..."
-                  rows={6}
+                  rows={8}
                   required
+                  className="mt-2"
                 />
+                <p className="text-sm text-gray-500 mt-1">
+                  Please share your experience in detail so others can be encouraged.
+                </p>
               </div>
 
               <Button 
                 type="submit" 
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white"
+                disabled={isSubmitting}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 text-lg font-semibold"
               >
-                Submit Testimony
+                {isSubmitting ? 'Submitting...' : 'Submit Testimony'}
               </Button>
             </form>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Testimonies</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {[
-                {
-                  name: "Mary Johnson",
-                  category: "Healing",
-                  message: "God healed my mother from illness. Praise be to God!",
-                  status: "approved",
-                  time: "2 hours ago"
-                },
-                {
-                  name: "Samuel Roberts",
-                  category: "Financial",
-                  message: "Got a new job after months of prayer. Thank you Jesus!",
-                  status: "pending",
-                  time: "5 hours ago"
-                },
-                {
-                  name: "Grace Williams",
-                  category: "Family",
-                  message: "My husband returned home after prayer. God is good!",
-                  status: "approved",
-                  time: "1 day ago"
-                }
-              ].map((testimony, index) => (
-                <div key={index} className="p-3 border rounded-lg">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-semibold text-gray-900">{testimony.name}</span>
-                    <div className="flex items-center gap-2">
-                      {testimony.status === 'approved' ? (
-                        <CheckCircle size={16} className="text-green-500" />
-                      ) : (
-                        <Clock size={16} className="text-orange-500" />
-                      )}
-                      <span className="text-xs text-gray-500">{testimony.time}</span>
-                    </div>
-                  </div>
-                  <span className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">
-                    {testimony.category}
-                  </span>
-                  <p className="text-sm text-gray-700 mt-2">{testimony.message}</p>
-                </div>
-              ))}
-            </div>
+        {/* Submission Guidelines */}
+        <Card className="mt-6">
+          <CardContent className="p-4">
+            <h4 className="font-semibold text-gray-900 mb-3">Testimony Guidelines:</h4>
+            <ul className="text-sm text-gray-600 space-y-1">
+              <li>• Be specific about what happened and how it impacted your life</li>
+              <li>• Keep your testimony positive and encouraging</li>
+              <li>• All testimonies are reviewed before being shared on air</li>
+              <li>• You may be contacted for follow-up or to appear on the show</li>
+              <li>• Your testimony may be edited for length and clarity</li>
+            </ul>
           </CardContent>
         </Card>
       </div>
