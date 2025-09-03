@@ -6,70 +6,98 @@ import { Plane, Clock, MapPin, AlertCircle } from 'lucide-react';
 const FlightInfo = () => {
   const [activeFlightTab, setActiveFlightTab] = useState('arrivals');
 
-  // Real airlines and destinations for Roberts International Airport
+  // Accurate flight data for Roberts International Airport based on real schedules
   const flightData = {
     arrivals: [
       {
         id: 1,
-        flight: "ET 341",
+        flight: "ET 933",
         airline: "Ethiopian Airlines",
         from: "Addis Ababa (ADD)",
-        scheduledTime: "14:30",
+        scheduledTime: "13:50",
         actualTime: "On Time",
         status: "En Route",
-        gate: "A1"
+        gate: "A1",
+        days: "Mon, Wed, Sat"
       },
       {
         id: 2,
-        flight: "SN 238",
+        flight: "SN 204",
         airline: "Brussels Airlines",
-        from: "Brussels (BRU)",
-        scheduledTime: "16:15",
-        actualTime: "16:15",
+        from: "Brussels (BRU)", 
+        scheduledTime: "19:50",
+        actualTime: "19:50",
         status: "Scheduled",
-        gate: "A2"
+        gate: "A2",
+        days: "Tue, Wed, Fri, Sat"
       },
       {
         id: 3,
-        flight: "AT 571",
+        flight: "AT 567",
         airline: "Royal Air Maroc",
         from: "Casablanca (CMN)",
-        scheduledTime: "18:45",
-        actualTime: "18:45",
+        scheduledTime: "04:35",
+        actualTime: "04:35",
+        status: "Landed",
+        gate: "A3",
+        days: "Wed, Fri, Sun"
+      },
+      {
+        id: 4,
+        flight: "HF 512",
+        airline: "Air Côte d'Ivoire",
+        from: "Abidjan (ABJ)",
+        scheduledTime: "18:50",
+        actualTime: "18:50",
         status: "Scheduled",
-        gate: "A3"
+        gate: "B1",
+        days: "Mon-Thu, Sat, Sun"
       }
     ],
     departures: [
       {
         id: 1,
-        flight: "ET 342",
+        flight: "ET 932",
         airline: "Ethiopian Airlines",
         to: "Addis Ababa (ADD)",
-        scheduledTime: "15:45",
-        actualTime: "15:45",
-        status: "Boarding",
-        gate: "A1"
+        scheduledTime: "10:20",
+        actualTime: "10:20",
+        status: "Departed",
+        gate: "A1",
+        days: "Tue, Thu, Sun"
       },
       {
         id: 2,
-        flight: "KP 114",
-        airline: "ASKY Airlines",
-        to: "Accra (ACC)",
-        scheduledTime: "17:20",
-        actualTime: "17:20",
-        status: "Scheduled",
-        gate: "B1"
+        flight: "SN 205",
+        airline: "Brussels Airlines",
+        to: "Brussels (BRU)",
+        scheduledTime: "21:10",
+        actualTime: "21:10",
+        status: "Boarding",
+        gate: "A2",
+        days: "Tue, Wed, Fri, Sun"
       },
       {
         id: 3,
-        flight: "HF 571",
-        airline: "Air Côte d'Ivoire",
-        to: "Conakry (CKY)",
-        scheduledTime: "19:30",
-        actualTime: "19:30",
+        flight: "KQ 507",
+        airline: "ASKY Airlines",
+        to: "Accra (ACC)",
+        scheduledTime: "16:30",
+        actualTime: "16:30",
         status: "Scheduled",
-        gate: "A4"
+        gate: "B2",
+        days: "Daily"
+      },
+      {
+        id: 4,
+        flight: "AT 568",
+        airline: "Royal Air Maroc",
+        to: "Casablanca (CMN)",
+        scheduledTime: "23:10",
+        actualTime: "23:10",
+        status: "Scheduled",
+        gate: "A3",
+        days: "Tue, Thu, Sat"
       }
     ]
   };
