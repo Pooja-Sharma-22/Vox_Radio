@@ -1,42 +1,213 @@
-// Mock weather data for Liberian cities
-export const mockWeatherData = [
-  {
-    city: "Monrovia",
-    country: "Liberia",
-    temperature: 28,
-    condition: "Partly Cloudy",
-    humidity: "78%",
-    windSpeed: "12 km/h",
-    updated: "2025-01-03 06:11"
-  },
-  {
-    city: "Gbarnga", 
-    country: "Liberia",
-    temperature: 26,
-    condition: "Sunny",
-    humidity: "65%",
-    windSpeed: "8 km/h",
-    updated: "2025-01-03 06:11"
-  },
-  {
-    city: "Buchanan",
-    country: "Liberia",
-    temperature: 29,
-    condition: "Clear",
-    humidity: "82%",
-    windSpeed: "15 km/h",
-    updated: "2025-01-03 06:11"
-  },
-  {
-    city: "Kakata",
-    country: "Liberia",
-    temperature: 27,
-    condition: "Overcast",
-    humidity: "71%",
-    windSpeed: "10 km/h",
-    updated: "2025-01-03 06:11"
-  }
+// All Liberian cities for weather rotation (rotates every 15 minutes)
+export const allLiberianCities = [
+  // Set 1 - Major Cities
+  [
+    {
+      city: "Monrovia",
+      country: "Liberia",
+      temperature: 28,
+      condition: "Partly Cloudy",
+      humidity: "78%",
+      windSpeed: "12 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Gbarnga", 
+      country: "Liberia",
+      temperature: 26,
+      condition: "Sunny",
+      humidity: "65%",
+      windSpeed: "8 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Buchanan",
+      country: "Liberia",
+      temperature: 29,
+      condition: "Clear",
+      humidity: "82%",
+      windSpeed: "15 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Kakata",
+      country: "Liberia",
+      temperature: 27,
+      condition: "Overcast",
+      humidity: "71%",
+      windSpeed: "10 km/h",
+      updated: new Date().toLocaleString()
+    }
+  ],
+  // Set 2 - Coastal Cities
+  [
+    {
+      city: "Harper",
+      country: "Liberia",
+      temperature: 30,
+      condition: "Sunny",
+      humidity: "85%",
+      windSpeed: "18 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Greenville",
+      country: "Liberia",
+      temperature: 29,
+      condition: "Partly Cloudy",
+      humidity: "80%",
+      windSpeed: "16 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Grand Bassa",
+      country: "Liberia",
+      temperature: 28,
+      condition: "Clear",
+      humidity: "77%",
+      windSpeed: "14 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "River Cess",
+      country: "Liberia",
+      temperature: 27,
+      condition: "Light Rain",
+      humidity: "88%",
+      windSpeed: "11 km/h",
+      updated: new Date().toLocaleString()
+    }
+  ],
+  // Set 3 - Northern Cities
+  [
+    {
+      city: "Voinjama",
+      country: "Liberia",
+      temperature: 25,
+      condition: "Overcast",
+      humidity: "72%",
+      windSpeed: "9 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Kolahun",
+      country: "Liberia",
+      temperature: 24,
+      condition: "Foggy",
+      humidity: "90%",
+      windSpeed: "6 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Foya",
+      country: "Liberia",
+      temperature: 26,
+      condition: "Partly Cloudy",
+      humidity: "68%",
+      windSpeed: "10 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Zorzor",
+      country: "Liberia",
+      temperature: 23,
+      condition: "Cool",
+      humidity: "75%",
+      windSpeed: "7 km/h",
+      updated: new Date().toLocaleString()
+    }
+  ],
+  // Set 4 - Central/Eastern Cities
+  [
+    {
+      city: "Zwedru",
+      country: "Liberia",
+      temperature: 27,
+      condition: "Thunderstorms",
+      humidity: "92%",
+      windSpeed: "13 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Pleebo",
+      country: "Liberia",
+      temperature: 29,
+      condition: "Humid",
+      humidity: "87%",
+      windSpeed: "15 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Tubmanburg",
+      country: "Liberia",
+      temperature: 26,
+      condition: "Partly Cloudy",
+      humidity: "73%",
+      windSpeed: "11 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Robertsport",
+      country: "Liberia",
+      temperature: 28,
+      condition: "Windy",
+      humidity: "79%",
+      windSpeed: "20 km/h",
+      updated: new Date().toLocaleString()
+    }
+  ],
+  // Set 5 - Mining/Rural Areas
+  [
+    {
+      city: "Yekepa",
+      country: "Liberia",
+      temperature: 24,
+      condition: "Cool",
+      humidity: "70%",
+      windSpeed: "8 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Bong Mines",
+      country: "Liberia",
+      temperature: 25,
+      condition: "Misty",
+      humidity: "83%",
+      windSpeed: "9 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Harbel",
+      country: "Liberia",
+      temperature: 28,
+      condition: "Warm",
+      humidity: "76%",
+      windSpeed: "12 km/h",
+      updated: new Date().toLocaleString()
+    },
+    {
+      city: "Bomi Hills",
+      country: "Liberia",
+      temperature: 26,
+      condition: "Overcast",
+      humidity: "74%",
+      windSpeed: "10 km/h",
+      updated: new Date().toLocaleString()
+    }
+  ]
 ];
+
+// Function to get current weather data set based on 15-minute rotation
+export const getCurrentWeatherData = () => {
+  const now = new Date();
+  const minutes = now.getMinutes();
+  const rotationIndex = Math.floor(minutes / 15); // Changes every 15 minutes (0, 1, 2, 3)
+  const setIndex = rotationIndex % allLiberianCities.length;
+  return allLiberianCities[setIndex];
+};
+
+// Legacy export for backward compatibility
+export const mockWeatherData = getCurrentWeatherData();
 
 // Mock flight data for Monrovia Roberts International Airport
 export const mockFlightData = {
