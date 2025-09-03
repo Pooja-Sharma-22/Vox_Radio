@@ -12,12 +12,8 @@ const RecentSubmissions = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('all');
 
-  // Combine all submissions
-  const allSubmissions = [
-    ...mockTestimonies.map(t => ({ ...t, type: 'testimony', icon: MessageSquare })),
-    ...mockPhoneCalls.map(c => ({ ...c, type: 'phone_call', icon: Phone, approved: true })),
-    ...mockWhatsAppData.recentMessages.map(w => ({ ...w, type: 'whatsapp', icon: MessageSquare, approved: w.replied }))
-  ];
+  // Empty submissions - to be populated with real data
+  const allSubmissions = [];
 
   const filteredSubmissions = allSubmissions.filter(submission => {
     const matchesSearch = searchTerm === '' || 
