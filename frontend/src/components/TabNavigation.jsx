@@ -3,27 +3,28 @@ import { Button } from './ui/button';
 
 const TabNavigation = ({ activeTab, setActiveTab }) => {
   const tabs = [
-    { id: 'current-weather', label: 'Current Weather' },
-    { id: 'whatsapp-facebook', label: 'WhatsApp & Facebook' },
-    { id: 'submit-testimony', label: 'Submit Testimony' },
-    { id: 'log-phone-call', label: 'Log a Phone Call' },
-    { id: 'recent-submissions', label: 'Recent Submissions' }
+    { id: 'current-weather', label: 'Current Weather', icon: '🌤️' },
+    { id: 'whatsapp', label: 'WhatsApp', icon: '💬' },
+    { id: 'submit-testimony', label: 'Submit Testimony', icon: '✍️' },
+    { id: 'log-phone-call', label: 'Log a Phone Call', icon: '📞' },
+    { id: 'recent-submissions', label: 'Recent Submissions', icon: '📋' }
   ];
 
   return (
-    <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
+    <div className="flex space-x-2 bg-black rounded-lg p-2 border border-gray-300">
       {tabs.map((tab) => (
         <Button
           key={tab.id}
           variant={activeTab === tab.id ? 'default' : 'ghost'}
           size="sm"
           onClick={() => setActiveTab(tab.id)}
-          className={`text-sm transition-all ${
+          className={`text-sm transition-all font-medium ${
             activeTab === tab.id 
-              ? 'bg-orange-500 text-white hover:bg-orange-600' 
-              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200'
+              ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:from-orange-600 hover:to-orange-700 border border-white' 
+              : 'text-white hover:text-orange-400 hover:bg-gray-800'
           }`}
         >
+          <span className="mr-2">{tab.icon}</span>
           {tab.label}
         </Button>
       ))}

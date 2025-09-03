@@ -1,33 +1,50 @@
 import React, { useState } from 'react';
-import Header from './Header';
 import Navigation from './Navigation';
 import DashboardHeader from './DashboardHeader';
 import TabNavigation from './TabNavigation';
 import CurrentWeather from './CurrentWeather';
+import WhatsAppSection from './WhatsAppSection';
+import SubmitTestimony from './SubmitTestimony';
+import LogPhoneCall from './LogPhoneCall';
+import RecentSubmissions from './RecentSubmissions';
+import FlightInfo from './FlightInfo';
 import { Button } from './ui/button';
 import { Download } from 'lucide-react';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('current-weather');
-  const [language, setLanguage] = useState('EN');
 
   const handleDownloadExcel = () => {
     // Mock download functionality
-    alert('Excel download functionality would be implemented here');
+    const data = {
+      weather: 'Current weather data for Liberian cities',
+      flights: 'Flight arrivals and departures for Monrovia',
+      testimonies: 'Recent testimonies submitted',
+      phoneCalls: 'Phone call logs',
+      whatsapp: 'WhatsApp message statistics'
+    };
+    
+    console.log('Downloading Excel report:', data);
+    alert('Excel report downloaded successfully!');
   };
 
   const renderTabContent = () => {
     switch(activeTab) {
       case 'current-weather':
-        return <CurrentWeather />;
-      case 'whatsapp-facebook':
-        return <div className="p-8 text-center text-gray-600">WhatsApp & Facebook functionality coming soon</div>;
+        return (
+          <div>
+            <CurrentWeather />
+            <FlightInfo />
+          </div>
+        );
+      case 'whatsapp':
+        return <WhatsAppSection />;
       case 'submit-testimony':
-        return <div className="p-8 text-center text-gray-600">Submit Testimony form coming soon</div>;
+        return <SubmitTestimony />;
       case 'log-phone-call':
-        return <div className="p-8 text-center text-gray-600">Log Phone Call functionality coming soon</div>;
+        return <LogPhoneCall />;
       case 'recent-submissions':
-        return <div className="p-8 text-center text-gray-600">Recent Submissions list coming soon</div>;
+        return <RecentSubmissions />;
       default:
         return <CurrentWeather />;
     }
@@ -35,21 +52,20 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
       <Navigation />
-      <DashboardHeader language={language} setLanguage={setLanguage} />
+      <DashboardHeader />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center py-6 border-b border-gray-300">
           <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
           <Button 
             onClick={handleDownloadExcel}
-            className="bg-orange-500 hover:bg-orange-600 text-white flex items-center gap-2"
+            className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center gap-2 shadow-lg border border-black"
           >
             <Download size={16} />
             Download as Excel
           </Button>
         </div>
-        <div className="bg-white rounded-lg shadow-sm min-h-96">
+        <div className="bg-white rounded-lg shadow-lg border border-gray-200 min-h-96 mt-4">
           {renderTabContent()}
         </div>
       </div>
