@@ -91,6 +91,9 @@ const Dashboard = () => {
         isVisible={showRadioPlayer} 
         onClose={() => setShowRadioPlayer(false)} 
       />
+      
+      {/* Notification System */}
+      <NotificationSystem />
     </div>
   );
 };
