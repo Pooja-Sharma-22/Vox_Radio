@@ -59,10 +59,7 @@ const Dashboard = () => {
       <DashboardHeader />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-6 border-b border-gray-300">
-          <div className="flex items-center gap-4">
-            <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
-            <LiberiaTime />
-          </div>
+          <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
           <div className="flex items-center gap-3">
             <Button 
               onClick={() => setShowRadioPlayer(!showRadioPlayer)}
