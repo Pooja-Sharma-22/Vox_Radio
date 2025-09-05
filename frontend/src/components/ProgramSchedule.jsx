@@ -116,7 +116,7 @@ const ProgramSchedule = () => {
 
           {/* Program Schedule Scroll */}
           <div className="flex-1 mx-6 overflow-hidden">
-            <div className="flex space-x-6 animate-marquee">
+            <div className="flex space-x-6 program-marquee">
               {programs.map((program) => {
                 const isCurrent = currentProgram && currentProgram.id === program.id;
                 const isUpcomingProgram = isUpcoming(program);
