@@ -91,44 +91,44 @@ const RadioPlayer = ({ isVisible, onClose }) => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-2 sm:bottom-4 right-2 sm:right-4 z-50">
       <Card className={`bg-black border-orange-500 border-2 shadow-2xl transition-all duration-300 ${
-        isMinimized ? 'w-64' : 'w-80'
+        isMinimized ? 'w-48 sm:w-64' : 'w-72 sm:w-80'
       }`}>
         <CardContent className="p-0">
           {/* Header */}
-          <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-3 flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center">
+          <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white p-2 sm:p-3 flex items-center justify-between">
+            <div className="flex items-center space-x-1 sm:space-x-2">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white flex items-center justify-center">
                 <span className="text-orange-500 text-xs font-bold">VOX</span>
               </div>
-              <span className="font-semibold text-sm">Vox Radio 97.5 FM</span>
+              <span className="font-semibold text-xs sm:text-sm">Vox Radio 97.5 FM</span>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 sm:space-x-2">
               <Button
                 size="sm"
                 variant="ghost"
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="text-white hover:bg-white hover:bg-opacity-20 h-6 w-6 p-0"
+                className="text-white hover:bg-white hover:bg-opacity-20 h-5 w-5 sm:h-6 sm:w-6 p-0"
               >
-                {isMinimized ? <Maximize2 size={12} /> : <Minimize2 size={12} />}
+                {isMinimized ? <Maximize2 size={10} className="sm:w-3 sm:h-3" /> : <Minimize2 size={10} className="sm:w-3 sm:h-3" />}
               </Button>
               <Button
                 size="sm"
                 variant="ghost"
                 onClick={onClose}
-                className="text-white hover:bg-white hover:bg-opacity-20 h-6 w-6 p-0"
+                className="text-white hover:bg-white hover:bg-opacity-20 h-5 w-5 sm:h-6 sm:w-6 p-0"
               >
-                <X size={12} />
+                <X size={10} className="sm:w-3 sm:h-3" />
               </Button>
             </div>
           </div>
 
           {/* Player Content */}
           {!isMinimized && (
-            <div className="bg-black text-white p-4">
+            <div className="bg-black text-white p-3 sm:p-4">
               {/* Status */}
-              <div className="text-center mb-3">
+              <div className="text-center mb-2 sm:mb-3">
                 <div className={`text-xs ${getConnectionStatusColor()}`}>
                   {connectionStatus === 'connecting' && (
                     <span className="inline-block w-1 h-1 bg-orange-500 rounded-full mr-1 animate-pulse"></span>
@@ -144,16 +144,16 @@ const RadioPlayer = ({ isVisible, onClose }) => {
               </div>
 
               {/* Controls */}
-              <div className="flex items-center justify-center space-x-4 mb-3">
+              <div className="flex items-center justify-center space-x-4 mb-2 sm:mb-3">
                 <Button
                   onClick={handlePlayPause}
-                  className={`w-12 h-12 rounded-full ${
+                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full ${
                     isPlaying 
                       ? 'bg-red-500 hover:bg-red-600' 
                       : 'bg-green-500 hover:bg-green-600'
                   } text-white`}
                 >
-                  {isPlaying ? <Pause size={18} /> : <Play size={18} />}
+                  {isPlaying ? <Pause size={16} className="sm:w-5 sm:h-5" /> : <Play size={16} className="sm:w-5 sm:h-5" />}
                 </Button>
               </div>
 
@@ -176,13 +176,13 @@ const RadioPlayer = ({ isVisible, onClose }) => {
                 <Button
                   onClick={handlePlayPause}
                   size="sm"
-                  className={`w-8 h-8 rounded-full ${
+                  className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full ${
                     isPlaying 
                       ? 'bg-red-500 hover:bg-red-600' 
                       : 'bg-green-500 hover:bg-green-600'
                   } text-white p-0`}
                 >
-                  {isPlaying ? <Pause size={12} /> : <Play size={12} />}
+                  {isPlaying ? <Pause size={10} className="sm:w-3 sm:h-3" /> : <Play size={10} className="sm:w-3 sm:h-3" />}
                 </Button>
                 <div className="text-xs">
                   <div className={getConnectionStatusColor()}>
