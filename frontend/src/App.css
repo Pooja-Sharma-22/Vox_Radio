@@ -106,3 +106,21 @@
 .radio-pulse {
   animation: radio-pulse 2s infinite;
 }
+
+/* Program schedule marquee animation */
+@keyframes program-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.program-marquee {
+  animation: program-scroll 40s linear infinite;
+}
+
+.program-marquee:hover {
+  animation-play-state: paused;
+}
