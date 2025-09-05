@@ -58,24 +58,28 @@ const Dashboard = () => {
       <Navigation />
       <ProgramSchedule />
       <DashboardHeader />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-6 border-b border-gray-300">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-4 sm:py-6 border-b border-gray-300 gap-4">
           <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
-          <div className="flex items-center gap-3">
+          <div className="flex items-center justify-center sm:justify-end gap-2 sm:gap-3">
             <Button 
               onClick={() => setShowRadioPlayer(!showRadioPlayer)}
               variant="outline"
-              className="flex items-center gap-2 border-orange-500 text-orange-600 hover:bg-orange-50"
+              size="sm"
+              className="flex items-center gap-1 sm:gap-2 border-orange-500 text-orange-600 hover:bg-orange-50 text-xs sm:text-sm"
             >
-              <Radio size={16} />
-              {showRadioPlayer ? 'Hide Player' : 'Show Player'}
+              <Radio size={14} className="sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">{showRadioPlayer ? 'Hide Player' : 'Show Player'}</span>
+              <span className="sm:hidden">{showRadioPlayer ? 'Hide' : 'Player'}</span>
             </Button>
             <Button 
               onClick={handleDownloadExcel}
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center gap-2 shadow-lg border border-black"
+              size="sm"
+              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center gap-1 sm:gap-2 shadow-lg border border-black text-xs sm:text-sm"
             >
-              <Download size={16} />
-              Download Report
+              <Download size={14} className="sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">Download Report</span>
+              <span className="sm:hidden">Download</span>
             </Button>
           </div>
         </div>
