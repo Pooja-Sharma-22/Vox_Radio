@@ -160,10 +160,14 @@ const LogPhoneCall = () => {
                     <SelectValue placeholder="Select presenter" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="John Smith">John Smith</SelectItem>
-                    <SelectItem value="Sarah Wilson">Sarah Wilson</SelectItem>
-                    <SelectItem value="Michael Johnson">Michael Johnson</SelectItem>
-                    <SelectItem value="Grace Davis">Grace Davis</SelectItem>
+                    <SelectItem value="Angeline Konway">Angeline Konway</SelectItem>
+                    <SelectItem value="Beatrice Ballah">Beatrice Ballah</SelectItem>
+                    <SelectItem value="Emmanuel Howard">Emmanuel Howard</SelectItem>
+                    <SelectItem value="Emmanuel Lepolu">Emmanuel Lepolu</SelectItem>
+                    <SelectItem value="Maxim M. Somah">Maxim M. Somah</SelectItem>
+                    <SelectItem value="Sam Doe">Sam Doe</SelectItem>
+                    <SelectItem value="Trenz KCalvin">Trenz KCalvin</SelectItem>
+                    <SelectItem value="Victoria Walker">Victoria Walker</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
