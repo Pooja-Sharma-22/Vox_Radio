@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Radio, Clock, Calendar } from 'lucide-react';
+import { Radio, Clock, Calendar, ChevronDown, ChevronUp } from 'lucide-react';
 
 const ProgramSchedule = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [currentProgram, setCurrentProgram] = useState(null);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Program schedule for Vox Radio
   const programs = [
@@ -93,30 +94,65 @@ const ProgramSchedule = () => {
            (program.startHour - currentHour) <= 2; // Show as upcoming if within 2 hours
   };
 
+  const getNextProgram = () => {
+    const currentDay = currentTime.getDay();
+    const currentHour = currentTime.getHours();
+    
+    // Find next program today
+    const todayPrograms = programs
+      .filter(p => p.days.includes(currentDay) && p.startHour > currentHour)
+      .sort((a, b) => a.startHour - b.startHour);
+    
+    if (todayPrograms.length > 0) {
+      const next = todayPrograms[0];
+      return `${next.name} at ${next.time.split('-')[0]}`;
+    }
+    
+    // Find first program tomorrow
+    const tomorrow = (currentDay + 1) % 7;
+    const tomorrowPrograms = programs
+      .filter(p => p.days.includes(tomorrow))
+      .sort((a, b) => a.startHour - b.startHour);
+    
+    if (tomorrowPrograms.length > 0) {
+      const next = tomorrowPrograms[0];
+      return `${next.name} Tomorrow`;
+    }
+    
+    return "Check Schedule";
+  };
+
   return (
-    <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white py-3 border-b border-orange-500">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Programs Header */}
-          <div className="flex items-center space-x-3">
+    <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white border-b border-orange-500">
+      {/* Mobile Layout */}
+      <div className="sm:hidden">
+        <div className="px-4 py-3">
+          {/* Mobile Header */}
+          <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Radio className="text-orange-400 animate-pulse" size={20} />
-              <span className="text-lg font-bold text-orange-400">VOX RADIO PROGRAMS</span>
+              <Radio className="text-orange-400 animate-pulse" size={16} />
+              <span className="text-sm font-bold text-orange-400">PROGRAMS</span>
             </div>
             
-            {/* Current Program Display */}
+            {/* Current Program Display - Mobile */}
             {currentProgram && (
-              <div className="flex items-center space-x-2 bg-orange-500 px-4 py-2 rounded-full">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="font-bold text-white">NOW LIVE: {currentProgram.name}</span>
-                <Clock size={16} className="text-yellow-300" />
+              <div className="flex items-center space-x-1 bg-orange-500 px-2 py-1 rounded-full">
+                <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="font-bold text-white text-xs">LIVE: {currentProgram.name}</span>
               </div>
             )}
+            
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="text-orange-400 hover:text-orange-300 transition-colors"
+            >
+              {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+            </button>
           </div>
 
-          {/* Program Schedule Scroll */}
-          <div className="flex-1 mx-6 overflow-hidden">
-            <div className="flex space-x-6 program-marquee">
+          {/* Expandable Program List - Mobile */}
+          {isExpanded && (
+            <div className="mt-3 space-y-2">
               {programs.map((program) => {
                 const isCurrent = currentProgram && currentProgram.id === program.id;
                 const isUpcomingProgram = isUpcoming(program);
@@ -124,66 +160,107 @@ const ProgramSchedule = () => {
                 return (
                   <div 
                     key={program.id} 
-                    className={`flex items-center space-x-2 whitespace-nowrap px-3 py-1 rounded transition-all duration-300 ${
+                    className={`flex items-center justify-between p-2 rounded transition-all duration-300 ${
                       isCurrent 
-                        ? 'bg-orange-500 text-white font-bold scale-110 shadow-lg' 
+                        ? 'bg-orange-500 text-white font-bold' 
                         : isUpcomingProgram
                         ? 'bg-yellow-600 text-white font-semibold'
-                        : 'text-gray-300 hover:text-orange-400'
+                        : 'bg-gray-800 text-gray-300'
                     }`}
                   >
-                    <Calendar size={14} className={isCurrent ? 'text-yellow-300' : 'text-orange-400'} />
-                    <span className={`text-sm ${isCurrent ? 'font-bold' : 'font-medium'}`}>
-                      {program.name}
-                    </span>
-                    <span className="text-xs opacity-75">
-                      {program.day} {program.time}
-                    </span>
-                    {isCurrent && (
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse ml-2"></div>
-                    )}
-                    {isUpcomingProgram && (
-                      <span className="text-xs bg-yellow-400 text-black px-1 rounded font-bold ml-1">
-                        SOON
-                      </span>
-                    )}
+                    <div className="flex items-center space-x-2">
+                      <Calendar size={12} className={isCurrent ? 'text-yellow-300' : 'text-orange-400'} />
+                      <span className="text-sm font-medium">{program.name}</span>
+                      {isCurrent && (
+                        <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
+                      )}
+                    </div>
+                    <div className="text-right">
+                      <div className="text-xs">{program.day}</div>
+                      <div className="text-xs opacity-75">{program.time}</div>
+                    </div>
                   </div>
                 );
               })}
+              
+              {/* Next Program - Mobile */}
+              <div className="text-center pt-2 border-t border-gray-700">
+                <div className="text-xs text-gray-400">NEXT PROGRAM</div>
+                <div className="text-sm text-orange-400 font-medium">
+                  {getNextProgram()}
+                </div>
+              </div>
             </div>
-          </div>
+          )}
+        </div>
+      </div>
 
-          {/* Next Program Info */}
-          <div className="text-right">
-            <div className="text-xs text-gray-400">NEXT PROGRAM</div>
-            <div className="text-sm text-orange-400 font-medium">
-              {(() => {
-                const currentDay = currentTime.getDay();
-                const currentHour = currentTime.getHours();
-                
-                // Find next program today
-                const todayPrograms = programs
-                  .filter(p => p.days.includes(currentDay) && p.startHour > currentHour)
-                  .sort((a, b) => a.startHour - b.startHour);
-                
-                if (todayPrograms.length > 0) {
-                  const next = todayPrograms[0];
-                  return `${next.name} at ${next.time.split('-')[0]}`;
-                }
-                
-                // Find first program tomorrow
-                const tomorrow = (currentDay + 1) % 7;
-                const tomorrowPrograms = programs
-                  .filter(p => p.days.includes(tomorrow))
-                  .sort((a, b) => a.startHour - b.startHour);
-                
-                if (tomorrowPrograms.length > 0) {
-                  const next = tomorrowPrograms[0];
-                  return `${next.name} Tomorrow`;
-                }
-                
-                return "Check Schedule";
-              })()}
+      {/* Desktop Layout */}
+      <div className="hidden sm:block py-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
+            {/* Programs Header */}
+            <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-2">
+                <Radio className="text-orange-400 animate-pulse" size={20} />
+                <span className="text-lg font-bold text-orange-400">VOX RADIO PROGRAMS</span>
+              </div>
+              
+              {/* Current Program Display */}
+              {currentProgram && (
+                <div className="flex items-center space-x-2 bg-orange-500 px-4 py-2 rounded-full">
+                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <span className="font-bold text-white">NOW LIVE: {currentProgram.name}</span>
+                  <Clock size={16} className="text-yellow-300" />
+                </div>
+              )}
+            </div>
+
+            {/* Program Schedule Scroll - Desktop */}
+            <div className="flex-1 mx-6 overflow-hidden">
+              <div className="flex space-x-6 program-marquee">
+                {programs.map((program) => {
+                  const isCurrent = currentProgram && currentProgram.id === program.id;
+                  const isUpcomingProgram = isUpcoming(program);
+                  
+                  return (
+                    <div 
+                      key={program.id} 
+                      className={`flex items-center space-x-2 whitespace-nowrap px-3 py-1 rounded transition-all duration-300 ${
+                        isCurrent 
+                          ? 'bg-orange-500 text-white font-bold scale-110 shadow-lg' 
+                          : isUpcomingProgram
+                          ? 'bg-yellow-600 text-white font-semibold'
+                          : 'text-gray-300 hover:text-orange-400'
+                      }`}
+                    >
+                      <Calendar size={14} className={isCurrent ? 'text-yellow-300' : 'text-orange-400'} />
+                      <span className={`text-sm ${isCurrent ? 'font-bold' : 'font-medium'}`}>
+                        {program.name}
+                      </span>
+                      <span className="text-xs opacity-75">
+                        {program.day} {program.time}
+                      </span>
+                      {isCurrent && (
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse ml-2"></div>
+                      )}
+                      {isUpcomingProgram && (
+                        <span className="text-xs bg-yellow-400 text-black px-1 rounded font-bold ml-1">
+                          SOON
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Next Program Info - Desktop */}
+            <div className="text-right">
+              <div className="text-xs text-gray-400">NEXT PROGRAM</div>
+              <div className="text-sm text-orange-400 font-medium">
+                {getNextProgram()}
+              </div>
             </div>
           </div>
         </div>
