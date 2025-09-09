@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Clock, MapPin, Radio } from 'lucide-react';
 
 const LiberiaTime = () => {
@@ -13,7 +13,7 @@ const LiberiaTime = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const formatLiberiaTime = () => {
+  const timeData = useMemo(() => {
     // Liberia follows GMT+0 (same as UTC)
     const liberiaTime = new Date(currentTime.toLocaleString("en-US", {timeZone: "Africa/Monrovia"}));
     
@@ -35,9 +35,7 @@ const LiberiaTime = () => {
     }).slice(-2);
 
     return { timeString, dateString, ampm };
-  };
-
-  const { timeString, dateString, ampm } = formatLiberiaTime();
+  }, [currentTime]); // Only recalculate when currentTime changes
 
   return (
     <div className="relative">
@@ -54,10 +52,10 @@ const LiberiaTime = () => {
           <div className="flex items-center justify-center space-x-1 sm:space-x-2">
             <Clock size={16} className="sm:w-5 sm:h-5 text-yellow-300 animate-pulse" />
             <span className="text-lg sm:text-2xl font-mono font-bold tracking-wider text-yellow-100">
-              {timeString}
+              {timeData.timeString}
             </span>
             <span className="text-xs sm:text-sm font-semibold text-yellow-200 ml-1">
-              {ampm}
+              {timeData.ampm}
             </span>
           </div>
           
@@ -69,7 +67,7 @@ const LiberiaTime = () => {
               <span className="text-xs font-medium text-yellow-100 sm:hidden">Monrovia</span>
             </div>
             <span className="text-xs text-yellow-200">•</span>
-            <span className="text-xs font-medium text-yellow-100">{dateString}</span>
+            <span className="text-xs font-medium text-yellow-100">{timeData.dateString}</span>
           </div>
           
           {/* GMT Indicator - Responsive */}
