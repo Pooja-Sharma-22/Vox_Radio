@@ -327,37 +327,53 @@ const ProgramSchedule = () => {
           </div>
 
           {/* Expandable Program List - Mobile */}
-          {isExpanded && (
-            <div className="mt-3 space-y-2">
-              {programs.map((program) => {
-                const isCurrent = currentProgram && currentProgram.id === program.id;
-                const isUpcomingProgram = isUpcoming(program);
-                
-                return (
-                  <div 
-                    key={program.id} 
-                    className={`flex items-center justify-between p-2 rounded transition-all duration-300 ${
-                      isCurrent 
-                        ? 'bg-orange-500 text-white font-bold' 
-                        : isUpcomingProgram
-                        ? 'bg-yellow-600 text-white font-semibold'
-                        : 'bg-gray-800 text-gray-300'
-                    }`}
-                  >
-                    <div className="flex items-center space-x-2">
-                      <Calendar size={12} className={isCurrent ? 'text-yellow-300' : 'text-orange-400'} />
-                      <span className="text-sm font-medium">{program.name}</span>
-                      {isCurrent && (
-                        <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
-                      )}
+          <div className={`mt-3 space-y-2 transition-all duration-500 ease-in-out overflow-hidden ${
+            isExpanded ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+          }`}>
+            {programs.map((program, index) => {
+              const isCurrent = currentProgram && currentProgram.id === program.id;
+              const isUpcomingProgram = isUpcoming(program);
+              
+              return (
+                <div 
+                  key={program.id} 
+                  className={`flex items-center justify-between p-3 rounded-lg transition-all duration-300 transform ${
+                    isCurrent 
+                      ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold scale-102 shadow-lg' 
+                      : isUpcomingProgram
+                      ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-semibold shadow-md'
+                      : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                  }`}
+                  style={{
+                    animationDelay: `${index * 50}ms`,
+                    animation: isExpanded ? 'slideInUp 0.3s ease-out forwards' : ''
+                  }}
+                >
+                  <div className="flex items-center space-x-3">
+                    <Calendar size={14} className={isCurrent ? 'text-yellow-300' : 'text-orange-400'} />
+                    <div>
+                      <div className="text-sm font-medium">{program.name}</div>
+                      <div className="text-xs opacity-75">with {program.presenter}</div>
                     </div>
-                    <div className="text-right">
-                      <div className="text-xs">{program.day}</div>
-                      <div className="text-xs opacity-75">{program.time}</div>
-                    </div>
+                    {isCurrent && (
+                      <div className="flex items-center space-x-1">
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span className="text-xs font-bold bg-green-400 text-black px-1.5 py-0.5 rounded-full">LIVE</span>
+                      </div>
+                    )}
+                    {isUpcomingProgram && (
+                      <span className="text-xs bg-yellow-300 text-black px-1.5 py-0.5 rounded-full font-bold">
+                        SOON
+                      </span>
+                    )}
                   </div>
-                );
-              })}
+                  <div className="text-right">
+                    <div className="text-xs font-medium">{program.day}</div>
+                    <div className="text-xs opacity-75">{program.time}</div>
+                  </div>
+                </div>
+              );
+            })}
               
               {/* Next Program - Mobile */}
               <div className="text-center pt-2 border-t border-gray-700">
