@@ -334,6 +334,51 @@ const EnhancedProgramSchedule = ({ isFullPage = false }) => {
           {/* Mobile Expanded Content */}
           {isExpanded && (
             <div className="mt-4 space-y-4">
+              {/* Search and Favorites Controls */}
+              <div className="space-y-3">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+                  <Input
+                    type="text"
+                    placeholder="Search programs, presenters, or types..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="pl-10 pr-10 bg-gray-800 border-gray-600 text-white placeholder-gray-400"
+                  />
+                  {searchTerm && (
+                    <button
+                      onClick={() => setSearchTerm('')}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                    >
+                      <X size={16} />
+                    </button>
+                  )}
+                </div>
+                
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+                    className={`flex items-center space-x-1 px-3 py-1 rounded-full text-xs font-medium ${
+                      showFavoritesOnly 
+                        ? 'bg-red-500 text-white' 
+                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    }`}
+                  >
+                    <Heart size={12} fill={showFavoritesOnly ? 'white' : 'none'} />
+                    <span>Favorites Only</span>
+                  </button>
+                  
+                  {!isFullPage && (
+                    <Button
+                      size="sm"
+                      onClick={() => window.open('/enhanced-schedule', '_blank')}
+                      className="bg-orange-500 hover:bg-orange-600 text-white text-xs"
+                    >
+                      Full Schedule
+                    </Button>
+                  )}
+                </div>
+              </div>
               {/* Day Selector */}
               <div className="overflow-x-auto">
                 <div className="flex space-x-2 pb-2">
