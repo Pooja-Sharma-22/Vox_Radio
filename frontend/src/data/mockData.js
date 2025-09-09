@@ -5,37 +5,37 @@ export const allLiberianCities = [
     {
       city: "Monrovia",
       country: "Liberia",
-      temperature: 28,
+      temperature: 82, // Changed from 28°C to 82°F
       condition: "Partly Cloudy",
       humidity: "78%",
-      windSpeed: "12 km/h",
+      windSpeed: "7.5 mph", // Changed from km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "Gbarnga", 
       country: "Liberia",
-      temperature: 26,
+      temperature: 79, // Changed from 26°C to 79°F
       condition: "Sunny",
       humidity: "65%",
-      windSpeed: "8 km/h",
+      windSpeed: "5 mph",
       updated: new Date().toLocaleString()
     },
     {
       city: "Buchanan",
       country: "Liberia",
-      temperature: 29,
+      temperature: 84, // Changed from 29°C to 84°F
       condition: "Clear",
       humidity: "82%",
-      windSpeed: "15 km/h",
+      windSpeed: "9 mph",
       updated: new Date().toLocaleString()
     },
     {
       city: "Kakata",
       country: "Liberia",
-      temperature: 27,
+      temperature: 81, // Changed from 27°C to 81°F
       condition: "Overcast",
       humidity: "71%",
-      windSpeed: "10 km/h",
+      windSpeed: "6 mph",
       updated: new Date().toLocaleString()
     }
   ],
