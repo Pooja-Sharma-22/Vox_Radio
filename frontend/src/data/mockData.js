@@ -83,37 +83,37 @@ export const allLiberianCities = [
     {
       city: "Voinjama",
       country: "Liberia",
-      temperature: 25,
+      temperature: 77, // Changed from 25°C to 77°F
       condition: "Overcast",
       humidity: "72%",
-      windSpeed: "9 km/h",
+      windSpeed: "6 mph", // Changed from 9 km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "Kolahun",
       country: "Liberia",
-      temperature: 24,
+      temperature: 75, // Changed from 24°C to 75°F
       condition: "Foggy",
       humidity: "90%",
-      windSpeed: "6 km/h",
+      windSpeed: "4 mph", // Changed from 6 km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "Foya",
       country: "Liberia",
-      temperature: 26,
+      temperature: 79, // Changed from 26°C to 79°F
       condition: "Partly Cloudy",
       humidity: "68%",
-      windSpeed: "10 km/h",
+      windSpeed: "6 mph", // Changed from 10 km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "Zorzor",
       country: "Liberia",
-      temperature: 23,
+      temperature: 73, // Changed from 23°C to 73°F
       condition: "Cool",
       humidity: "75%",
-      windSpeed: "7 km/h",
+      windSpeed: "4 mph", // Changed from 7 km/h to mph
       updated: new Date().toLocaleString()
     }
   ],
