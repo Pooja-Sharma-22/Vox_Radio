@@ -101,3 +101,60 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Refine the display and logic for the list of programs, change the weather temperature unit from Celsius to Fahrenheit, and further optimize and ensure a mobile-first design approach across the application."
+
+frontend:
+  - task: "Convert weather data from Celsius to Fahrenheit"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/data/mockData.js, /app/frontend/src/components/WeatherCard.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Starting implementation - need to convert all weather data sets from Celsius to Fahrenheit and update WeatherCard component display"
+
+  - task: "Refine program schedule display and logic"
+    implemented: false
+    working: "NA" 
+    file: "/app/frontend/src/components/ProgramSchedule.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Need to improve mobile animations, marquee scrolling, and SOON indicator logic"
+
+  - task: "Optimize mobile-first design across application"
+    implemented: false
+    working: "NA"
+    file: "Multiple components"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Review all components for consistent mobile-first responsive design patterns"
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 0
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "Convert weather data from Celsius to Fahrenheit"
+    - "Refine program schedule display and logic"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    -agent: "main"
+    -message: "Starting implementation of pending tasks: weather unit conversion to Fahrenheit, program schedule refinements, and mobile-first design optimization. Will implement in order of priority."
