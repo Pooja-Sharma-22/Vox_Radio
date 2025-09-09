@@ -165,33 +165,35 @@ const WhatsAppSection = () => {
           ) : (
             <div className="space-y-4">
               {messages.map((message) => (
-                <div key={message.id} className="p-4 border rounded-lg hover:bg-gray-50 transition-colors">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
+                <div key={message.id} className="p-3 sm:p-4 border rounded-lg hover:bg-gray-50 transition-colors">
+                  <div className="flex flex-col sm:flex-row items-start justify-between space-y-3 sm:space-y-0">
+                    <div className="flex-1 w-full">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
                         <span className="font-semibold text-gray-900">{message.sender}</span>
                         <span className="text-sm text-gray-500 flex items-center gap-1">
                           <Clock size={12} />
                           {message.time}
                         </span>
-                        {message.replied ? (
-                          <CheckCircle size={16} className="text-green-500" />
-                        ) : (
-                          <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-                        )}
+                        <div className="flex items-center gap-2">
+                          {message.replied ? (
+                            <CheckCircle size={16} className="text-green-500" />
+                          ) : (
+                            <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+                          )}
+                        </div>
                       </div>
                       {message.phone && (
                         <p className="text-sm text-gray-600 mb-2">📞 {message.phone}</p>
                       )}
-                      <p className="text-gray-700 mb-3">{message.message}</p>
+                      <p className="text-gray-700 mb-3 text-sm sm:text-base">{message.message}</p>
                     </div>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
                     {!message.replied && (
                       <Button 
                         size="sm" 
                         onClick={() => handleReplyMessage(message.id)}
-                        className="bg-green-500 hover:bg-green-600 text-white"
+                        className="bg-green-500 hover:bg-green-600 text-white w-full sm:w-auto"
                       >
                         Reply
                       </Button>
@@ -200,6 +202,7 @@ const WhatsAppSection = () => {
                       size="sm" 
                       variant="outline"
                       onClick={() => alert(`Message details:\nFrom: ${message.sender}\nTime: ${message.time}\nMessage: ${message.message}\nReplied: ${message.replied ? 'Yes' : 'No'}`)}
+                      className="w-full sm:w-auto"
                     >
                       View Details
                     </Button>
