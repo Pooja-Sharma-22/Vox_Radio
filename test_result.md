@@ -158,10 +158,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Convert weather data from Celsius to Fahrenheit"
     - "Refine program schedule display and logic"
-    - "Optimize mobile-first design across application"
-  stuck_tasks: []
+  stuck_tasks:
+    - "Refine program schedule display and logic"
   test_all: false
   test_priority: "high_first"
 
