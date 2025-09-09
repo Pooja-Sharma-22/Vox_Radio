@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 const TabNavigation = ({ activeTab, setActiveTab }) => {
   const tabs = [
     { id: 'current-weather', label: 'Current Weather', icon: '🌤️', shortLabel: 'Weather' },
+    { id: 'enhanced-schedule', label: 'Enhanced Schedule', icon: '📅', shortLabel: 'Schedule' },
     { id: 'whatsapp', label: 'WhatsApp', icon: '💬', shortLabel: 'WhatsApp' },
     { id: 'submit-testimony', label: 'Submit Testimony', icon: '✍️', shortLabel: 'Testimony' },
     { id: 'log-phone-call', label: 'Log a Phone Call', icon: '📞', shortLabel: 'Phone' },
