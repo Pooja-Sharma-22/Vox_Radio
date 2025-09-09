@@ -6,20 +6,72 @@ const ProgramSchedule = () => {
   const [currentProgram, setCurrentProgram] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Program schedule for Vox Radio
+  // Updated Vox Radio Program schedule based on actual program log
   const programs = [
     {
       id: 1,
-      name: "Morning Devotion",
+      name: "Good Shaping",
+      presenter: "Sam Doe",
       day: "Monday-Friday",
-      time: "06:00-07:00",
-      startHour: 6,
-      endHour: 7,
-      days: [1, 2, 3, 4, 5] // Monday to Friday
+      time: "05:00-06:00",
+      startHour: 5,
+      endHour: 6,
+      days: [1, 2, 3, 4, 5]
     },
     {
       id: 2,
-      name: "Community Hour",
+      name: "The Gospel Classic",
+      presenter: "Emmanuel Howard",
+      day: "Monday-Friday", 
+      time: "06:00-08:00",
+      startHour: 6,
+      endHour: 8,
+      days: [1, 2, 3, 4, 5]
+    },
+    {
+      id: 3,
+      name: "Music",
+      presenter: "Victoria Walker",
+      day: "Monday-Friday",
+      time: "08:00-10:00", 
+      startHour: 8,
+      endHour: 10,
+      days: [1, 2, 3, 4, 5]
+    },
+    {
+      id: 4,
+      name: "Jingles and Promos",
+      presenter: "Angeline Konway",
+      day: "Monday-Friday",
+      time: "10:00-10:30",
+      startHour: 10,
+      endHour: 10.5,
+      days: [1, 2, 3, 4, 5]
+    },
+    {
+      id: 5,
+      name: "Announcements",
+      presenter: "Beatrice Ballah",
+      day: "Monday-Friday",
+      time: "10:30-11:00",
+      startHour: 10.5,
+      endHour: 11,
+      days: [1, 2, 3, 4, 5]
+    },
+    {
+      id: 6,
+      name: "Music",
+      presenter: "Maxim M. Somah",
+      day: "Monday-Friday",
+      time: "11:00-12:00",
+      startHour: 11,
+      endHour: 12,
+      days: [1, 2, 3, 4, 5]
+    },
+    {
+      id: 7,
+      name: "Worship Connection",
+      presenter: "Emmanuel Lepolu",
       day: "Monday-Friday",
       time: "12:00-13:00",
       startHour: 12,
@@ -27,40 +79,156 @@ const ProgramSchedule = () => {
       days: [1, 2, 3, 4, 5]
     },
     {
-      id: 3,
-      name: "Chains Broken",
-      day: "Friday",
+      id: 8,
+      name: "Word to Go",
+      presenter: "Trenz KCalvin",
+      day: "Monday-Friday",
+      time: "13:00-14:00",
+      startHour: 13,
+      endHour: 14,
+      days: [1, 2, 3, 4, 5]
+    },
+    {
+      id: 9,
+      name: "The Heart Beat",
+      presenter: "Sam Doe",
+      day: "Monday-Friday",
+      time: "14:00-16:00",
+      startHour: 14,
+      endHour: 16,
+      days: [1, 2, 3, 4, 5]
+    },
+    {
+      id: 10,
+      name: "Thru The Bible",
+      presenter: "Emmanuel Howard", 
+      day: "Monday-Friday",
       time: "16:00-17:00",
       startHour: 16,
       endHour: 17,
-      days: [5] // Friday only
+      days: [1, 2, 3, 4, 5]
     },
     {
-      id: 4,
-      name: "Evening Praise",
-      day: "Monday-Sunday",
-      time: "18:00-19:00",
-      startHour: 18,
+      id: 11,
+      name: "Music",
+      presenter: "Victoria Walker",
+      day: "Monday-Friday",
+      time: "17:00-19:00",
+      startHour: 17,
       endHour: 19,
-      days: [0, 1, 2, 3, 4, 5, 6] // All days
+      days: [1, 2, 3, 4, 5]
     },
     {
-      id: 5,
-      name: "Youth Connect",
+      id: 12,
+      name: "Vox Talk",
+      presenter: "Angeline Konway",
+      day: "Monday-Friday", 
+      time: "19:00-20:00",
+      startHour: 19,
+      endHour: 20,
+      days: [1, 2, 3, 4, 5]
+    },
+    {
+      id: 13,
+      name: "Announcements",
+      presenter: "Beatrice Ballah",
+      day: "Monday-Friday",
+      time: "20:00-20:30",
+      startHour: 20,
+      endHour: 20.5,
+      days: [1, 2, 3, 4, 5]
+    },
+    {
+      id: 14,
+      name: "International Thru The Bible",
+      presenter: "Maxim M. Somah",
+      day: "Monday-Friday",
+      time: "20:30-21:00",
+      startHour: 20.5,
+      endHour: 21,
+      days: [1, 2, 3, 4, 5]
+    },
+    // Weekend Programs
+    {
+      id: 15,
+      name: "The Morning Glory",
+      presenter: "Emmanuel Lepolu",
       day: "Saturday",
-      time: "14:00-15:00",
-      startHour: 14,
-      endHour: 15,
-      days: [6] // Saturday only
+      time: "05:00-08:00",
+      startHour: 5,
+      endHour: 8,
+      days: [6]
     },
     {
-      id: 6,
+      id: 16,
+      name: "Music",
+      presenter: "Trenz KCalvin",
+      day: "Saturday",
+      time: "08:00-10:00",
+      startHour: 8,
+      endHour: 10,
+      days: [6]
+    },
+    {
+      id: 17,
+      name: "Faith For Life",
+      presenter: "Sam Doe",
+      day: "Saturday",
+      time: "10:00-12:00",
+      startHour: 10,
+      endHour: 12,
+      days: [6]
+    },
+    {
+      id: 18,
+      name: "Music",
+      presenter: "Emmanuel Howard",
+      day: "Saturday",
+      time: "12:00-14:00",
+      startHour: 12,
+      endHour: 14,
+      days: [6]
+    },
+    {
+      id: 19,
+      name: "Blessed Rest",
+      presenter: "Victoria Walker",
+      day: "Saturday",
+      time: "14:00-16:00",
+      startHour: 14,
+      endHour: 16,
+      days: [6]
+    },
+    // Sunday Programs
+    {
+      id: 20,
       name: "Sunday Service",
+      presenter: "Angeline Konway",
       day: "Sunday",
-      time: "09:00-11:00",
-      startHour: 9,
-      endHour: 11,
-      days: [0] // Sunday only
+      time: "06:00-12:00",
+      startHour: 6,
+      endHour: 12,
+      days: [0]
+    },
+    {
+      id: 21,
+      name: "The Gospel Classic",
+      presenter: "Beatrice Ballah",
+      day: "Sunday",
+      time: "12:00-14:00",
+      startHour: 12,
+      endHour: 14,
+      days: [0]
+    },
+    {
+      id: 22,
+      name: "Music and Testimonies",
+      presenter: "Maxim M. Somah",
+      day: "Sunday",
+      time: "14:00-16:00",
+      startHour: 14,
+      endHour: 16,
+      days: [0]
     }
   ];
 
