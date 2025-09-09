@@ -281,6 +281,8 @@ export const mockFlightData = {
 };
 
 // Mock testimonies data
+const mockTimestamp = new Date().toLocaleString();
+
 export const mockTestimonies = [
   {
     id: 1,
