@@ -430,41 +430,70 @@ const EnhancedProgramSchedule = ({ isFullPage = false }) => {
 
               {/* Program List */}
               <div className="space-y-2 max-h-96 overflow-y-auto">
-                {getFilteredPrograms().map((program, index) => {
-                  const isCurrent = currentProgram && currentProgram.name === program.name;
-                  const typeConfig = PROGRAM_TYPES[program.type];
-                  
-                  return (
-                    <div 
-                      key={index} 
-                      className={`p-3 rounded-lg border-l-4 ${typeConfig?.borderColor} ${
-                        isCurrent 
-                          ? 'bg-orange-500 text-white' 
-                          : `${typeConfig?.bgLight} bg-opacity-10 text-gray-300`
-                      }`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          {getProgramTypeIcon(program.type)}
-                          <div>
-                            <div className="text-sm font-medium">{program.name}</div>
-                            <div className="text-xs opacity-75">with {program.presenter}</div>
-                          </div>
-                          {isCurrent && (
-                            <div className="flex items-center space-x-1">
-                              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                              <span className="text-xs font-bold bg-green-400 text-black px-1.5 py-0.5 rounded-full">LIVE</span>
+                {getFilteredPrograms().length === 0 ? (
+                  <div className="text-center py-8 text-gray-400">
+                    <div className="mb-2">
+                      {searchTerm ? <Search size={24} /> : showFavoritesOnly ? <Heart size={24} /> : <Calendar size={24} />}
+                    </div>
+                    <p className="text-sm">
+                      {searchTerm 
+                        ? `No programs found matching "${searchTerm}"` 
+                        : showFavoritesOnly 
+                        ? 'No favorite programs for this day' 
+                        : 'No programs scheduled for this day'
+                      }
+                    </p>
+                  </div>
+                ) : (
+                  getFilteredPrograms().map((program, index) => {
+                    const isCurrent = currentProgram && currentProgram.name === program.name;
+                    const typeConfig = PROGRAM_TYPES[program.type];
+                    const isCurrentFavorite = isFavorite(program, selectedDay);
+                    
+                    return (
+                      <div 
+                        key={index} 
+                        className={`p-3 rounded-lg border-l-4 ${typeConfig?.borderColor} ${
+                          isCurrent 
+                            ? 'bg-orange-500 text-white' 
+                            : `${typeConfig?.bgLight} bg-opacity-10 text-gray-300`
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-2 flex-1">
+                            {getProgramTypeIcon(program.type)}
+                            <div className="flex-1">
+                              <div className="text-sm font-medium">{program.name}</div>
+                              <div className="text-xs opacity-75">with {program.presenter}</div>
                             </div>
-                          )}
-                        </div>
-                        <div className="text-right">
-                          <div className="text-xs font-medium">{program.time}</div>
-                          <div className={`text-xs ${typeConfig?.textColor}`}>{program.type}</div>
+                            {isCurrent && (
+                              <div className="flex items-center space-x-1">
+                                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                <span className="text-xs font-bold bg-green-400 text-black px-1.5 py-0.5 rounded-full">LIVE</span>
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <div className="text-right">
+                              <div className="text-xs font-medium">{program.time}</div>
+                              <div className={`text-xs ${typeConfig?.textColor}`}>{program.type}</div>
+                            </div>
+                            <button
+                              onClick={() => toggleFavorite(program, selectedDay)}
+                              className={`p-1 rounded-full transition-colors ${
+                                isCurrentFavorite 
+                                  ? 'text-red-500 hover:text-red-400' 
+                                  : 'text-gray-400 hover:text-red-500'
+                              }`}
+                            >
+                              <Heart size={14} fill={isCurrentFavorite ? 'currentColor' : 'none'} />
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })
+                )}
               </div>
             </div>
           )}
