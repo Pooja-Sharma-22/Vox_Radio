@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Calendar, Download, Print } from 'lucide-react';
+import { ArrowLeft, Calendar, Download, Printer } from 'lucide-react';
 import { Button } from './ui/button';
 import EnhancedProgramSchedule from './EnhancedProgramSchedule';
 
