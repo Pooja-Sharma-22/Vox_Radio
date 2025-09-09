@@ -417,26 +417,37 @@ const ProgramSchedule = () => {
                   return (
                     <div 
                       key={program.id} 
-                      className={`flex items-center space-x-2 whitespace-nowrap px-3 py-1 rounded transition-all duration-300 ${
+                      className={`flex items-center space-x-3 whitespace-nowrap px-4 py-2 rounded-lg transition-all duration-300 ${
                         isCurrent 
-                          ? 'bg-orange-500 text-white font-bold scale-110 shadow-lg' 
+                          ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold scale-110 shadow-lg' 
                           : isUpcomingProgram
-                          ? 'bg-yellow-600 text-white font-semibold'
-                          : 'text-gray-300 hover:text-orange-400'
+                          ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-semibold shadow-md'
+                          : 'text-gray-300 hover:text-orange-400 hover:bg-gray-800 rounded-lg px-3 py-1'
                       }`}
                     >
-                      <Calendar size={14} className={isCurrent ? 'text-yellow-300' : 'text-orange-400'} />
-                      <span className={`text-sm ${isCurrent ? 'font-bold' : 'font-medium'}`}>
-                        {program.name}
-                      </span>
-                      <span className="text-xs opacity-75">
-                        {program.day} {program.time}
-                      </span>
+                      <Calendar size={16} className={isCurrent ? 'text-yellow-300' : 'text-orange-400'} />
+                      <div className="flex flex-col items-start">
+                        <span className={`text-sm ${isCurrent ? 'font-bold' : 'font-medium'}`}>
+                          {program.name}
+                        </span>
+                        <span className="text-xs opacity-75">
+                          with {program.presenter}
+                        </span>
+                      </div>
+                      <div className="text-xs opacity-75 border-l border-gray-400 pl-2">
+                        <div>{program.day}</div>
+                        <div>{program.time}</div>
+                      </div>
                       {isCurrent && (
-                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse ml-2"></div>
+                        <div className="flex items-center space-x-1">
+                          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                          <span className="text-xs font-bold bg-green-400 text-black px-2 py-0.5 rounded-full">
+                            LIVE
+                          </span>
+                        </div>
                       )}
                       {isUpcomingProgram && (
-                        <span className="text-xs bg-yellow-400 text-black px-1 rounded font-bold ml-1">
+                        <span className="text-xs bg-yellow-300 text-black px-2 py-0.5 rounded-full font-bold">
                           SOON
                         </span>
                       )}
