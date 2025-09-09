@@ -159,3 +159,5 @@ test_plan:
 agent_communication:
     -agent: "main"
     -message: "Completed all three pending tasks: 1) Successfully converted all weather data from Celsius to Fahrenheit and updated display units 2) Enhanced program schedule with better animations, more accurate timing logic, and improved visual presentation 3) Improved mobile-first design across WhatsApp section and other components. Ready for testing."
+    -agent: "testing"
+    -message: "CRITICAL ISSUE FOUND: Application has infinite re-render loop causing 'Maximum update depth exceeded' errors. Despite this, core functionality works: ✅ Weather shows Fahrenheit (81°F, 84°F, 79°F, 82°F) ✅ Wind speeds in mph ✅ 15-minute rotation working ✅ Program schedule with presenter names ✅ Desktop marquee scrolling ✅ Mobile responsive design. ISSUE: ProgramSchedule component has programs array recreated on every render, likely causing infinite loops. Needs immediate fix."
