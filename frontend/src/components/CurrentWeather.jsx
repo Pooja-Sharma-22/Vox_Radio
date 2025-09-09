@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import WeatherCard from './WeatherCard';
 import { getCurrentWeatherData } from '../data/mockData';
 
@@ -6,11 +6,10 @@ const CurrentWeather = () => {
   const [weatherData, setWeatherData] = useState(getCurrentWeatherData());
   const [lastUpdate, setLastUpdate] = useState(new Date());
   const [nextRotation, setNextRotation] = useState('');
-  const [currentTime, setCurrentTime] = useState(new Date());
 
-  // Memoized function to calculate next rotation time
-  const calculateNextRotation = useMemo(() => {
-    const now = currentTime;
+  // Calculate next rotation time - stable function
+  const calculateNextRotation = () => {
+    const now = new Date();
     const minutes = now.getMinutes();
     const nextRotationMinute = Math.ceil((minutes + 1) / 15) * 15;
     const nextRotationTime = new Date(now);
@@ -24,40 +23,11 @@ const CurrentWeather = () => {
     
     nextRotationTime.setSeconds(0);
     return nextRotationTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  }, [currentTime]);
+  };
 
-  // Update weather data every 15 minutes
-  useEffect(() => {
-    const updateWeatherData = () => {
-      const newData = getCurrentWeatherData();
-      setWeatherData(newData);
-      setLastUpdate(new Date());
-      setCurrentTime(new Date());
-    };
-
-    // Initial calculation
-    setCurrentTime(new Date());
-
-    // Set up interval to update every minute to check for rotation
-    const interval = setInterval(() => {
-      const now = new Date();
-      const minutes = now.getMinutes();
-      
-      // Update at 0, 15, 30, 45 minutes
-      if (minutes % 15 === 0 && now.getSeconds() < 10) {
-        updateWeatherData();
-      } else {
-        // Update current time for next rotation calculation
-        setCurrentTime(new Date());
-      }
-    }, 10000); // Check every 10 seconds for smoother updates
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Memoized function to get current set info
-  const getCurrentSetInfo = useMemo(() => {
-    const now = currentTime;
+  // Get current set info - stable function
+  const getCurrentSetInfo = () => {
+    const now = new Date();
     const minutes = now.getMinutes();
     const rotationIndex = Math.floor(minutes / 15);
     
@@ -70,7 +40,36 @@ const CurrentWeather = () => {
     ];
     
     return setNames[rotationIndex % setNames.length];
-  }, [currentTime]);
+  };
+
+  // Update weather data every 15 minutes
+  useEffect(() => {
+    const updateWeatherData = () => {
+      const newData = getCurrentWeatherData();
+      setWeatherData(newData);
+      setLastUpdate(new Date());
+      setNextRotation(calculateNextRotation());
+    };
+
+    // Initial calculation
+    setNextRotation(calculateNextRotation());
+
+    // Set up interval to update every minute to check for rotation
+    const interval = setInterval(() => {
+      const now = new Date();
+      const minutes = now.getMinutes();
+      
+      // Update at 0, 15, 30, 45 minutes
+      if (minutes % 15 === 0 && now.getSeconds() < 10) {
+        updateWeatherData();
+      } else {
+        // Update next rotation time display only
+        setNextRotation(calculateNextRotation());
+      }
+    }, 10000); // Check every 10 seconds for smoother updates
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="p-6">
