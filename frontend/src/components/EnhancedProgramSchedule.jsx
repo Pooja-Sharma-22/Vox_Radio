@@ -200,12 +200,49 @@ const enhancedPrograms = {
   ]
 };
 
-const EnhancedProgramSchedule = () => {
+const EnhancedProgramSchedule = ({ isFullPage = false }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [currentProgram, setCurrentProgram] = useState(null);
   const [selectedDay, setSelectedDay] = useState('Monday');
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectedType, setSelectedType] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [favorites, setFavorites] = useState([]);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+  // Load favorites from localStorage
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem('voxRadioFavorites');
+    if (savedFavorites) {
+      setFavorites(JSON.parse(savedFavorites));
+    }
+  }, []);
+
+  // Save favorites to localStorage
+  const saveFavorites = (newFavorites) => {
+    setFavorites(newFavorites);
+    localStorage.setItem('voxRadioFavorites', JSON.stringify(newFavorites));
+  };
+
+  // Toggle favorite program
+  const toggleFavorite = (program, day) => {
+    const programKey = `${day}-${program.name}-${program.time}`;
+    const isFavorite = favorites.includes(programKey);
+    
+    if (isFavorite) {
+      saveFavorites(favorites.filter(fav => fav !== programKey));
+    } else {
+      saveFavorites([...favorites, programKey]);
+    }
+  };
+
+  // Check if program is favorite
+  const isFavorite = (program, day) => {
+    const programKey = `${day}-${program.name}-${program.time}`;
+    return favorites.includes(programKey);
+  };
 
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
