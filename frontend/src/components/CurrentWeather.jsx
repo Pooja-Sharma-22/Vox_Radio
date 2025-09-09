@@ -32,11 +32,11 @@ const CurrentWeather = () => {
       const newData = getCurrentWeatherData();
       setWeatherData(newData);
       setLastUpdate(new Date());
-      setNextRotation(calculateNextRotation());
+      setCurrentTime(new Date());
     };
 
     // Initial calculation
-    setNextRotation(calculateNextRotation());
+    setCurrentTime(new Date());
 
     // Set up interval to update every minute to check for rotation
     const interval = setInterval(() => {
@@ -47,16 +47,17 @@ const CurrentWeather = () => {
       if (minutes % 15 === 0 && now.getSeconds() < 10) {
         updateWeatherData();
       } else {
-        // Update next rotation time display
-        setNextRotation(calculateNextRotation());
+        // Update current time for next rotation calculation
+        setCurrentTime(new Date());
       }
     }, 10000); // Check every 10 seconds for smoother updates
 
     return () => clearInterval(interval);
   }, []);
 
-  const getCurrentSetInfo = () => {
-    const now = new Date();
+  // Memoized function to get current set info
+  const getCurrentSetInfo = useMemo(() => {
+    const now = currentTime;
     const minutes = now.getMinutes();
     const rotationIndex = Math.floor(minutes / 15);
     
@@ -69,7 +70,7 @@ const CurrentWeather = () => {
     ];
     
     return setNames[rotationIndex % setNames.length];
-  };
+  }, [currentTime]);
 
   return (
     <div className="p-6">
