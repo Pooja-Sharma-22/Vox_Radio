@@ -374,6 +374,15 @@ const ProgramSchedule = () => {
                 </div>
               );
             })}
+            
+            {/* Next Program - Mobile */}
+            <div className="text-center pt-2 border-t border-gray-700">
+              <div className="text-xs text-gray-400">NEXT PROGRAM</div>
+              <div className="text-sm text-orange-400 font-medium">
+                {getNextProgram()}
+              </div>
+            </div>
+          </div>
               
               {/* Next Program - Mobile */}
               <div className="text-center pt-2 border-t border-gray-700">
