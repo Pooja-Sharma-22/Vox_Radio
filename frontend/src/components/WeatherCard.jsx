@@ -10,7 +10,7 @@ const WeatherCard = ({ weather }) => {
         
         <div className="text-4xl font-bold text-orange-500 mb-2 flex items-center">
           <Thermometer className="mr-2" size={32} />
-          {weather.temperature}°C
+          {weather.temperature}°F
         </div>
         
         <p className="text-gray-700 font-medium mb-4">{weather.condition}</p>
