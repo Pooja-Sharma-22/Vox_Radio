@@ -279,6 +279,29 @@ const EnhancedProgramSchedule = ({ isFullPage = false }) => {
     return favorites.includes(programKey);
   };
 
+  // Find current program based on Liberia time
+  const getCurrentProgram = () => {
+    const now = new Date(new Date().toLocaleString("en-US", {timeZone: "Africa/Monrovia"}));
+    const currentDay = days[now.getDay()];
+    const currentHour = now.getHours();
+    const currentMinutes = now.getMinutes();
+    const currentTimeDecimal = currentHour + (currentMinutes / 60);
+
+    const todayPrograms = enhancedPrograms[currentDay] || [];
+    
+    return todayPrograms.find(program => {
+      const startTime = program.timeSlot;
+      const endTime = startTime + program.duration;
+      
+      // Handle programs that cross midnight
+      if (startTime > endTime) {
+        return currentTimeDecimal >= startTime || currentTimeDecimal < endTime;
+      }
+      
+      return currentTimeDecimal >= startTime && currentTimeDecimal < endTime;
+    });
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date(new Date().toLocaleString("en-US", {timeZone: "Africa/Monrovia"}));
@@ -288,20 +311,8 @@ const EnhancedProgramSchedule = ({ isFullPage = false }) => {
       const currentDayName = days[now.getDay()];
       setSelectedDay(currentDayName);
       
-      // Find current program (simplified logic for demonstration)
-      const todayPrograms = enhancedPrograms[currentDayName] || [];
-      const currentHour = now.getHours();
-      const activeProgram = todayPrograms.find(program => {
-        // Simple time matching logic - would need more sophisticated parsing
-        const timeRange = program.time.split('-');
-        if (timeRange.length === 2) {
-          const startTime = timeRange[0].trim();
-          const startHour = parseInt(startTime.split(':')[0]);
-          return currentHour >= startHour && currentHour < startHour + 1;
-        }
-        return false;
-      });
-      
+      // Find current program
+      const activeProgram = getCurrentProgram();
       setCurrentProgram(activeProgram);
     }, 1000);
 
