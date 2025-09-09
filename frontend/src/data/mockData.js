@@ -1,4 +1,7 @@
 // All Liberian cities for weather rotation (rotates every 15 minutes) - All temperatures in Fahrenheit
+// Create timestamp once to prevent infinite re-renders
+const weatherTimestamp = new Date().toLocaleString();
+
 export const allLiberianCities = [
   // Set 1 - Major Cities
   [
@@ -9,7 +12,7 @@ export const allLiberianCities = [
       condition: "Partly Cloudy",
       humidity: "78%",
       windSpeed: "7.5 mph", // Changed from km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Gbarnga", 
@@ -18,7 +21,7 @@ export const allLiberianCities = [
       condition: "Sunny",
       humidity: "65%",
       windSpeed: "5 mph",
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Buchanan",
@@ -27,7 +30,7 @@ export const allLiberianCities = [
       condition: "Clear",
       humidity: "82%",
       windSpeed: "9 mph",
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Kakata",
@@ -36,7 +39,7 @@ export const allLiberianCities = [
       condition: "Overcast",
       humidity: "71%",
       windSpeed: "6 mph",
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     }
   ],
   // Set 2 - Coastal Cities
@@ -48,7 +51,7 @@ export const allLiberianCities = [
       condition: "Sunny",
       humidity: "85%",
       windSpeed: "11 mph", // Changed from 18 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Greenville",
@@ -57,7 +60,7 @@ export const allLiberianCities = [
       condition: "Partly Cloudy",
       humidity: "80%",
       windSpeed: "10 mph", // Changed from 16 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Grand Bassa",
@@ -66,7 +69,7 @@ export const allLiberianCities = [
       condition: "Clear",
       humidity: "77%",
       windSpeed: "9 mph", // Changed from 14 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "River Cess",
@@ -75,7 +78,7 @@ export const allLiberianCities = [
       condition: "Light Rain",
       humidity: "88%",
       windSpeed: "7 mph", // Changed from 11 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     }
   ],
   // Set 3 - Northern Cities
@@ -87,7 +90,7 @@ export const allLiberianCities = [
       condition: "Overcast",
       humidity: "72%",
       windSpeed: "6 mph", // Changed from 9 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Kolahun",
@@ -96,7 +99,7 @@ export const allLiberianCities = [
       condition: "Foggy",
       humidity: "90%",
       windSpeed: "4 mph", // Changed from 6 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Foya",
@@ -105,7 +108,7 @@ export const allLiberianCities = [
       condition: "Partly Cloudy",
       humidity: "68%",
       windSpeed: "6 mph", // Changed from 10 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Zorzor",
@@ -114,7 +117,7 @@ export const allLiberianCities = [
       condition: "Cool",
       humidity: "75%",
       windSpeed: "4 mph", // Changed from 7 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     }
   ],
   // Set 4 - Central/Eastern Cities
@@ -126,7 +129,7 @@ export const allLiberianCities = [
       condition: "Thunderstorms",
       humidity: "92%",
       windSpeed: "8 mph", // Changed from 13 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Pleebo",
@@ -135,7 +138,7 @@ export const allLiberianCities = [
       condition: "Humid",
       humidity: "87%",
       windSpeed: "9 mph", // Changed from 15 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Tubmanburg",
@@ -144,7 +147,7 @@ export const allLiberianCities = [
       condition: "Partly Cloudy",
       humidity: "73%",
       windSpeed: "7 mph", // Changed from 11 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Robertsport",
@@ -153,7 +156,7 @@ export const allLiberianCities = [
       condition: "Windy",
       humidity: "79%",
       windSpeed: "12 mph", // Changed from 20 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     }
   ],
   // Set 5 - Mining/Rural Areas
@@ -165,7 +168,7 @@ export const allLiberianCities = [
       condition: "Cool",
       humidity: "70%",
       windSpeed: "5 mph", // Changed from 8 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Bong Mines",
@@ -174,7 +177,7 @@ export const allLiberianCities = [
       condition: "Misty",
       humidity: "83%",
       windSpeed: "6 mph", // Changed from 9 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Harbel",
@@ -183,7 +186,7 @@ export const allLiberianCities = [
       condition: "Warm",
       humidity: "76%",
       windSpeed: "7 mph", // Changed from 12 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     },
     {
       city: "Bomi Hills",
@@ -192,7 +195,7 @@ export const allLiberianCities = [
       condition: "Overcast",
       humidity: "74%",
       windSpeed: "6 mph", // Changed from 10 km/h to mph
-      updated: new Date().toLocaleString()
+      updated: weatherTimestamp
     }
   ]
 ];
