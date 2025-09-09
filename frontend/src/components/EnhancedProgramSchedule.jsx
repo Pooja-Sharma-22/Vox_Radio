@@ -517,8 +517,55 @@ const EnhancedProgramSchedule = ({ isFullPage = false }) => {
               )}
             </div>
 
-            {/* Desktop Type Filter */}
+            {/* Desktop Search and Controls */}
+            <div className="flex items-center space-x-3">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+                <Input
+                  type="text"
+                  placeholder="Search programs..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 pr-10 w-64 bg-gray-800 border-gray-600 text-white placeholder-gray-400"
+                />
+                {searchTerm && (
+                  <button
+                    onClick={() => setSearchTerm('')}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                  >
+                    <X size={16} />
+                  </button>
+                )}
+              </div>
+              
+              <button
+                onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                  showFavoritesOnly 
+                    ? 'bg-red-500 text-white shadow-lg' 
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                }`}
+              >
+                <Heart size={16} fill={showFavoritesOnly ? 'white' : 'none'} />
+                <span>Favorites ({favorites.length})</span>
+              </button>
+              
+              {!isFullPage && (
+                <Button
+                  onClick={() => window.open('/enhanced-schedule', '_blank')}
+                  className="bg-orange-500 hover:bg-orange-600 text-white"
+                >
+                  Full Schedule View
+                </Button>
+              )}
+            </div>
+          </div>
+
+          {/* Desktop Type Filter */}
+          <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-2">
+              <Filter size={16} className="text-gray-400" />
+              <span className="text-sm text-gray-400">Filter by type:</span>
               <button
                 onClick={() => setSelectedType('All')}
                 className={`px-3 py-1 rounded-full text-sm font-medium ${
@@ -543,6 +590,10 @@ const EnhancedProgramSchedule = ({ isFullPage = false }) => {
                   <span>{type}</span>
                 </button>
               ))}
+            </div>
+            
+            <div className="text-sm text-gray-400">
+              Showing {getFilteredPrograms().length} programs for {selectedDay}
             </div>
           </div>
 
