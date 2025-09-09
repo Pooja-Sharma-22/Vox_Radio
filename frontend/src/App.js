@@ -10,6 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/enhanced-schedule" element={<FullPageSchedule />} />
         </Routes>
       </BrowserRouter>
     </div>
