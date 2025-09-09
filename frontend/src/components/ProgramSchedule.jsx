@@ -256,10 +256,13 @@ const ProgramSchedule = () => {
   const isUpcoming = (program) => {
     const currentDay = currentTime.getDay();
     const currentHour = currentTime.getHours();
+    const currentMinutes = currentTime.getMinutes();
+    const currentTimeInMinutes = currentHour * 60 + currentMinutes;
+    const programStartInMinutes = program.startHour * 60;
     
     return program.days.includes(currentDay) && 
-           currentHour < program.startHour && 
-           (program.startHour - currentHour) <= 2; // Show as upcoming if within 2 hours
+           currentTimeInMinutes < programStartInMinutes && 
+           (programStartInMinutes - currentTimeInMinutes) <= 60; // Show as upcoming if within 1 hour
   };
 
   const getNextProgram = () => {
