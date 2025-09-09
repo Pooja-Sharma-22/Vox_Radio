@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Radio, Clock, Calendar, ChevronDown, ChevronUp, Play, Users, Book, MessageCircle, Heart, Star } from 'lucide-react';
+import { Radio, Clock, Calendar, ChevronDown, ChevronUp, Play, Users, Book, MessageCircle, Heart, Star, Search, X, Filter } from 'lucide-react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
 
 // Program type categories with colors (matching your HTML structure)
 const PROGRAM_TYPES = {
