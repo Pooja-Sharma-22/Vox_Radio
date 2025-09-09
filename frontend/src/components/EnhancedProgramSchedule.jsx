@@ -244,8 +244,6 @@ const EnhancedProgramSchedule = ({ isFullPage = false }) => {
     return favorites.includes(programKey);
   };
 
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
   useEffect(() => {
     const timer = setInterval(() => {
       const now = new Date(new Date().toLocaleString("en-US", {timeZone: "Africa/Monrovia"}));
@@ -273,12 +271,31 @@ const EnhancedProgramSchedule = ({ isFullPage = false }) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [days]);
 
   const getFilteredPrograms = () => {
-    const dayPrograms = enhancedPrograms[selectedDay] || [];
-    if (selectedType === 'All') return dayPrograms;
-    return dayPrograms.filter(program => program.type === selectedType);
+    let dayPrograms = enhancedPrograms[selectedDay] || [];
+    
+    // Filter by search term
+    if (searchTerm) {
+      dayPrograms = dayPrograms.filter(program => 
+        program.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        program.presenter.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        program.type.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    
+    // Filter by type
+    if (selectedType !== 'All') {
+      dayPrograms = dayPrograms.filter(program => program.type === selectedType);
+    }
+    
+    // Filter by favorites
+    if (showFavoritesOnly) {
+      dayPrograms = dayPrograms.filter(program => isFavorite(program, selectedDay));
+    }
+    
+    return dayPrograms;
   };
 
   const getProgramTypeIcon = (type) => {
