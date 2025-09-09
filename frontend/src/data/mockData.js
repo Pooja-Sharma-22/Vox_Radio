@@ -44,37 +44,37 @@ export const allLiberianCities = [
     {
       city: "Harper",
       country: "Liberia",
-      temperature: 30,
+      temperature: 86, // Changed from 30°C to 86°F
       condition: "Sunny",
       humidity: "85%",
-      windSpeed: "18 km/h",
+      windSpeed: "11 mph", // Changed from 18 km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "Greenville",
       country: "Liberia",
-      temperature: 29,
+      temperature: 84, // Changed from 29°C to 84°F
       condition: "Partly Cloudy",
       humidity: "80%",
-      windSpeed: "16 km/h",
+      windSpeed: "10 mph", // Changed from 16 km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "Grand Bassa",
       country: "Liberia",
-      temperature: 28,
+      temperature: 82, // Changed from 28°C to 82°F
       condition: "Clear",
       humidity: "77%",
-      windSpeed: "14 km/h",
+      windSpeed: "9 mph", // Changed from 14 km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "River Cess",
       country: "Liberia",
-      temperature: 27,
+      temperature: 81, // Changed from 27°C to 81°F
       condition: "Light Rain",
       humidity: "88%",
-      windSpeed: "11 km/h",
+      windSpeed: "7 mph", // Changed from 11 km/h to mph
       updated: new Date().toLocaleString()
     }
   ],
