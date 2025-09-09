@@ -122,15 +122,18 @@ frontend:
 
   - task: "Refine program schedule display and logic"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/src/components/ProgramSchedule.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         -working: true
         -agent: "main"
         -comment: "Enhanced mobile expandable animations with smooth transitions, improved current program detection with minute-level accuracy, enhanced SOON indicator to show within 1 hour, added presenter names to desktop marquee, improved styling with gradients and better visual hierarchy"
+        -working: false
+        -agent: "testing"
+        -comment: "❌ CRITICAL: Infinite re-render loop causing 'Maximum update depth exceeded' errors. Visual features work: ✅ Presenter names displayed (with Emmanuel Howard, with Victoria Walker) ✅ Desktop marquee scrolling functional ✅ Mobile expandable design working. ROOT CAUSE: ProgramSchedule component recreates programs array on every render (lines 10-233), causing infinite loops. REQUIRES IMMEDIATE FIX: Move programs array outside component or use useMemo."
 
   - task: "Optimize mobile-first design across application"
     implemented: true
