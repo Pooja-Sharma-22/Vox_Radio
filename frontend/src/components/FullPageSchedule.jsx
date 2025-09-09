@@ -63,5 +63,3 @@ const FullPageSchedule = () => {
 };
 
 export default FullPageSchedule;
-
-export default FullPageSchedule;
