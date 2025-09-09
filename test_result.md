@@ -124,7 +124,7 @@ frontend:
     implemented: true
     working: false
     file: "/app/frontend/src/components/ProgramSchedule.jsx"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
     needs_retesting: false
     status_history:
@@ -134,6 +134,9 @@ frontend:
         -working: false
         -agent: "testing"
         -comment: "❌ CRITICAL: Infinite re-render loop causing 'Maximum update depth exceeded' errors. Visual features work: ✅ Presenter names displayed (with Emmanuel Howard, with Victoria Walker) ✅ Desktop marquee scrolling functional ✅ Mobile expandable design working. ROOT CAUSE: ProgramSchedule component recreates programs array on every render (lines 10-233), causing infinite loops. REQUIRES IMMEDIATE FIX: Move programs array outside component or use useMemo."
+        -working: false
+        -agent: "testing"
+        -comment: "❌ CRITICAL ISSUE PERSISTS: Despite moving programs array outside component (lines 5-228), infinite loop still occurring with hundreds of 'Maximum update depth exceeded' errors. ROOT CAUSE IDENTIFIED: mockData.js contains new Date().toLocaleString() calls in weather data (lines 12,21,51,60,69,78,90,99,108,117,129,138,147,156,168,177,186,195) causing CurrentWeather component to infinitely re-render. VISUAL VERIFICATION: ✅ Presenter names show correctly (with Emmanuel Howard, with Victoria Walker) ✅ Weather displays Fahrenheit (81°F, 84°F, 79°F, 82°F) ✅ Mobile expand/collapse works ✅ 15-minute rotation visible. REQUIRES: Fix Date objects in mockData.js to prevent infinite re-renders."
 
   - task: "Optimize mobile-first design across application"
     implemented: true
