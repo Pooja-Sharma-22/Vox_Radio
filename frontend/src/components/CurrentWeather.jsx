@@ -80,7 +80,7 @@ const CurrentWeather = () => {
             Current Weather - Liberia
           </h3>
           <p className="text-sm text-gray-600 mt-1">
-            Showing: <span className="font-medium text-orange-600">{getCurrentSetInfo}</span>
+            Showing: <span className="font-medium text-orange-600">{getCurrentSetInfo()}</span>
           </p>
         </div>
         <div className="text-right">
@@ -88,7 +88,7 @@ const CurrentWeather = () => {
             Last updated: {lastUpdate.toLocaleString()}
           </div>
           <div className="text-xs text-orange-600 mt-1">
-            Next rotation: {calculateNextRotation}
+            Next rotation: {nextRotation}
           </div>
         </div>
       </div>
