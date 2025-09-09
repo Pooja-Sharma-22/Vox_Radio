@@ -161,37 +161,37 @@ export const allLiberianCities = [
     {
       city: "Yekepa",
       country: "Liberia",
-      temperature: 24,
+      temperature: 75, // Changed from 24°C to 75°F
       condition: "Cool",
       humidity: "70%",
-      windSpeed: "8 km/h",
+      windSpeed: "5 mph", // Changed from 8 km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "Bong Mines",
       country: "Liberia",
-      temperature: 25,
+      temperature: 77, // Changed from 25°C to 77°F
       condition: "Misty",
       humidity: "83%",
-      windSpeed: "9 km/h",
+      windSpeed: "6 mph", // Changed from 9 km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "Harbel",
       country: "Liberia",
-      temperature: 28,
+      temperature: 82, // Changed from 28°C to 82°F
       condition: "Warm",
       humidity: "76%",
-      windSpeed: "12 km/h",
+      windSpeed: "7 mph", // Changed from 12 km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "Bomi Hills",
       country: "Liberia",
-      temperature: 26,
+      temperature: 79, // Changed from 26°C to 79°F
       condition: "Overcast",
       humidity: "74%",
-      windSpeed: "10 km/h",
+      windSpeed: "6 mph", // Changed from 10 km/h to mph
       updated: new Date().toLocaleString()
     }
   ]
