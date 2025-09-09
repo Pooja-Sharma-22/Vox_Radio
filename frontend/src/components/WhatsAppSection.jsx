@@ -64,25 +64,25 @@ const WhatsAppSection = () => {
   };
 
   return (
-    <div className="p-6">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-2xl font-bold text-gray-900 flex items-center">
+    <div className="p-4 sm:p-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 space-y-4 sm:space-y-0">
+        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 flex items-center">
           <span className="mr-3">💬</span>
           WhatsApp Management
         </h3>
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
           <Button 
             onClick={handleRefresh}
             disabled={isLoading}
             variant="outline"
-            className="flex items-center gap-2"
+            className="flex items-center justify-center gap-2 w-full sm:w-auto"
           >
             <RefreshCw size={16} className={isLoading ? 'animate-spin' : ''} />
             {isLoading ? 'Loading...' : 'Refresh'}
           </Button>
           <Button 
             onClick={openWhatsApp}
-            className="bg-green-500 hover:bg-green-600 text-white flex items-center gap-2"
+            className="bg-green-500 hover:bg-green-600 text-white flex items-center justify-center gap-2 w-full sm:w-auto"
           >
             <MessageCircle size={16} />
             Open WhatsApp
@@ -91,7 +91,7 @@ const WhatsAppSection = () => {
       </div>
 
       {/* Statistics Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
         <Card className="border-l-4 border-l-green-500">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
