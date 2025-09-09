@@ -44,7 +44,7 @@ const FullPageSchedule = () => {
                 variant="outline"
                 className="border-white text-white hover:bg-white hover:text-orange-600"
               >
-                <Print size={16} className="mr-2" />
+                <Printer size={16} className="mr-2" />
                 Print Schedule
               </Button>
             </div>
