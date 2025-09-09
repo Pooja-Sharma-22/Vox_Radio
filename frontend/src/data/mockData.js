@@ -122,37 +122,37 @@ export const allLiberianCities = [
     {
       city: "Zwedru",
       country: "Liberia",
-      temperature: 27,
+      temperature: 81, // Changed from 27°C to 81°F
       condition: "Thunderstorms",
       humidity: "92%",
-      windSpeed: "13 km/h",
+      windSpeed: "8 mph", // Changed from 13 km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "Pleebo",
       country: "Liberia",
-      temperature: 29,
+      temperature: 84, // Changed from 29°C to 84°F
       condition: "Humid",
       humidity: "87%",
-      windSpeed: "15 km/h",
+      windSpeed: "9 mph", // Changed from 15 km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "Tubmanburg",
       country: "Liberia",
-      temperature: 26,
+      temperature: 79, // Changed from 26°C to 79°F
       condition: "Partly Cloudy",
       humidity: "73%",
-      windSpeed: "11 km/h",
+      windSpeed: "7 mph", // Changed from 11 km/h to mph
       updated: new Date().toLocaleString()
     },
     {
       city: "Robertsport",
       country: "Liberia",
-      temperature: 28,
+      temperature: 82, // Changed from 28°C to 82°F
       condition: "Windy",
       humidity: "79%",
-      windSpeed: "20 km/h",
+      windSpeed: "12 mph", // Changed from 20 km/h to mph
       updated: new Date().toLocaleString()
     }
   ],
