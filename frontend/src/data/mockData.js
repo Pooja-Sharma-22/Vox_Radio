@@ -1,4 +1,4 @@
-// All Liberian cities for weather rotation (rotates every 15 minutes) - Temperatures in Fahrenheit
+// All Liberian cities for weather rotation (rotates every 15 minutes) - All temperatures in Fahrenheit
 export const allLiberianCities = [
   // Set 1 - Major Cities
   [
