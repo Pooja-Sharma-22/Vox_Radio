@@ -93,49 +93,49 @@ const WhatsAppSection = () => {
       {/* Statistics Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
         <Card className="border-l-4 border-l-green-500">
-          <CardContent className="p-4">
+          <CardContent className="p-3 sm:p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Today</p>
-                <p className="text-2xl font-bold text-green-600">{stats.today}</p>
+                <p className="text-xs sm:text-sm text-gray-600">Today</p>
+                <p className="text-xl sm:text-2xl font-bold text-green-600">{stats.today}</p>
               </div>
-              <MessageCircle className="text-green-500" size={32} />
+              <MessageCircle className="text-green-500" size={24} />
             </div>
           </CardContent>
         </Card>
 
         <Card className="border-l-4 border-l-blue-500">
-          <CardContent className="p-4">
+          <CardContent className="p-3 sm:p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">This Week</p>
-                <p className="text-2xl font-bold text-blue-600">{stats.week}</p>
+                <p className="text-xs sm:text-sm text-gray-600">This Week</p>
+                <p className="text-xl sm:text-2xl font-bold text-blue-600">{stats.week}</p>
               </div>
-              <TrendingUp className="text-blue-500" size={32} />
+              <TrendingUp className="text-blue-500" size={24} />
             </div>
           </CardContent>
         </Card>
 
         <Card className="border-l-4 border-l-purple-500">
-          <CardContent className="p-4">
+          <CardContent className="p-3 sm:p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">This Month</p>
-                <p className="text-2xl font-bold text-purple-600">{stats.month}</p>
+                <p className="text-xs sm:text-sm text-gray-600">This Month</p>
+                <p className="text-xl sm:text-2xl font-bold text-purple-600">{stats.month}</p>
               </div>
-              <Users className="text-purple-500" size={32} />
+              <Users className="text-purple-500" size={24} />
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-l-4 border-l-orange-500">
-          <CardContent className="p-4">
+        <Card className="border-l-4 border-l-orange-500 col-span-2 lg:col-span-1">
+          <CardContent className="p-3 sm:p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">WhatsApp Number</p>
-                <p className="text-lg font-bold text-orange-600">0777975975</p>
+                <p className="text-xs sm:text-sm text-gray-600">WhatsApp Number</p>
+                <p className="text-base sm:text-lg font-bold text-orange-600">0777975975</p>
               </div>
-              <MessageCircle className="text-orange-500" size={32} />
+              <MessageCircle className="text-orange-500" size={24} />
             </div>
           </CardContent>
         </Card>
