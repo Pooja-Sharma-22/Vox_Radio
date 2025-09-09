@@ -240,12 +240,17 @@ const ProgramSchedule = () => {
       // Check if any program is currently active
       const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
       const currentHour = now.getHours();
+      const currentMinutes = now.getMinutes();
+      const currentTimeInMinutes = currentHour * 60 + currentMinutes;
       
-      const activeProgram = programs.find(program => 
-        program.days.includes(currentDay) && 
-        currentHour >= program.startHour && 
-        currentHour < program.endHour
-      );
+      const activeProgram = programs.find(program => {
+        const programStartInMinutes = program.startHour * 60;
+        const programEndInMinutes = program.endHour * 60;
+        
+        return program.days.includes(currentDay) && 
+               currentTimeInMinutes >= programStartInMinutes && 
+               currentTimeInMinutes < programEndInMinutes;
+      });
       
       setCurrentProgram(activeProgram);
     }, 1000);
