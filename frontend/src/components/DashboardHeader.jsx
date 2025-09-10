@@ -207,27 +207,25 @@ const DashboardHeader = () => {
           
           {/* Current Program and Presenter Display */}
           {currentProgram ? (
-            <div className="mt-4 bg-black bg-opacity-20 rounded-lg px-4 py-3 mx-auto max-w-2xl">
-              <div className="flex items-center justify-center space-x-3">
-                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+            <div className="mt-4 bg-red-600 bg-opacity-90 rounded-lg px-6 py-4 mx-auto max-w-4xl border-2 border-red-400 shadow-lg">
+              <div className="flex items-center justify-center space-x-4">
+                <div className="w-4 h-4 bg-yellow-300 rounded-full animate-pulse shadow-lg"></div>
                 <div className="text-center">
-                  <div className="text-lg font-bold text-white">
-                    NOW PLAYING: {currentProgram.name}
+                  <div className="text-lg sm:text-xl font-bold text-white uppercase tracking-wide">
+                    🔴 LIVE NOW: {currentProgram.name}
                   </div>
-                  <div className="text-sm text-orange-100">
+                  <div className="text-sm sm:text-base text-yellow-100 font-medium mt-1">
                     with {currentProgram.presenter} | {currentProgram.time}
                   </div>
                 </div>
-                <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                <div className="w-4 h-4 bg-yellow-300 rounded-full animate-pulse shadow-lg"></div>
               </div>
             </div>
           ) : (
-            <div className="mt-4 bg-gray-800 bg-opacity-30 rounded-lg px-4 py-2 mx-auto max-w-2xl">
+            <div className="mt-4 bg-gray-700 bg-opacity-80 rounded-lg px-4 py-3 mx-auto max-w-2xl">
               <div className="text-center">
-                <div className="text-sm text-orange-200">
-                  {new Date(new Date().toLocaleString("en-US", {timeZone: "Africa/Monrovia"})).toLocaleString()} | 
-                  Day: {days[new Date(new Date().toLocaleString("en-US", {timeZone: "Africa/Monrovia"})).getDay()]} | 
-                  No program currently scheduled
+                <div className="text-sm text-gray-300">
+                  📻 No program currently scheduled
                 </div>
               </div>
             </div>
