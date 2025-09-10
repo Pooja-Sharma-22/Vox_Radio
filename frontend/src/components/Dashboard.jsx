@@ -5,6 +5,7 @@ import ProgramSchedule from './ProgramSchedule';
 import EnhancedProgramSchedule from './EnhancedProgramSchedule';
 import TabNavigation from './TabNavigation';
 import CurrentWeather from './CurrentWeather';
+import WeatherForecast from './WeatherForecast';
 import WhatsAppSection from './WhatsAppSection';
 import SubmitTestimony from './SubmitTestimony';
 import LogPhoneCall from './LogPhoneCall';
