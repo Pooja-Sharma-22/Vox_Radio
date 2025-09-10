@@ -72,19 +72,19 @@ const CurrentWeather = () => {
   }, []);
 
   return (
-    <div className="p-6">
-      <div className="flex items-center justify-between mb-6">
-        <div>
-          <h3 className="text-2xl font-bold text-gray-900 flex items-center">
-            <span className="mr-3">🌤️</span>
+    <div className="p-3 sm:p-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6">
+        <div className="mb-3 sm:mb-0">
+          <h3 className="text-lg sm:text-2xl font-bold text-gray-900 flex items-center">
+            <span className="mr-2 sm:mr-3">🌤️</span>
             Current Weather - Liberia
           </h3>
-          <p className="text-sm text-gray-600 mt-1">
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">
             Showing: <span className="font-medium text-orange-600">{getCurrentSetInfo()}</span>
           </p>
         </div>
-        <div className="text-right">
-          <div className="text-sm text-gray-500">
+        <div className="text-left sm:text-right">
+          <div className="text-xs sm:text-sm text-gray-500">
             Last updated: {lastUpdate.toLocaleString()}
           </div>
           <div className="text-xs text-orange-600 mt-1">
