@@ -102,7 +102,7 @@ const AIAnalytics = () => {
       name: "Hootsuite (Free Plan)",
       description: "Social media management and analytics",
       category: "Social Media",
-      url: "https://hootsuite.com",
+      url: process.env.REACT_APP_SOCIAL_MEDIA_URL || "https://hootsuite.com",
       useCase: "Schedule posts and track social media engagement"
     },
     {
