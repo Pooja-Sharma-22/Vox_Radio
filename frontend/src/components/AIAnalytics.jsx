@@ -116,7 +116,7 @@ const AIAnalytics = () => {
       name: "ChatGPT (Free)",
       description: "AI assistant for content creation and analysis",
       category: "Content",
-      url: "https://chat.openai.com",
+      url: process.env.REACT_APP_AI_CHAT_URL || "https://chat.openai.com",
       useCase: "Generate program ideas, analyze feedback, create scripts"
     },
     {
