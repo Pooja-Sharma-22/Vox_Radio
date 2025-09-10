@@ -8,7 +8,7 @@ const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const openRadioStream = () => {
-    const radioUrl = 'https://radio.galcom.org/?station=VOXRadio';
+    const radioUrl = process.env.REACT_APP_RADIO_STREAM_URL || 'https://radio.galcom.org/?station=VOXRadio';
     
     // Calculate center position for popup
     const screenWidth = window.screen.width;
