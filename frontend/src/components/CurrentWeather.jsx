@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 import WeatherCard from './WeatherCard';
 import { getCurrentWeatherData } from '../data/mockData';
 
-import React, { useState, useEffect } from 'react';
-import WeatherCard from './WeatherCard';
-import { getCurrentWeatherData } from '../data/mockData';
-
 // 2-day forecast data for Liberian counties and cities
 const liberianForecastData = [
   // Tomorrow's forecast
