@@ -138,11 +138,14 @@ frontend:
     file: "/app/frontend/src/components/DashboardHeader.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         -working: true
         -agent: "main"
         -comment: "Successfully simplified LIVE NOW display with animated audio wave bars on both sides. Removed green banner styling and replaced with yellow animated pulse bars that create a professional audio visualization effect."
+        -working: true
+        -agent: "testing"
+        -comment: "✅ VERIFIED: LIVE NOW section displays perfectly with 10 animated audio wave bars (yellow bg-yellow-300 with animate-pulse). Shows current program 'INTERNATIONAL KAPOA SECURE LIBERIA with Maxim Somah | 00:30-04:30'. Animation works on both desktop and mobile (390x844). Professional audio visualization effect achieved."
 
   - task: "Display NEXT PROGRAM information at top of header"
     implemented: true
