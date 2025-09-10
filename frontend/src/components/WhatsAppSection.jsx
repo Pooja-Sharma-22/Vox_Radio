@@ -45,7 +45,8 @@ const WhatsAppSection = () => {
   };
 
   const openWhatsApp = () => {
-    const url = `https://wa.me/2310777975975`;
+    const phoneNumber = process.env.REACT_APP_WHATSAPP_NUMBER || '2310777975975';
+    const url = `https://wa.me/${phoneNumber}`;
     window.open(url, '_blank');
   };
 
