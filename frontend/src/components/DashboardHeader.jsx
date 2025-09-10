@@ -127,6 +127,7 @@ const enhancedPrograms = {
     { id: 'fri-19', time: "22:00-00:30", timeSlot: 22, duration: 2.5, name: "Music", presenter: "T. KCalvin Walter", type: "Music" }
   ],
   Saturday: [
+    { id: 'sat-0', time: "00:30-04:30", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "T. KCalvin Walter", type: "Community" },
     { id: 'sat-1', time: "05:00-07:00", timeSlot: 5, duration: 2, name: "Music", presenter: "KCalvin", type: "Music" },
     { id: 'sat-2', time: "07:00-08:30", timeSlot: 7, duration: 1.5, name: "The Morning Jam", presenter: "KCalvin", type: "Music" },
     { id: 'sat-3', time: "08:30-09:00", timeSlot: 8.5, duration: 0.5, name: "Music", presenter: "KCalvin", type: "Music" },
