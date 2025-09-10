@@ -332,40 +332,6 @@ const VoxRadioProgramLog = () => {
         </p>
       </div>
 
-      {/* Live Now Playing Banner */}
-      {currentProgram && (
-        <div className="mb-6 p-4 rounded-lg" style={{ backgroundColor: '#4CAF50' }}>
-          <div className="flex items-center justify-center space-x-3">
-            {/* Audio waves */}
-            <div className="flex items-center space-x-1">
-              <div className="w-1 bg-white rounded-full animate-pulse" style={{height: '12px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
-              <div className="w-1 bg-white rounded-full animate-pulse" style={{height: '20px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
-              <div className="w-1 bg-white rounded-full animate-pulse" style={{height: '16px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
-              <div className="w-1 bg-white rounded-full animate-pulse" style={{height: '24px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
-              <div className="w-1 bg-white rounded-full animate-pulse" style={{height: '18px', animationDelay: '400ms', animationDuration: '600ms'}}></div>
-            </div>
-            
-            <div className="text-center">
-              <div className="text-lg font-bold text-white">
-                NOW PLAYING: {currentProgram.Program}
-              </div>
-              <div className="text-sm text-white opacity-90">
-                with {currentProgram['Presenter(s)'] || 'Various'} | {currentProgram['Time (24h)']}
-              </div>
-            </div>
-            
-            {/* Audio waves */}
-            <div className="flex items-center space-x-1">
-              <div className="w-1 bg-white rounded-full animate-pulse" style={{height: '18px', animationDelay: '500ms', animationDuration: '600ms'}}></div>
-              <div className="w-1 bg-white rounded-full animate-pulse" style={{height: '24px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
-              <div className="w-1 bg-white rounded-full animate-pulse" style={{height: '16px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
-              <div className="w-1 bg-white rounded-full animate-pulse" style={{height: '20px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
-              <div className="w-1 bg-white rounded-full animate-pulse" style={{height: '12px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Tab Navigation */}
       <div className="flex space-x-1 mb-6 border-b">
         <button
