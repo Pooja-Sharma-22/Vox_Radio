@@ -169,13 +169,10 @@ metadata:
   run_ui: true
 
 test_plan:
-  current_focus:
-    - "Implement scrolling marquee for program information"
-    - "Simplify live program display with animated audio waves"
-    - "Display NEXT PROGRAM information at top of header"
+  current_focus: []
   stuck_tasks: []
-  test_all: true
-  test_priority: "high_first"
+  test_all: false
+  test_priority: "completed"
 
 agent_communication:
     -agent: "main"
