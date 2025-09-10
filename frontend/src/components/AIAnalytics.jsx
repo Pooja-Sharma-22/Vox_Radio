@@ -95,7 +95,7 @@ const AIAnalytics = () => {
       name: "Google Analytics",
       description: "Track website and digital engagement metrics",
       category: "Analytics",
-      url: "https://analytics.google.com",
+      url: process.env.REACT_APP_ANALYTICS_URL || "https://analytics.google.com",
       useCase: "Monitor online listener behavior and trends"
     },
     {
