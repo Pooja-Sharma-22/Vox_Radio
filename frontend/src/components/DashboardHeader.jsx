@@ -201,7 +201,7 @@ const DashboardHeader = () => {
           <p className="text-center mt-2 text-sm sm:text-base text-orange-100">Real-time updates and management tools</p>
           
           {/* Current Program and Presenter Display */}
-          {currentProgram && (
+          {currentProgram ? (
             <div className="mt-4 bg-black bg-opacity-20 rounded-lg px-4 py-3 mx-auto max-w-2xl">
               <div className="flex items-center justify-center space-x-3">
                 <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
@@ -214,6 +214,16 @@ const DashboardHeader = () => {
                   </div>
                 </div>
                 <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+              </div>
+            </div>
+          ) : (
+            <div className="mt-4 bg-gray-800 bg-opacity-30 rounded-lg px-4 py-2 mx-auto max-w-2xl">
+              <div className="text-center">
+                <div className="text-sm text-orange-200">
+                  {new Date(new Date().toLocaleString("en-US", {timeZone: "Africa/Monrovia"})).toLocaleString()} | 
+                  Day: {days[new Date(new Date().toLocaleString("en-US", {timeZone: "Africa/Monrovia"})).getDay()]} | 
+                  No program currently scheduled
+                </div>
               </div>
             </div>
           )}
