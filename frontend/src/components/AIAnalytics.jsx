@@ -130,7 +130,7 @@ const AIAnalytics = () => {
       name: "SurveyMonkey (Free)",
       description: "Create listener surveys and polls",
       category: "Feedback",
-      url: "https://surveymonkey.com",
+      url: process.env.REACT_APP_SURVEY_URL || "https://surveymonkey.com",
       useCase: "Gather detailed listener feedback and preferences"
     }
   ];
