@@ -1,164 +1,171 @@
 import React, { useState, useEffect } from 'react';
 
-// Enhanced program data with real-time tracking - 24-hour format
-const enhancedPrograms = {
-  Sunday: [
-    { id: 'sun-1', time: "05:00-07:00", timeSlot: 5, duration: 2, name: "Music and Talks", presenter: "Emmanuel Lepolu", type: "Music" },
-    { id: 'sun-2', time: "07:00-07:30", timeSlot: 7, duration: 0.5, name: "Salvation Half Hour", presenter: "Min. Cooper", type: "Bible Teaching" },
-    { id: 'sun-3', time: "07:30-08:00", timeSlot: 7.5, duration: 0.5, name: "Music", presenter: "Emmanuel Lepolu", type: "Music" },
-    { id: 'sun-4', time: "08:00-10:00", timeSlot: 8, duration: 2, name: "The Gospel Caravan", presenter: "Emmanuel Lepolu", type: "Bible Teaching" },
-    { id: 'sun-5', time: "10:00-15:00", timeSlot: 10, duration: 5, name: "Music", presenter: "Various", type: "Music" },
-    { id: 'sun-6', time: "15:00-16:00", timeSlot: 15, duration: 1, name: "Sunday Special", presenter: "Beatrice Ballah", type: "Special" },
-    { id: 'sun-7', time: "16:00-18:00", timeSlot: 16, duration: 2, name: "Music and Talks", presenter: "Victoria Walker", type: "Music" },
-    { id: 'sun-8', time: "18:00-19:30", timeSlot: 18, duration: 1.5, name: "Kids Hour", presenter: "Victoria Walker", type: "Special" },
-    { id: 'sun-9', time: "19:30-21:00", timeSlot: 19.5, duration: 1.5, name: "Music", presenter: "Maxim Somah", type: "Music" },
-    { id: 'sun-10', time: "21:00-22:00", timeSlot: 21, duration: 1, name: "Search The Scriptures", presenter: "Maxim Somah", type: "Bible Teaching" },
-    { id: 'sun-11', time: "22:00-05:00", timeSlot: 22, duration: 7, name: "Music", presenter: "Various", type: "Music" }
-  ],
-  Monday: [
-    { id: 'mon-0', time: "00:30-04:30", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "Sam W. Doe", type: "Community" },
-    { id: 'mon-1', time: "05:00-08:00", timeSlot: 5, duration: 3, name: "The Quiet Storm", presenter: "New Life Africa", type: "Special" },
-    { id: 'mon-2', time: "08:00-09:00", timeSlot: 8, duration: 1, name: "Good Shepherd Fellowship", presenter: "Bishop Thomas", type: "Bible Teaching" },
-    { id: 'mon-3', time: "09:00-10:00", timeSlot: 9, duration: 1, name: "Living Word", presenter: "Pastor Mensa", type: "Bible Teaching" },
-    { id: 'mon-4', time: "10:00-10:10", timeSlot: 10, duration: 0.17, name: "Jingles and Music", presenter: "Deddeh Gayflor", type: "Music" },
-    { id: 'mon-5', time: "10:10-10:20", timeSlot: 10.17, duration: 0.17, name: "Announcement", presenter: "Deddeh Gayflor", type: "Community" },
-    { id: 'mon-6', time: "10:20-10:45", timeSlot: 10.33, duration: 0.42, name: "Back To The Bible", presenter: "Various", type: "Bible Teaching" },
-    { id: 'mon-7', time: "10:45-11:00", timeSlot: 10.75, duration: 0.25, name: "Music", presenter: "Deddeh Gayflor", type: "Music" },
-    { id: 'mon-8', time: "11:00-13:00", timeSlot: 11, duration: 2, name: "Worship Connexion", presenter: "New Life Africa", type: "Bible Teaching" },
-    { id: 'mon-9', time: "13:00-13:05", timeSlot: 13, duration: 0.08, name: "Word To Go", presenter: "Pastor Mensa", type: "Bible Teaching" },
-    { id: 'mon-10', time: "13:05-15:00", timeSlot: 13.08, duration: 1.92, name: "Launch Time Connection", presenter: "Deddeh Gayflor", type: "Special" },
-    { id: 'mon-11', time: "15:00-16:30", timeSlot: 15, duration: 1.5, name: "The Heart Beat", presenter: "Various", type: "Community" },
-    { id: 'mon-12', time: "16:30-17:30", timeSlot: 16.5, duration: 1, name: "Thru The Bible", presenter: "Pastor Mcquee", type: "Bible Teaching" },
-    { id: 'mon-13', time: "17:30-17:45", timeSlot: 17.5, duration: 0.25, name: "Music", presenter: "Emmanuel Lepolu", type: "Music" },
-    { id: 'mon-14', time: "17:45-18:00", timeSlot: 17.75, duration: 0.25, name: "Announcement", presenter: "Emmanuel Lepolu", type: "Community" },
-    { id: 'mon-15', time: "18:00-18:30", timeSlot: 18, duration: 0.5, name: "Major Headlines", presenter: "Emmanuel Lepolu", type: "Community" },
-    { id: 'mon-16', time: "18:30-19:30", timeSlot: 18.5, duration: 1, name: "Music", presenter: "Emmanuel Lepolu", type: "Music" },
-    { id: 'mon-17', time: "19:30-20:45", timeSlot: 19.5, duration: 1.25, name: "Vox Talk", presenter: "Maxim and Sam", type: "Interactive" },
-    { id: 'mon-18', time: "20:45-21:00", timeSlot: 20.75, duration: 0.25, name: "Announcement", presenter: "Sam", type: "Community" },
-    { id: 'mon-19', time: "21:00-22:00", timeSlot: 21, duration: 1, name: "Vox Prayer Night", presenter: "Leone Moore", type: "Bible Teaching" },
-    { id: 'mon-20', time: "22:00-23:00", timeSlot: 22, duration: 1, name: "The Night Ride", presenter: "Sam W. Doe", type: "Special" },
-    { id: 'mon-21', time: "23:00-00:30", timeSlot: 23, duration: 1.5, name: "Music", presenter: "Sam W. Doe", type: "Music" }
-  ],
-  Tuesday: [
-    { id: 'tue-0', time: "00:30-04:30", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "Sam W. Doe", type: "Community" },
-    { id: 'tue-1', time: "05:00-08:00", timeSlot: 5, duration: 3, name: "The Quiet Storm", presenter: "New Life Africa", type: "Special" },
-    { id: 'tue-2', time: "08:00-09:00", timeSlot: 8, duration: 1, name: "Good Shepherd Fellowship", presenter: "Bishop Thomas", type: "Bible Teaching" },
-    { id: 'tue-3', time: "09:00-10:00", timeSlot: 9, duration: 1, name: "Living Word", presenter: "Pastor Mensa", type: "Bible Teaching" },
-    { id: 'tue-4', time: "10:00-10:10", timeSlot: 10, duration: 0.17, name: "Jingles and Music", presenter: "Emmanuel Lepolu", type: "Music" },
-    { id: 'tue-5', time: "10:10-10:20", timeSlot: 10.17, duration: 0.17, name: "Announcement", presenter: "Emmanuel Lepolu", type: "Community" },
-    { id: 'tue-6', time: "10:20-10:45", timeSlot: 10.33, duration: 0.42, name: "Back To The Bible", presenter: "Various", type: "Bible Teaching" },
-    { id: 'tue-7', time: "10:45-11:00", timeSlot: 10.75, duration: 0.25, name: "Music", presenter: "Emmanuel Lepolu", type: "Music" },
-    { id: 'tue-8', time: "11:00-13:00", timeSlot: 11, duration: 2, name: "Worship Connexion", presenter: "New Life Africa", type: "Bible Teaching" },
-    { id: 'tue-9', time: "13:00-13:05", timeSlot: 13, duration: 0.08, name: "Word To Go", presenter: "Pastor Mensa", type: "Bible Teaching" },
-    { id: 'tue-10', time: "13:05-15:00", timeSlot: 13.08, duration: 1.92, name: "Launch Time Connection", presenter: "Beauty Nuah", type: "Special" },
-    { id: 'tue-11', time: "15:00-16:30", timeSlot: 15, duration: 1.5, name: "The Heart Beat", presenter: "Various", type: "Community" },
-    { id: 'tue-12', time: "16:30-17:30", timeSlot: 16.5, duration: 1, name: "Thru The Bible", presenter: "Pastor Mcquee", type: "Bible Teaching" },
-    { id: 'tue-13', time: "17:30-17:45", timeSlot: 17.5, duration: 0.25, name: "Music", presenter: "Beatrice Ballah", type: "Music" },
-    { id: 'tue-14', time: "17:45-18:00", timeSlot: 17.75, duration: 0.25, name: "Announcement", presenter: "Beatrice Ballah", type: "Community" },
-    { id: 'tue-15', time: "18:00-19:00", timeSlot: 18, duration: 1, name: "She Speaks Up", presenter: "Beatrice Ballah", type: "Interactive" },
-    { id: 'tue-16', time: "19:00-19:30", timeSlot: 19, duration: 0.5, name: "Music", presenter: "Maxim Somah", type: "Music" },
-    { id: 'tue-17', time: "19:30-20:45", timeSlot: 19.5, duration: 1.25, name: "Vox Talk", presenter: "Maxim and Sam", type: "Interactive" },
-    { id: 'tue-18', time: "20:45-21:00", timeSlot: 20.75, duration: 0.25, name: "Announcement", presenter: "Various", type: "Community" },
-    { id: 'tue-19', time: "21:00-22:00", timeSlot: 21, duration: 1, name: "Vox Prayer Night", presenter: "Leone Moore", type: "Bible Teaching" },
-    { id: 'tue-20', time: "22:00-00:30", timeSlot: 22, duration: 2.5, name: "Music", presenter: "Maxim Somah", type: "Music" }
-  ],
-  Wednesday: [
-    { id: 'wed-0', time: "00:30-04:30", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "Maxim Somah", type: "Community" },
-    { id: 'wed-1', time: "05:00-08:00", timeSlot: 5, duration: 3, name: "The Quiet Storm", presenter: "New Life Africa", type: "Special" },
-    { id: 'wed-2', time: "08:00-09:00", timeSlot: 8, duration: 1, name: "Good Shepherd Fellowship", presenter: "Bishop Thomas", type: "Bible Teaching" },
-    { id: 'wed-3', time: "09:00-10:00", timeSlot: 9, duration: 1, name: "Living Word", presenter: "Pastor Mensa", type: "Bible Teaching" },
-    { id: 'wed-4', time: "10:00-10:10", timeSlot: 10, duration: 0.17, name: "Jingles and Music", presenter: "Emmanuel Lepolu", type: "Music" },
-    { id: 'wed-5', time: "10:10-10:20", timeSlot: 10.17, duration: 0.17, name: "Announcement", presenter: "Emmanuel Lepolu", type: "Community" },
-    { id: 'wed-6', time: "10:20-10:45", timeSlot: 10.33, duration: 0.42, name: "New Day Hour", presenter: "Pastor Fatorma", type: "Bible Teaching" },
-    { id: 'wed-7', time: "10:45-11:00", timeSlot: 10.75, duration: 0.25, name: "Music", presenter: "T. KCalvin Walter", type: "Music" },
-    { id: 'wed-8', time: "11:00-13:00", timeSlot: 11, duration: 2, name: "Worship Connexion", presenter: "New Life Africa", type: "Bible Teaching" },
-    { id: 'wed-9', time: "13:00-13:05", timeSlot: 13, duration: 0.08, name: "Word To Go", presenter: "Pastor Mensa", type: "Bible Teaching" },
-    { id: 'wed-10', time: "13:05-15:00", timeSlot: 13.08, duration: 1.92, name: "Launch Time Connection", presenter: "Beauty Nuah", type: "Special" },
-    { id: 'wed-11', time: "15:00-16:30", timeSlot: 15, duration: 1.5, name: "The Heart Beat", presenter: "Various", type: "Community" },
-    { id: 'wed-12', time: "16:30-17:30", timeSlot: 16.5, duration: 1, name: "Thru The Bible", presenter: "Pastor Mcquee", type: "Bible Teaching" },
-    { id: 'wed-13', time: "17:30-17:45", timeSlot: 17.5, duration: 0.25, name: "Music", presenter: "Victoria Walker", type: "Music" },
-    { id: 'wed-14', time: "17:45-18:00", timeSlot: 17.75, duration: 0.25, name: "Announcement", presenter: "Victoria Walker", type: "Community" },
-    { id: 'wed-15', time: "18:00-19:15", timeSlot: 18, duration: 1.25, name: "Music", presenter: "Victoria Walker", type: "Music" },
-    { id: 'wed-16', time: "19:15-20:45", timeSlot: 19.25, duration: 1.5, name: "Ladies Let's Talk", presenter: "Victoria Walker", type: "Interactive" },
-    { id: 'wed-17', time: "20:45-21:00", timeSlot: 20.75, duration: 0.25, name: "Announcement", presenter: "Victoria Walker", type: "Community" },
-    { id: 'wed-18', time: "21:00-22:00", timeSlot: 21, duration: 1, name: "Vox Prayer Night", presenter: "Leone Moore", type: "Bible Teaching" },
-    { id: 'wed-19', time: "22:00-00:30", timeSlot: 22, duration: 2.5, name: "Music", presenter: "Emmanuel Howard", type: "Music" }
-  ],
-  Thursday: [
-    { id: 'thu-0', time: "00:30-04:30", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "Emmanuel Howard", type: "Community" },
-    { id: 'thu-1', time: "05:00-08:00", timeSlot: 5, duration: 3, name: "The Quiet Storm", presenter: "New Life Africa", type: "Special" },
-    { id: 'thu-2', time: "08:00-09:00", timeSlot: 8, duration: 1, name: "Good Shepherd Fellowship", presenter: "Bishop Thomas", type: "Bible Teaching" },
-    { id: 'thu-3', time: "09:00-10:00", timeSlot: 9, duration: 1, name: "Living Word", presenter: "Pastor Mensa", type: "Bible Teaching" },
-    { id: 'thu-4', time: "10:00-10:10", timeSlot: 10, duration: 0.17, name: "Jingles and Music", presenter: "Emmanuel Lepolu", type: "Music" },
-    { id: 'thu-5', time: "10:10-10:20", timeSlot: 10.17, duration: 0.17, name: "Announcement", presenter: "Emmanuel Lepolu", type: "Community" },
-    { id: 'thu-6', time: "10:20-11:00", timeSlot: 10.33, duration: 0.67, name: "Music", presenter: "Deddeh Gayflor", type: "Music" },
-    { id: 'thu-7', time: "11:00-13:00", timeSlot: 11, duration: 2, name: "Worship Connexion", presenter: "New Life Africa", type: "Bible Teaching" },
-    { id: 'thu-8', time: "13:00-13:05", timeSlot: 13, duration: 0.08, name: "Word To Go", presenter: "Pastor Mensa", type: "Bible Teaching" },
-    { id: 'thu-9', time: "13:05-15:00", timeSlot: 13.08, duration: 1.92, name: "Launch Time Connect", presenter: "Deddeh Gayflor", type: "Community" },
-    { id: 'thu-10', time: "15:00-16:30", timeSlot: 15, duration: 1.5, name: "The Heart Beat", presenter: "Various", type: "Community" },
-    { id: 'thu-11', time: "16:30-17:30", timeSlot: 16.5, duration: 1, name: "Thru The Bible", presenter: "Pastor Mcquee", type: "Bible Teaching" },
-    { id: 'thu-12', time: "17:30-17:45", timeSlot: 17.5, duration: 0.25, name: "Music", presenter: "Beauty Nuah", type: "Music" },
-    { id: 'thu-13', time: "17:45-18:00", timeSlot: 17.75, duration: 0.25, name: "Announcement", presenter: "Beauty Nuah", type: "Community" },
-    { id: 'thu-14', time: "18:00-19:00", timeSlot: 18, duration: 1, name: "Teenagers Talk", presenter: "Beauty Nuah", type: "Interactive" },
-    { id: 'thu-15', time: "19:00-19:30", timeSlot: 19, duration: 0.5, name: "Music", presenter: "Sam W. Doe", type: "Music" },
-    { id: 'thu-16', time: "19:30-20:45", timeSlot: 19.5, duration: 1.25, name: "Vox Talk", presenter: "Maxim And Sam", type: "Interactive" },
-    { id: 'thu-17', time: "20:45-21:00", timeSlot: 20.75, duration: 0.25, name: "Announcement", presenter: "Maxim Somah", type: "Community" },
-    { id: 'thu-18', time: "22:00-00:30", timeSlot: 22, duration: 2.5, name: "Music", presenter: "Sam W. Doe", type: "Music" }
-  ],
-  Friday: [
-    { id: 'fri-0', time: "00:30-04:30", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "Maxim Somah and Sam W. Doe", type: "Community" },
-    { id: 'fri-1', time: "05:00-08:00", timeSlot: 5, duration: 3, name: "The Quiet Storm", presenter: "New Life Africa", type: "Special" },
-    { id: 'fri-2', time: "08:00-09:00", timeSlot: 8, duration: 1, name: "Good Shepherd Fellowship", presenter: "Bishop Thomas", type: "Bible Teaching" },
-    { id: 'fri-3', time: "09:00-10:00", timeSlot: 9, duration: 1, name: "Living Word", presenter: "Pastor Mensa", type: "Bible Teaching" },
-    { id: 'fri-4', time: "10:00-10:10", timeSlot: 10, duration: 0.17, name: "Jingles and Music", presenter: "Maxim Somah", type: "Music" },
-    { id: 'fri-5', time: "10:10-10:20", timeSlot: 10.17, duration: 0.17, name: "Announcement", presenter: "Maxim Somah", type: "Community" },
-    { id: 'fri-6', time: "10:20-11:00", timeSlot: 10.33, duration: 0.67, name: "Music", presenter: "Maxim Somah", type: "Music" },
-    { id: 'fri-7', time: "11:00-13:00", timeSlot: 11, duration: 2, name: "Worship Connexion", presenter: "New Life Africa", type: "Bible Teaching" },
-    { id: 'fri-8', time: "13:00-13:05", timeSlot: 13, duration: 0.08, name: "Word To Go", presenter: "Pastor Mensa", type: "Bible Teaching" },
-    { id: 'fri-9', time: "13:05-15:00", timeSlot: 13.08, duration: 1.92, name: "Launch Time Connect", presenter: "Maxim Somah", type: "Community" },
-    { id: 'fri-10', time: "15:00-15:20", timeSlot: 15, duration: 0.33, name: "Music", presenter: "Various", type: "Music" },
-    { id: 'fri-11', time: "15:20-15:24", timeSlot: 15.33, duration: 0.07, name: "Guidelines For Living", presenter: "Various", type: "Special" },
-    { id: 'fri-12', time: "15:24-16:00", timeSlot: 15.4, duration: 0.6, name: "The Heart Beat", presenter: "Various", type: "Community" },
-    { id: 'fri-13', time: "16:00-17:00", timeSlot: 16, duration: 1, name: "The Drug Show", presenter: "Sam W. Doe", type: "Special" },
-    { id: 'fri-14', time: "17:00-18:00", timeSlot: 17, duration: 1, name: "Trenz At 10", presenter: "T. KCalvin Walter", type: "Special" },
-    { id: 'fri-15', time: "18:00-19:00", timeSlot: 18, duration: 1, name: "The Living Proof", presenter: "T. KCalvin Walter", type: "Special" },
-    { id: 'fri-16', time: "19:00-20:45", timeSlot: 19, duration: 1.75, name: "Music", presenter: "T. KCalvin Walter", type: "Music" },
-    { id: 'fri-17', time: "20:45-21:00", timeSlot: 20.75, duration: 0.25, name: "Announcement", presenter: "T. KCalvin Walter", type: "Community" },
-    { id: 'fri-18', time: "21:00-22:00", timeSlot: 21, duration: 1, name: "The Conversation", presenter: "T. KCalvin Walter", type: "Interactive" },
-    { id: 'fri-19', time: "22:00-00:30", timeSlot: 22, duration: 2.5, name: "Music", presenter: "T. KCalvin Walter", type: "Music" }
-  ],
-  Saturday: [
-    { id: 'sat-0', time: "00:30-04:30", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "T. KCalvin Walter", type: "Community" },
-    { id: 'sat-1', time: "05:00-07:00", timeSlot: 5, duration: 2, name: "Music", presenter: "KCalvin", type: "Music" },
-    { id: 'sat-2', time: "07:00-08:30", timeSlot: 7, duration: 1.5, name: "The Morning Jam", presenter: "KCalvin", type: "Music" },
-    { id: 'sat-3', time: "08:30-09:00", timeSlot: 8.5, duration: 0.5, name: "Music", presenter: "KCalvin", type: "Music" },
-    { id: 'sat-4', time: "09:00-10:15", timeSlot: 9, duration: 1.25, name: "Vox Sports DESK", presenter: "KCalvin and Emmanuel", type: "Community" },
-    { id: 'sat-5', time: "10:15-11:15", timeSlot: 10.25, duration: 1, name: "Teenagers Talk", presenter: "Janet and D'Alessandro", type: "Interactive" },
-    { id: 'sat-6', time: "11:15-13:00", timeSlot: 11.25, duration: 1.75, name: "Music", presenter: "Various", type: "Music" },
-    { id: 'sat-7', time: "13:00-13:30", timeSlot: 13, duration: 0.5, name: "Truth For Life Weekend", presenter: "Various", type: "Bible Teaching" },
-    { id: 'sat-8', time: "13:30-14:00", timeSlot: 13.5, duration: 0.5, name: "Planet Sports", presenter: "Various", type: "Community" },
-    { id: 'sat-9', time: "14:00-16:00", timeSlot: 14, duration: 2, name: "Island Praise", presenter: "Various", type: "Bible Teaching" },
-    { id: 'sat-10', time: "16:00-19:00", timeSlot: 16, duration: 3, name: "Blessed Beatz", presenter: "Various", type: "Music" },
-    { id: 'sat-11', time: "19:00-00:00", timeSlot: 19, duration: 5, name: "Transformed DJ", presenter: "Various", type: "Music" },
-    { id: 'sat-12', time: "00:00-05:00", timeSlot: 0, duration: 5, name: "Music", presenter: "Various", type: "Music" }
-  ]
-};
+// Complete program schedule data from the VoxRadioProgramLog
+const programScheduleData = [
+  // SUNDAY
+  { Day: 'SUNDAY', 'Time (24h)': '00:00-05:00', Program: 'Music', 'Presenter(s)': '', timeSlot: 0, duration: 5 },
+  { Day: 'SUNDAY', 'Time (24h)': '05:00-07:00', Program: 'Music and Talks', 'Presenter(s)': 'Emmanuel Lerpolu', timeSlot: 5, duration: 2 },
+  { Day: 'SUNDAY', 'Time (24h)': '07:00-07:30', Program: 'Salvation Half Hour', 'Presenter(s)': 'Min. Cooper', timeSlot: 7, duration: 0.5 },
+  { Day: 'SUNDAY', 'Time (24h)': '07:30-08:00', Program: 'Music', 'Presenter(s)': 'Emmanuel Lerpolu', timeSlot: 7.5, duration: 0.5 },
+  { Day: 'SUNDAY', 'Time (24h)': '08:00-10:00', Program: 'The Gospel Caravan', 'Presenter(s)': 'Emmanuel Lerpolu', timeSlot: 8, duration: 2 },
+  { Day: 'SUNDAY', 'Time (24h)': '10:00-15:00', Program: 'Music', 'Presenter(s)': '', timeSlot: 10, duration: 5 },
+  { Day: 'SUNDAY', 'Time (24h)': '15:00-16:00', Program: 'Sunday Special', 'Presenter(s)': 'Beatrice Ballah', timeSlot: 15, duration: 1 },
+  { Day: 'SUNDAY', 'Time (24h)': '16:00-18:00', Program: 'Music and Talks', 'Presenter(s)': 'Victoria Walker', timeSlot: 16, duration: 2 },
+  { Day: 'SUNDAY', 'Time (24h)': '18:00-19:30', Program: 'Kids Hour', 'Presenter(s)': 'Victoria Walker', timeSlot: 18, duration: 1.5 },
+  { Day: 'SUNDAY', 'Time (24h)': '19:30-21:00', Program: 'Music', 'Presenter(s)': 'Maxim Somah', timeSlot: 19.5, duration: 1.5 },
+  { Day: 'SUNDAY', 'Time (24h)': '21:00-22:00', Program: 'Search The Scriptures', 'Presenter(s)': 'Maxim Somah', timeSlot: 21, duration: 1 },
+  { Day: 'SUNDAY', 'Time (24h)': '22:00-00:00', Program: 'Music', 'Presenter(s)': '', timeSlot: 22, duration: 2 },
+
+  // MONDAY
+  { Day: 'MONDAY', 'Time (24h)': '00:00-00:30', Program: 'Music', 'Presenter(s)': '', timeSlot: 0, duration: 0.5 },
+  { Day: 'MONDAY', 'Time (24h)': '00:30-04:30', Program: 'International Kapoa Secure Liberia', 'Presenter(s)': 'Sam W. Doe', timeSlot: 0.5, duration: 4 },
+  { Day: 'MONDAY', 'Time (24h)': '05:00-08:00', Program: 'The Quiet Storm', 'Presenter(s)': 'New Life Africa', timeSlot: 5, duration: 3 },
+  { Day: 'MONDAY', 'Time (24h)': '08:00-09:00', Program: 'Good Shepherd Fellowship', 'Presenter(s)': 'Bishop Thomas', timeSlot: 8, duration: 1 },
+  { Day: 'MONDAY', 'Time (24h)': '09:00-10:00', Program: 'Living Word', 'Presenter(s)': 'Pastor Mensa', timeSlot: 9, duration: 1 },
+  { Day: 'MONDAY', 'Time (24h)': '10:00-10:10', Program: 'Jingles and Music', 'Presenter(s)': 'Deddeh Gayflor', timeSlot: 10, duration: 0.17 },
+  { Day: 'MONDAY', 'Time (24h)': '10:10-10:20', Program: 'Announcement', 'Presenter(s)': 'Deddeh Gayflor', timeSlot: 10.17, duration: 0.17 },
+  { Day: 'MONDAY', 'Time (24h)': '10:20-10:45', Program: 'Back To The Bible', 'Presenter(s)': 'Various', timeSlot: 10.33, duration: 0.42 },
+  { Day: 'MONDAY', 'Time (24h)': '10:45-11:00', Program: 'Music', 'Presenter(s)': 'Deddeh Gayflor', timeSlot: 10.75, duration: 0.25 },
+  { Day: 'MONDAY', 'Time (24h)': '11:00-13:00', Program: 'Worship Connexion', 'Presenter(s)': 'New Life Africa', timeSlot: 11, duration: 2 },
+  { Day: 'MONDAY', 'Time (24h)': '13:00-13:05', Program: 'Word To Go', 'Presenter(s)': 'Pastor Mensa', timeSlot: 13, duration: 0.08 },
+  { Day: 'MONDAY', 'Time (24h)': '13:05-15:00', Program: 'Launch Time Connection', 'Presenter(s)': 'Deddeh Gayflor', timeSlot: 13.08, duration: 1.92 },
+  { Day: 'MONDAY', 'Time (24h)': '15:00-16:30', Program: 'The Heart Beat', 'Presenter(s)': 'Various', timeSlot: 15, duration: 1.5 },
+  { Day: 'MONDAY', 'Time (24h)': '16:30-17:30', Program: 'Thru The Bible', 'Presenter(s)': 'Pastor Mcquee', timeSlot: 16.5, duration: 1 },
+  { Day: 'MONDAY', 'Time (24h)': '17:30-17:45', Program: 'Music', 'Presenter(s)': 'Emmanuel Lepolu', timeSlot: 17.5, duration: 0.25 },
+  { Day: 'MONDAY', 'Time (24h)': '17:45-18:00', Program: 'Announcement', 'Presenter(s)': 'Emmanuel Lepolu', timeSlot: 17.75, duration: 0.25 },
+  { Day: 'MONDAY', 'Time (24h)': '18:00-18:30', Program: 'Major Headlines', 'Presenter(s)': 'Emmanuel Lepolu', timeSlot: 18, duration: 0.5 },
+  { Day: 'MONDAY', 'Time (24h)': '18:30-19:30', Program: 'Music', 'Presenter(s)': 'Emmanuel Lepolu', timeSlot: 18.5, duration: 1 },
+  { Day: 'MONDAY', 'Time (24h)': '19:30-20:45', Program: 'Vox Talk', 'Presenter(s)': 'Maxim and Sam', timeSlot: 19.5, duration: 1.25 },
+  { Day: 'MONDAY', 'Time (24h)': '20:45-21:00', Program: 'Announcement', 'Presenter(s)': 'Sam', timeSlot: 20.75, duration: 0.25 },
+  { Day: 'MONDAY', 'Time (24h)': '21:00-22:00', Program: 'Vox Prayer Night', 'Presenter(s)': 'Leone Moore', timeSlot: 21, duration: 1 },
+  { Day: 'MONDAY', 'Time (24h)': '22:00-23:00', Program: 'The Night Ride', 'Presenter(s)': 'Sam W. Doe', timeSlot: 22, duration: 1 },
+  { Day: 'MONDAY', 'Time (24h)': '23:00-00:00', Program: 'Music', 'Presenter(s)': 'Sam W. Doe', timeSlot: 23, duration: 1 },
+
+  // TUESDAY
+  { Day: 'TUESDAY', 'Time (24h)': '00:00-00:30', Program: 'Music', 'Presenter(s)': '', timeSlot: 0, duration: 0.5 },
+  { Day: 'TUESDAY', 'Time (24h)': '00:30-04:30', Program: 'International Kapoa Secure Liberia', 'Presenter(s)': 'Sam W. Doe', timeSlot: 0.5, duration: 4 },
+  { Day: 'TUESDAY', 'Time (24h)': '05:00-08:00', Program: 'The Quiet Storm', 'Presenter(s)': 'New Life Africa', timeSlot: 5, duration: 3 },
+  { Day: 'TUESDAY', 'Time (24h)': '08:00-09:00', Program: 'Good Shepherd Fellowship', 'Presenter(s)': 'Bishop Thomas', timeSlot: 8, duration: 1 },
+  { Day: 'TUESDAY', 'Time (24h)': '09:00-10:00', Program: 'Living Word', 'Presenter(s)': 'Pastor Mensa', timeSlot: 9, duration: 1 },
+  { Day: 'TUESDAY', 'Time (24h)': '10:00-10:10', Program: 'Jingles and Music', 'Presenter(s)': 'Emmanuel Lepolu', timeSlot: 10, duration: 0.17 },
+  { Day: 'TUESDAY', 'Time (24h)': '10:10-10:20', Program: 'Announcement', 'Presenter(s)': 'Emmanuel Lepolu', timeSlot: 10.17, duration: 0.17 },
+  { Day: 'TUESDAY', 'Time (24h)': '10:20-10:45', Program: 'Back To The Bible', 'Presenter(s)': 'Various', timeSlot: 10.33, duration: 0.42 },
+  { Day: 'TUESDAY', 'Time (24h)': '10:45-11:00', Program: 'Music', 'Presenter(s)': 'Emmanuel Lepolu', timeSlot: 10.75, duration: 0.25 },
+  { Day: 'TUESDAY', 'Time (24h)': '11:00-13:00', Program: 'Worship Connexion', 'Presenter(s)': 'New Life Africa', timeSlot: 11, duration: 2 },
+  { Day: 'TUESDAY', 'Time (24h)': '13:00-13:05', Program: 'Word To Go', 'Presenter(s)': 'Pastor Mensa', timeSlot: 13, duration: 0.08 },
+  { Day: 'TUESDAY', 'Time (24h)': '13:05-15:00', Program: 'Launch Time Connection', 'Presenter(s)': 'Beauty Nuah', timeSlot: 13.08, duration: 1.92 },
+  { Day: 'TUESDAY', 'Time (24h)': '15:00-16:30', Program: 'The Heart Beat', 'Presenter(s)': 'Various', timeSlot: 15, duration: 1.5 },
+  { Day: 'TUESDAY', 'Time (24h)': '16:30-17:30', Program: 'Thru The Bible', 'Presenter(s)': 'Pastor Mcquee', timeSlot: 16.5, duration: 1 },
+  { Day: 'TUESDAY', 'Time (24h)': '17:30-17:45', Program: 'Music', 'Presenter(s)': 'Beatrice Ballah', timeSlot: 17.5, duration: 0.25 },
+  { Day: 'TUESDAY', 'Time (24h)': '17:45-18:00', Program: 'Announcement', 'Presenter(s)': 'Beatrice Ballah', timeSlot: 17.75, duration: 0.25 },
+  { Day: 'TUESDAY', 'Time (24h)': '18:00-19:00', Program: 'She Speaks Up', 'Presenter(s)': 'Beatrice Ballah', timeSlot: 18, duration: 1 },
+  { Day: 'TUESDAY', 'Time (24h)': '19:00-19:30', Program: 'Music', 'Presenter(s)': 'Maxim Somah', timeSlot: 19, duration: 0.5 },
+  { Day: 'TUESDAY', 'Time (24h)': '19:30-20:45', Program: 'Vox Talk', 'Presenter(s)': 'Maxim and Sam', timeSlot: 19.5, duration: 1.25 },
+  { Day: 'TUESDAY', 'Time (24h)': '20:45-21:00', Program: 'Announcement', 'Presenter(s)': 'Various', timeSlot: 20.75, duration: 0.25 },
+  { Day: 'TUESDAY', 'Time (24h)': '21:00-22:00', Program: 'Vox Prayer Night', 'Presenter(s)': 'Leone Moore', timeSlot: 21, duration: 1 },
+  { Day: 'TUESDAY', 'Time (24h)': '22:00-00:00', Program: 'Music', 'Presenter(s)': 'Maxim Somah', timeSlot: 22, duration: 2 },
+
+  // WEDNESDAY
+  { Day: 'WEDNESDAY', 'Time (24h)': '00:00-00:30', Program: 'Music', 'Presenter(s)': '', timeSlot: 0, duration: 0.5 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '00:30-04:30', Program: 'International Kapoa Secure Liberia', 'Presenter(s)': 'Maxim Somah', timeSlot: 0.5, duration: 4 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '05:00-08:00', Program: 'The Quiet Storm', 'Presenter(s)': 'New Life Africa', timeSlot: 5, duration: 3 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '08:00-09:00', Program: 'Good Shepherd Fellowship', 'Presenter(s)': 'Bishop Thomas', timeSlot: 8, duration: 1 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '09:00-10:00', Program: 'Living Word', 'Presenter(s)': 'Pastor Mensa', timeSlot: 9, duration: 1 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '10:00-10:10', Program: 'Jingles and Music', 'Presenter(s)': 'Emmanuel Lepolu', timeSlot: 10, duration: 0.17 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '10:10-10:20', Program: 'Announcement', 'Presenter(s)': 'Emmanuel Lepolu', timeSlot: 10.17, duration: 0.17 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '10:20-10:45', Program: 'New Day Hour', 'Presenter(s)': 'Pastor Fatorma', timeSlot: 10.33, duration: 0.42 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '10:45-11:00', Program: 'Music', 'Presenter(s)': 'T. KCalvin Walter', timeSlot: 10.75, duration: 0.25 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '11:00-13:00', Program: 'Worship Connexion', 'Presenter(s)': 'New Life Africa', timeSlot: 11, duration: 2 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '13:00-13:05', Program: 'Word To Go', 'Presenter(s)': 'Pastor Mensa', timeSlot: 13, duration: 0.08 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '13:05-15:00', Program: 'Launch Time Connection', 'Presenter(s)': 'Beauty Nuah', timeSlot: 13.08, duration: 1.92 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '15:00-16:30', Program: 'The Heart Beat', 'Presenter(s)': 'Various', timeSlot: 15, duration: 1.5 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '16:30-17:30', Program: 'Thru The Bible', 'Presenter(s)': 'Pastor Mcquee', timeSlot: 16.5, duration: 1 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '17:30-17:45', Program: 'Music', 'Presenter(s)': 'Victoria Walker', timeSlot: 17.5, duration: 0.25 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '17:45-18:00', Program: 'Announcement', 'Presenter(s)': 'Victoria Walker', timeSlot: 17.75, duration: 0.25 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '18:00-19:15', Program: 'Music', 'Presenter(s)': 'Victoria Walker', timeSlot: 18, duration: 1.25 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '19:15-20:45', Program: 'Ladies Let\'s Talk', 'Presenter(s)': 'Victoria Walker', timeSlot: 19.25, duration: 1.5 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '20:45-21:00', Program: 'Announcement', 'Presenter(s)': 'Victoria Walker', timeSlot: 20.75, duration: 0.25 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '21:00-22:00', Program: 'Vox Prayer Night', 'Presenter(s)': 'Leone Moore', timeSlot: 21, duration: 1 },
+  { Day: 'WEDNESDAY', 'Time (24h)': '22:00-00:00', Program: 'Music', 'Presenter(s)': 'Emmanuel Howard', timeSlot: 22, duration: 2 },
+
+  // THURSDAY
+  { Day: 'THURSDAY', 'Time (24h)': '00:00-00:30', Program: 'Music', 'Presenter(s)': '', timeSlot: 0, duration: 0.5 },
+  { Day: 'THURSDAY', 'Time (24h)': '00:30-04:30', Program: 'International Kapoa Secure Liberia', 'Presenter(s)': 'Emmanuel Howard', timeSlot: 0.5, duration: 4 },
+  { Day: 'THURSDAY', 'Time (24h)': '05:00-08:00', Program: 'The Quiet Storm', 'Presenter(s)': 'New Life Africa', timeSlot: 5, duration: 3 },
+  { Day: 'THURSDAY', 'Time (24h)': '08:00-09:00', Program: 'Good Shepherd Fellowship', 'Presenter(s)': 'Bishop Thomas', timeSlot: 8, duration: 1 },
+  { Day: 'THURSDAY', 'Time (24h)': '09:00-10:00', Program: 'Living Word', 'Presenter(s)': 'Pastor Mensa', timeSlot: 9, duration: 1 },
+  { Day: 'THURSDAY', 'Time (24h)': '10:00-10:10', Program: 'Jingles and Music', 'Presenter(s)': 'Emmanuel Lepolu', timeSlot: 10, duration: 0.17 },
+  { Day: 'THURSDAY', 'Time (24h)': '10:10-10:20', Program: 'Announcement', 'Presenter(s)': 'Emmanuel Lepolu', timeSlot: 10.17, duration: 0.17 },
+  { Day: 'THURSDAY', 'Time (24h)': '10:20-11:00', Program: 'Music', 'Presenter(s)': 'Deddeh Gayflor', timeSlot: 10.33, duration: 0.67 },
+  { Day: 'THURSDAY', 'Time (24h)': '11:00-13:00', Program: 'Worship Connexion', 'Presenter(s)': 'New Life Africa', timeSlot: 11, duration: 2 },
+  { Day: 'THURSDAY', 'Time (24h)': '13:00-13:05', Program: 'Word To Go', 'Presenter(s)': 'Pastor Mensa', timeSlot: 13, duration: 0.08 },
+  { Day: 'THURSDAY', 'Time (24h)': '13:05-15:00', Program: 'Launch Time Connect', 'Presenter(s)': 'Deddeh Gayflor', timeSlot: 13.08, duration: 1.92 },
+  { Day: 'THURSDAY', 'Time (24h)': '15:00-16:30', Program: 'The Heart Beat', 'Presenter(s)': 'Various', timeSlot: 15, duration: 1.5 },
+  { Day: 'THURSDAY', 'Time (24h)': '16:30-17:30', Program: 'Thru The Bible', 'Presenter(s)': 'Pastor Mcquee', timeSlot: 16.5, duration: 1 },
+  { Day: 'THURSDAY', 'Time (24h)': '17:30-17:45', Program: 'Music', 'Presenter(s)': 'Beauty Nuah', timeSlot: 17.5, duration: 0.25 },
+  { Day: 'THURSDAY', 'Time (24h)': '17:45-18:00', Program: 'Announcement', 'Presenter(s)': 'Beauty Nuah', timeSlot: 17.75, duration: 0.25 },
+  { Day: 'THURSDAY', 'Time (24h)': '18:00-19:00', Program: 'Teenagers Talk', 'Presenter(s)': 'Beauty Nuah', timeSlot: 18, duration: 1 },
+  { Day: 'THURSDAY', 'Time (24h)': '19:00-19:30', Program: 'Music', 'Presenter(s)': 'Sam W. Doe', timeSlot: 19, duration: 0.5 },
+  { Day: 'THURSDAY', 'Time (24h)': '19:30-20:45', Program: 'Vox Talk', 'Presenter(s)': 'Maxim And Sam', timeSlot: 19.5, duration: 1.25 },
+  { Day: 'THURSDAY', 'Time (24h)': '20:45-21:00', Program: 'Announcement', 'Presenter(s)': 'Maxim Somah', timeSlot: 20.75, duration: 0.25 },
+  { Day: 'THURSDAY', 'Time (24h)': '21:00-22:00', Program: 'Vox Prayer Night', 'Presenter(s)': 'Leone Moore', timeSlot: 21, duration: 1 },
+  { Day: 'THURSDAY', 'Time (24h)': '22:00-00:00', Program: 'Music', 'Presenter(s)': 'Sam W. Doe', timeSlot: 22, duration: 2 },
+
+  // FRIDAY
+  { Day: 'FRIDAY', 'Time (24h)': '00:00-00:30', Program: 'Music', 'Presenter(s)': '', timeSlot: 0, duration: 0.5 },
+  { Day: 'FRIDAY', 'Time (24h)': '00:30-04:30', Program: 'International Kapoa Secure Liberia', 'Presenter(s)': 'Maxim Somah and Sam W. Doe', timeSlot: 0.5, duration: 4 },
+  { Day: 'FRIDAY', 'Time (24h)': '05:00-08:00', Program: 'The Quiet Storm', 'Presenter(s)': 'New Life Africa', timeSlot: 5, duration: 3 },
+  { Day: 'FRIDAY', 'Time (24h)': '08:00-09:00', Program: 'Good Shepherd Fellowship', 'Presenter(s)': 'Bishop Thomas', timeSlot: 8, duration: 1 },
+  { Day: 'FRIDAY', 'Time (24h)': '09:00-10:00', Program: 'Living Word', 'Presenter(s)': 'Pastor Mensa', timeSlot: 9, duration: 1 },
+  { Day: 'FRIDAY', 'Time (24h)': '10:00-10:10', Program: 'Jingles and Music', 'Presenter(s)': 'Maxim Somah', timeSlot: 10, duration: 0.17 },
+  { Day: 'FRIDAY', 'Time (24h)': '10:10-10:20', Program: 'Announcement', 'Presenter(s)': 'Maxim Somah', timeSlot: 10.17, duration: 0.17 },
+  { Day: 'FRIDAY', 'Time (24h)': '10:20-11:00', Program: 'Music', 'Presenter(s)': 'Maxim Somah', timeSlot: 10.33, duration: 0.67 },
+  { Day: 'FRIDAY', 'Time (24h)': '11:00-13:00', Program: 'Worship Connexion', 'Presenter(s)': 'New Life Africa', timeSlot: 11, duration: 2 },
+  { Day: 'FRIDAY', 'Time (24h)': '13:00-13:05', Program: 'Word To Go', 'Presenter(s)': 'Pastor Mensa', timeSlot: 13, duration: 0.08 },
+  { Day: 'FRIDAY', 'Time (24h)': '13:05-15:00', Program: 'Launch Time Connect', 'Presenter(s)': 'Maxim Somah', timeSlot: 13.08, duration: 1.92 },
+  { Day: 'FRIDAY', 'Time (24h)': '15:00-15:20', Program: 'Music', 'Presenter(s)': 'Various', timeSlot: 15, duration: 0.33 },
+  { Day: 'FRIDAY', 'Time (24h)': '15:20-15:24', Program: 'Guidelines For Living', 'Presenter(s)': 'Various', timeSlot: 15.33, duration: 0.07 },
+  { Day: 'FRIDAY', 'Time (24h)': '15:24-16:00', Program: 'The Heart Beat', 'Presenter(s)': 'Various', timeSlot: 15.4, duration: 0.6 },
+  { Day: 'FRIDAY', 'Time (24h)': '16:00-17:00', Program: 'The Drug Show', 'Presenter(s)': 'Sam W. Doe', timeSlot: 16, duration: 1 },
+  { Day: 'FRIDAY', 'Time (24h)': '17:00-18:00', Program: 'Trenz At 10', 'Presenter(s)': 'T. KCalvin Walter', timeSlot: 17, duration: 1 },
+  { Day: 'FRIDAY', 'Time (24h)': '18:00-19:00', Program: 'The Living Proof', 'Presenter(s)': 'T. KCalvin Walter', timeSlot: 18, duration: 1 },
+  { Day: 'FRIDAY', 'Time (24h)': '19:00-20:45', Program: 'Music', 'Presenter(s)': 'T. KCalvin Walter', timeSlot: 19, duration: 1.75 },
+  { Day: 'FRIDAY', 'Time (24h)': '20:45-21:00', Program: 'Announcement', 'Presenter(s)': 'T. KCalvin Walter', timeSlot: 20.75, duration: 0.25 },
+  { Day: 'FRIDAY', 'Time (24h)': '21:00-22:00', Program: 'The Conversation', 'Presenter(s)': 'T. KCalvin Walter', timeSlot: 21, duration: 1 },
+  { Day: 'FRIDAY', 'Time (24h)': '22:00-00:00', Program: 'Music', 'Presenter(s)': 'T. KCalvin Walter', timeSlot: 22, duration: 2 },
+
+  // SATURDAY
+  { Day: 'SATURDAY', 'Time (24h)': '00:00-00:30', Program: 'Music', 'Presenter(s)': '', timeSlot: 0, duration: 0.5 },
+  { Day: 'SATURDAY', 'Time (24h)': '00:30-04:30', Program: 'International Kapoa Secure Liberia', 'Presenter(s)': 'T. KCalvin Walter', timeSlot: 0.5, duration: 4 },
+  { Day: 'SATURDAY', 'Time (24h)': '05:00-07:00', Program: 'Music', 'Presenter(s)': 'KCalvin', timeSlot: 5, duration: 2 },
+  { Day: 'SATURDAY', 'Time (24h)': '07:00-08:30', Program: 'The Morning Jam', 'Presenter(s)': 'KCalvin', timeSlot: 7, duration: 1.5 },
+  { Day: 'SATURDAY', 'Time (24h)': '08:30-09:00', Program: 'Music', 'Presenter(s)': 'KCalvin', timeSlot: 8.5, duration: 0.5 },
+  { Day: 'SATURDAY', 'Time (24h)': '09:00-10:15', Program: 'Vox Sports DESK', 'Presenter(s)': 'KCalvin and Emmanuel', timeSlot: 9, duration: 1.25 },
+  { Day: 'SATURDAY', 'Time (24h)': '10:15-11:15', Program: 'Teenagers Talk', 'Presenter(s)': 'Janet and D\'Alessandro', timeSlot: 10.25, duration: 1 },
+  { Day: 'SATURDAY', 'Time (24h)': '11:15-13:00', Program: 'Music', 'Presenter(s)': 'Various', timeSlot: 11.25, duration: 1.75 },
+  { Day: 'SATURDAY', 'Time (24h)': '13:00-13:30', Program: 'Truth For Life Weekend', 'Presenter(s)': 'Various', timeSlot: 13, duration: 0.5 },
+  { Day: 'SATURDAY', 'Time (24h)': '13:30-14:00', Program: 'Planet Sports', 'Presenter(s)': 'Various', timeSlot: 13.5, duration: 0.5 },
+  { Day: 'SATURDAY', 'Time (24h)': '14:00-16:00', Program: 'Island Praise', 'Presenter(s)': 'Various', timeSlot: 14, duration: 2 },
+  { Day: 'SATURDAY', 'Time (24h)': '16:00-19:00', Program: 'Blessed Beatz', 'Presenter(s)': 'Various', timeSlot: 16, duration: 3 },
+  { Day: 'SATURDAY', 'Time (24h)': '19:00-00:00', Program: 'Transformed DJ', 'Presenter(s)': 'Various', timeSlot: 19, duration: 5 }
+];
 
 const DashboardHeader = () => {
   const [currentProgram, setCurrentProgram] = useState(null);
+  const [nextProgram, setNextProgram] = useState(null);
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   // Find current program based on Liberia time
   const getCurrentProgram = () => {
     const now = new Date(new Date().toLocaleString("en-US", {timeZone: "Africa/Monrovia"}));
-    const currentDay = days[now.getDay()];
+    const currentDay = days[now.getDay()].toUpperCase();
     const currentHour = now.getHours();
     const currentMinutes = now.getMinutes();
     const currentTimeDecimal = currentHour + (currentMinutes / 60);
 
-    const todayPrograms = enhancedPrograms[currentDay] || [];
-    
-    return todayPrograms.find(program => {
+    return programScheduleData.find(program => {
+      if (program.Day !== currentDay) return false;
+      
       const startTime = program.timeSlot;
       const endTime = startTime + program.duration;
       
@@ -171,15 +178,49 @@ const DashboardHeader = () => {
     });
   };
 
+  // Find next program based on Liberia time
+  const getNextProgram = () => {
+    const now = new Date(new Date().toLocaleString("en-US", {timeZone: "Africa/Monrovia"}));
+    const currentDay = days[now.getDay()].toUpperCase();
+    const currentTimeDecimal = now.getHours() + (now.getMinutes() / 60);
+
+    // Find next program today
+    const nextToday = programScheduleData
+      .filter(program => program.Day === currentDay && program.timeSlot > currentTimeDecimal)
+      .sort((a, b) => a.timeSlot - b.timeSlot)[0];
+
+    if (nextToday) {
+      return nextToday;
+    }
+
+    // If no program today, get first program of next day
+    const nextDayIndex = (now.getDay() + 1) % 7;
+    const nextDayName = days[nextDayIndex].toUpperCase();
+    
+    return programScheduleData
+      .filter(program => program.Day === nextDayName)
+      .sort((a, b) => a.timeSlot - b.timeSlot)[0];
+  };
+
+  // Create scrolling marquee content
+  const createMarqueeContent = () => {
+    const allPrograms = programScheduleData.map(program => 
+      `${program.Day} • ${program['Time (24h)']} • ${program.Program} • ${program['Presenter(s)'] || 'Various'}`
+    );
+    return allPrograms.join(' • • • ');
+  };
+
   useEffect(() => {
     const timer = setInterval(() => {
       const activeProgram = getCurrentProgram();
+      const upcomingProgram = getNextProgram();
       setCurrentProgram(activeProgram);
+      setNextProgram(upcomingProgram);
     }, 5000); // Check every 5 seconds
 
     // Initial check
-    const initialProgram = getCurrentProgram();
-    setCurrentProgram(initialProgram);
+    setCurrentProgram(getCurrentProgram());
+    setNextProgram(getNextProgram());
 
     return () => clearInterval(timer);
   }, []);
@@ -190,39 +231,55 @@ const DashboardHeader = () => {
         <div className="py-4 sm:py-6">
           <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center">Vox Radio Presenters Dashboard</h2>
           
-          {/* Current Program and Presenter Display */}
+          {/* Current Program Display */}
           {currentProgram && (
-            <div className="mt-4 text-center">
+            <div className="mt-3 text-center">
               <div className="flex items-center justify-center space-x-3">
                 {/* Audio waves animation */}
                 <div className="flex items-center space-x-1">
-                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '12px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '20px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '16px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '24px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '18px', animationDelay: '400ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '12px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '20px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '16px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '24px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '18px', animationDelay: '400ms', animationDuration: '600ms'}}></div>
                 </div>
                 
                 <div>
                   <div className="text-lg sm:text-xl font-bold text-white">
-                    LIVE NOW: {currentProgram.name.toUpperCase()}
+                    LIVE NOW: {currentProgram.Program.toUpperCase()}
                   </div>
-                  <div className="text-sm sm:text-base text-orange-200 font-medium">
-                    with {currentProgram.presenter} | {currentProgram.time}
+                  <div className="text-sm sm:text-base text-orange-100 font-medium">
+                    with {currentProgram['Presenter(s)'] || 'Various'} | {currentProgram['Time (24h)']}
                   </div>
                 </div>
                 
                 {/* Audio waves animation */}
                 <div className="flex items-center space-x-1">
-                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '18px', animationDelay: '500ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '24px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '16px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '20px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '12px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '18px', animationDelay: '500ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '24px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '16px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '20px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '12px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
                 </div>
               </div>
             </div>
           )}
+
+          {/* Next Program Display */}
+          {nextProgram && (
+            <div className="mt-2 text-center">
+              <div className="text-sm font-medium text-orange-200">
+                NEXT PROGRAM: {nextProgram.Program} with {nextProgram['Presenter(s)'] || 'Various'} | {nextProgram['Time (24h)']}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      
+      {/* Scrolling Marquee */}
+      <div className="bg-black bg-opacity-20 py-2 overflow-hidden">
+        <div className="whitespace-nowrap animate-marquee text-sm text-orange-100">
+          {createMarqueeContent()}
         </div>
       </div>
     </div>
