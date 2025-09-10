@@ -109,7 +109,7 @@ const AIAnalytics = () => {
       name: "Canva",
       description: "AI-powered design tool for promotional materials",
       category: "Design",
-      url: "https://canva.com",
+      url: process.env.REACT_APP_DESIGN_URL || "https://canva.com",
       useCase: "Create professional graphics for social media and promotions"
     },
     {
