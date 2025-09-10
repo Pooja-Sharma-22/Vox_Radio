@@ -3,6 +3,7 @@ import Navigation from './Navigation';
 import DashboardHeader from './DashboardHeader';
 import ProgramSchedule from './ProgramSchedule';
 import EnhancedProgramSchedule from './EnhancedProgramSchedule';
+import VoxRadioProgramLog from './VoxRadioProgramLog';
 import TabNavigation from './TabNavigation';
 import CurrentWeather from './CurrentWeather';
 import WeatherForecast from './WeatherForecast';
