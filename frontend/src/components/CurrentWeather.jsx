@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 import WeatherCard from './WeatherCard';
 import { getCurrentWeatherData } from '../data/mockData';
 
-import React, { useState, useEffect } from 'react';
-import WeatherCard from './WeatherCard';
-import { getCurrentWeatherData } from '../data/mockData';
-
 const CurrentWeather = () => {
   const [weatherData, setWeatherData] = useState(getCurrentWeatherData());
   const [lastUpdate, setLastUpdate] = useState(new Date());
