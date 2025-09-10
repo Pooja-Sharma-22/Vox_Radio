@@ -227,47 +227,50 @@ const DashboardHeader = () => {
   return (
     <div className="bg-gradient-to-r from-orange-500 to-orange-600 text-white border-b-2 border-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="py-4 sm:py-6">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center">Vox Radio Presenters Dashboard</h2>
+        <div className="py-3 px-2 sm:py-6 sm:px-0">
+          <h2 className="text-lg sm:text-2xl lg:text-3xl font-bold text-center mb-2">Vox Radio Presenters Dashboard</h2>
           
-          {/* Current Program Display */}
+          {/* Current Program Display - Mobile First */}
           {currentProgram && (
-            <div className="mt-3 text-center">
-              <div className="flex items-center justify-center space-x-3">
-                {/* Audio waves animation */}
+            <div className="mt-2 px-2">
+              <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-3">
+                {/* Audio waves animation - smaller on mobile */}
                 <div className="flex items-center space-x-1">
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '12px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '20px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '16px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '24px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '18px', animationDelay: '400ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '8px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '12px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '10px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '14px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '11px', animationDelay: '400ms', animationDuration: '600ms'}}></div>
                 </div>
                 
-                <div>
-                  <div className="text-lg sm:text-xl font-bold text-white">
+                <div className="text-center">
+                  <div className="text-sm sm:text-lg lg:text-xl font-bold text-white">
                     LIVE NOW: {currentProgram.Program.toUpperCase()}
                   </div>
-                  <div className="text-sm sm:text-base text-orange-100 font-medium">
-                    with {currentProgram['Presenter(s)'] || 'Various'} | {currentProgram['Time (24h)']}
+                  <div className="text-xs sm:text-sm lg:text-base text-orange-100 font-medium mt-1">
+                    with {currentProgram['Presenter(s)'] || 'Various'}
+                  </div>
+                  <div className="text-xs sm:text-sm text-orange-200 mt-1">
+                    {currentProgram['Time (24h)']}
                   </div>
                 </div>
                 
-                {/* Audio waves animation */}
+                {/* Audio waves animation - smaller on mobile */}
                 <div className="flex items-center space-x-1">
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '18px', animationDelay: '500ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '24px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '16px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '20px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '12px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '11px', animationDelay: '500ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '14px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '10px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '12px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '8px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Next Program Display */}
+          {/* Next Program Display - Mobile First */}
           {nextProgram && (
-            <div className="mt-2 text-center">
-              <div className="text-sm font-medium text-orange-200">
+            <div className="mt-3 px-2 text-center">
+              <div className="text-xs sm:text-sm font-medium text-orange-200">
                 NEXT PROGRAM: {nextProgram.Program} with {nextProgram['Presenter(s)'] || 'Various'} | {nextProgram['Time (24h)']}
               </div>
             </div>
