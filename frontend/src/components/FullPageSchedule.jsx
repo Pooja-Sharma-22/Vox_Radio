@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Calendar, Download, Printer } from 'lucide-react';
 import { Button } from './ui/button';
-import EnhancedProgramSchedule from './EnhancedProgramSchedule';
+import VoxRadioProgramLog from './VoxRadioProgramLog';
 
 const FullPageSchedule = () => {
   const handleBack = () => {
