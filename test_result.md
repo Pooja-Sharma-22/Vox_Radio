@@ -173,9 +173,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Refine program schedule display and logic"
-  stuck_tasks:
-    - "Refine program schedule display and logic"
+    - "Convert program schedule to 24-hour format"
+    - "Add current presenter/program display under dashboard header"
+    - "Remove Show Player functionality while keeping Listen Live"
+    - "Add 2-day weather forecast"
+  stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
