@@ -192,14 +192,14 @@ const DashboardHeader = () => {
           
           {/* Current Program and Presenter Display */}
           {currentProgram ? (
-            <div className="mt-4 bg-red-600 bg-opacity-90 rounded-lg px-6 py-4 mx-auto max-w-4xl border-2 border-red-400 shadow-lg">
+            <div className="mt-4 bg-gradient-to-r from-orange-600 to-orange-700 rounded-lg px-6 py-4 mx-auto max-w-4xl border-2 border-orange-400 shadow-lg">
               <div className="flex items-center justify-center space-x-4">
                 <div className="w-4 h-4 bg-yellow-300 rounded-full animate-pulse shadow-lg"></div>
                 <div className="text-center">
                   <div className="text-lg sm:text-xl font-bold text-white uppercase tracking-wide">
                     🔴 LIVE NOW: {currentProgram.name}
                   </div>
-                  <div className="text-sm sm:text-base text-yellow-100 font-medium mt-1">
+                  <div className="text-sm sm:text-base text-orange-100 font-medium mt-1">
                     with {currentProgram.presenter} | {currentProgram.time}
                   </div>
                 </div>
@@ -207,9 +207,9 @@ const DashboardHeader = () => {
               </div>
             </div>
           ) : (
-            <div className="mt-4 bg-gray-700 bg-opacity-80 rounded-lg px-4 py-3 mx-auto max-w-2xl">
+            <div className="mt-4 bg-orange-800 bg-opacity-60 rounded-lg px-4 py-3 mx-auto max-w-2xl border border-orange-600">
               <div className="text-center">
-                <div className="text-sm text-gray-300">
+                <div className="text-sm text-orange-200">
                   📻 No program currently scheduled
                 </div>
               </div>
