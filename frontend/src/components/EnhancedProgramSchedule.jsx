@@ -105,6 +105,7 @@ const enhancedPrograms = {
     { id: 'tue-20', time: "22:00-00:30", timeSlot: 22, duration: 2.5, name: "Music", presenter: "Maxim Somah", type: "Music" }
   ],
   Wednesday: [
+    { id: 'wed-0', time: "00:30-04:30", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "Emmanuel Howard", type: "Community" },
     { id: 'wed-1', time: "05:00-08:00", timeSlot: 5, duration: 3, name: "The Quiet Storm", presenter: "New Life Africa", type: "Special" },
     { id: 'wed-2', time: "08:00-09:00", timeSlot: 8, duration: 1, name: "Good Shepherd Fellowship", presenter: "Bishop Thomas", type: "Bible Teaching" },
     { id: 'wed-3', time: "09:00-10:00", timeSlot: 9, duration: 1, name: "Living Word", presenter: "Pastor Mensa", type: "Bible Teaching" },
