@@ -191,26 +191,34 @@ const DashboardHeader = () => {
           <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-center">Vox Radio Presenters Dashboard</h2>
           
           {/* Current Program and Presenter Display */}
-          {currentProgram ? (
-            <div className="mt-4 bg-gradient-to-r from-orange-600 to-orange-700 rounded-lg px-6 py-4 mx-auto max-w-4xl border-2 border-orange-400 shadow-lg">
-              <div className="flex items-center justify-center space-x-4">
-                <div className="w-4 h-4 bg-yellow-300 rounded-full animate-pulse shadow-lg"></div>
-                <div className="text-center">
-                  <div className="text-lg sm:text-xl font-bold text-white uppercase tracking-wide">
-                    🔴 LIVE NOW: {currentProgram.name}
+          {currentProgram && (
+            <div className="mt-4 text-center">
+              <div className="flex items-center justify-center space-x-3">
+                {/* Audio waves animation */}
+                <div className="flex items-center space-x-1">
+                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '12px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '20px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '16px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '24px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '18px', animationDelay: '400ms', animationDuration: '600ms'}}></div>
+                </div>
+                
+                <div>
+                  <div className="text-lg sm:text-xl font-bold text-white">
+                    LIVE NOW: {currentProgram.name.toUpperCase()}
                   </div>
-                  <div className="text-sm sm:text-base text-orange-100 font-medium mt-1">
+                  <div className="text-sm sm:text-base text-orange-200 font-medium">
                     with {currentProgram.presenter} | {currentProgram.time}
                   </div>
                 </div>
-                <div className="w-4 h-4 bg-yellow-300 rounded-full animate-pulse shadow-lg"></div>
-              </div>
-            </div>
-          ) : (
-            <div className="mt-4 bg-orange-800 bg-opacity-60 rounded-lg px-4 py-3 mx-auto max-w-2xl border border-orange-600">
-              <div className="text-center">
-                <div className="text-sm text-orange-200">
-                  📻 No program currently scheduled
+                
+                {/* Audio waves animation */}
+                <div className="flex items-center space-x-1">
+                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '18px', animationDelay: '500ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '24px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '16px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '20px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
+                  <div className="w-1 bg-orange-500 rounded-full animate-pulse" style={{height: '12px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
                 </div>
               </div>
             </div>
