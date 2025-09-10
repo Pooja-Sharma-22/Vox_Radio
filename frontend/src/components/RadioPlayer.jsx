@@ -22,7 +22,7 @@ const RadioPlayer = ({ isVisible, onClose }) => {
       setConnectionStatus('stopped');
     } else {
       // Start the stream - open in new window for better compatibility
-      const radioUrl = 'https://radio.galcom.org/?station=VOXRadio';
+      const radioUrl = process.env.REACT_APP_RADIO_STREAM_URL || 'https://radio.galcom.org/?station=VOXRadio';
       const radioWindow = window.open(
         radioUrl,
         'VoxRadioStream',
