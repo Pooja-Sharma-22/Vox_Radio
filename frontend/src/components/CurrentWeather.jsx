@@ -94,16 +94,16 @@ const CurrentWeather = () => {
       </div>
       
       {/* Rotation Info Banner */}
-      <div className="mb-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-          <p className="text-sm text-orange-800">
+      <div className="mb-3 sm:mb-4 p-2 sm:p-3 bg-orange-50 border border-orange-200 rounded-lg">
+        <div className="flex items-start sm:items-center gap-2">
+          <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse mt-1 sm:mt-0 flex-shrink-0"></div>
+          <p className="text-xs sm:text-sm text-orange-800">
             <strong>Auto-Rotation:</strong> Cities change automatically every 15 minutes to show different regions across Liberia
           </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         {weatherData.map((weather, index) => (
           <WeatherCard key={`${weather.city}-${index}`} weather={weather} />
         ))}
