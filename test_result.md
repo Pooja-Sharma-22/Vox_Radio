@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Complete the redesign of enhanced program schedule to match Kioo Radio programs page with 24-hour format, add current presenter/program display under dashboard header, remove Show Player functionality while keeping Listen Live, add 2-day weather forecast, and remove Made with Emergent logo."
+user_problem_statement: "Fix frontend compilation error, implement scrolling marquee for program information in header, and complete the simplification of live program display with animated audio waves."
 
 frontend:
   - task: "Convert program schedule to 24-hour format"
