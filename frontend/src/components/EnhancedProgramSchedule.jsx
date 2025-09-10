@@ -148,7 +148,7 @@ const enhancedPrograms = {
     { id: 'thu-18', time: "22:00-00:30", timeSlot: 22, duration: 2.5, name: "Music", presenter: "Sam W. Doe", type: "Music" }
   ],
   Friday: [
-    { id: 'fri-0', time: "00:30-04:30", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "T. KCalvin Walter", type: "Community" },
+    { id: 'fri-0', time: "00:30-04:30", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "Maxim Somah and Sam W. Doe", type: "Community" },
     { id: 'fri-1', time: "05:00-08:00", timeSlot: 5, duration: 3, name: "The Quiet Storm", presenter: "New Life Africa", type: "Special" },
     { id: 'fri-2', time: "08:00-09:00", timeSlot: 8, duration: 1, name: "Good Shepherd Fellowship", presenter: "Bishop Thomas", type: "Bible Teaching" },
     { id: 'fri-3', time: "09:00-10:00", timeSlot: 9, duration: 1, name: "Living Word", presenter: "Pastor Mensa", type: "Bible Teaching" },
