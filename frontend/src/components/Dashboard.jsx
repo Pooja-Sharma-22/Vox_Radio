@@ -40,6 +40,8 @@ const Dashboard = () => {
     switch(activeTab) {
       case 'current-weather':
         return <CurrentWeather />;
+      case 'weather-forecast':
+        return <WeatherForecast />;
       case 'enhanced-schedule':
         return <EnhancedProgramSchedule />;
       case 'whatsapp':
