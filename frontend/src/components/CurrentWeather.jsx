@@ -110,9 +110,9 @@ const CurrentWeather = () => {
       </div>
       
       {/* Rotation Schedule */}
-      <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-        <h4 className="font-medium text-gray-900 mb-3">15-Minute Rotation Schedule:</h4>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-3 text-xs">
+      <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-50 rounded-lg">
+        <h4 className="font-medium text-gray-900 mb-2 sm:mb-3 text-sm sm:text-base">15-Minute Rotation Schedule:</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3 text-xs">
           <div className="p-2 bg-white rounded border">
             <div className="font-medium text-gray-900">:00 - :14</div>
             <div className="text-gray-600">Major Cities</div>
