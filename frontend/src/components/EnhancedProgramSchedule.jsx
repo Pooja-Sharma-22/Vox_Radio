@@ -1,49 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Radio, Clock, Calendar, ChevronDown, ChevronUp, Play, Users, Book, MessageCircle, Heart, Star, Search, X, Filter } from 'lucide-react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-
-// Program type categories with colors (matching your HTML structure)
-const PROGRAM_TYPES = {
-  'Music': { 
-    color: 'bg-blue-500', 
-    textColor: 'text-blue-500',
-    borderColor: 'border-blue-500',
-    icon: Play,
-    bgLight: 'bg-blue-50'
-  },
-  'Bible Teaching': { 
-    color: 'bg-green-500', 
-    textColor: 'text-green-500',
-    borderColor: 'border-green-500',
-    icon: Book,
-    bgLight: 'bg-green-50'
-  },
-  'Interactive': { 
-    color: 'bg-purple-500', 
-    textColor: 'text-purple-500',
-    borderColor: 'border-purple-500',
-    icon: MessageCircle,
-    bgLight: 'bg-purple-50'
-  },
-  'Community': { 
-    color: 'bg-orange-500', 
-    textColor: 'text-orange-500',
-    borderColor: 'border-orange-500',
-    icon: Users,
-    bgLight: 'bg-orange-50'
-  },
-  'Special': { 
-    color: 'bg-red-500', 
-    textColor: 'text-red-500',
-    borderColor: 'border-red-500',
-    icon: Star,
-    bgLight: 'bg-red-50'
-  }
-};
-
-import React, { useState, useEffect } from 'react';
-import { Radio, Clock, Calendar, ChevronDown, ChevronUp, Play, Users, Book, MessageCircle, Heart, Star, Search, X, Filter } from 'lucide-react';
+import { Radio, Clock, Calendar, Search, X, Filter, Heart, Play, Users, Book, MessageCircle, Star } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 
@@ -122,9 +78,7 @@ const enhancedPrograms = {
     { id: 'mon-18', time: "8:45-9:00PM", timeSlot: 20.75, duration: 0.25, name: "Announcement", presenter: "Sam", type: "Community" },
     { id: 'mon-19', time: "9:00-10:00PM", timeSlot: 21, duration: 1, name: "Vox Prayer Night", presenter: "Leone Moore", type: "Bible Teaching" },
     { id: 'mon-20', time: "10:00-11:00PM", timeSlot: 22, duration: 1, name: "The Night Ride", presenter: "Sam W. Doe", type: "Special" },
-    { id: 'mon-21', time: "11:00PM-12:30AM", timeSlot: 23, duration: 1.5, name: "Music", presenter: "Sam W. Doe", type: "Music" },
-    { id: 'mon-22', time: "12:30-4:30AM", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "Sam W. Doe", type: "Special" },
-    { id: 'mon-23', time: "4:30-5:00AM", timeSlot: 4.5, duration: 0.5, name: "Thru The Bible", presenter: "Various", type: "Bible Teaching" }
+    { id: 'mon-21', time: "11:00PM-12:30AM", timeSlot: 23, duration: 1.5, name: "Music", presenter: "Sam W. Doe", type: "Music" }
   ],
   Tuesday: [
     { id: 'tue-1', time: "5:00-8:00AM", timeSlot: 5, duration: 3, name: "The Quiet Storm", presenter: "New Life Africa", type: "Special" },
@@ -146,11 +100,8 @@ const enhancedPrograms = {
     { id: 'tue-17', time: "7:30-8:45PM", timeSlot: 19.5, duration: 1.25, name: "Vox Talk", presenter: "Maxim and Sam", type: "Interactive" },
     { id: 'tue-18', time: "8:45-9:00PM", timeSlot: 20.75, duration: 0.25, name: "Announcement", presenter: "Various", type: "Community" },
     { id: 'tue-19', time: "9:00-10:00PM", timeSlot: 21, duration: 1, name: "Vox Prayer Night", presenter: "Leone Moore", type: "Bible Teaching" },
-    { id: 'tue-20', time: "10:00PM-12:30AM", timeSlot: 22, duration: 2.5, name: "Music", presenter: "Maxim Somah", type: "Music" },
-    { id: 'tue-21', time: "12:30-4:30AM", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "Maxim Somah", type: "Special" },
-    { id: 'tue-22', time: "4:30-5:00AM", timeSlot: 4.5, duration: 0.5, name: "Thru The Bible", presenter: "Various", type: "Bible Teaching" }
+    { id: 'tue-20', time: "10:00PM-12:30AM", timeSlot: 22, duration: 2.5, name: "Music", presenter: "Maxim Somah", type: "Music" }
   ],
-  // Additional days would continue with the same pattern...
   Wednesday: [
     { id: 'wed-1', time: "5:00-8:00AM", timeSlot: 5, duration: 3, name: "The Quiet Storm", presenter: "New Life Africa", type: "Special" },
     { id: 'wed-2', time: "8:00-9:00AM", timeSlot: 8, duration: 1, name: "Good Shepherd Fellowship", presenter: "Bishop Thomas", type: "Bible Teaching" },
@@ -170,9 +121,7 @@ const enhancedPrograms = {
     { id: 'wed-16', time: "7:15-8:45PM", timeSlot: 19.25, duration: 1.5, name: "Ladies Let's Talk", presenter: "Victoria Walker", type: "Interactive" },
     { id: 'wed-17', time: "8:45-9:00PM", timeSlot: 20.75, duration: 0.25, name: "Announcement", presenter: "Victoria Walker", type: "Community" },
     { id: 'wed-18', time: "9:00-10:00PM", timeSlot: 21, duration: 1, name: "Vox Prayer Night", presenter: "Leone Moore", type: "Bible Teaching" },
-    { id: 'wed-19', time: "10:00PM-12:30AM", timeSlot: 22, duration: 2.5, name: "Music", presenter: "Emmanuel Howard", type: "Music" },
-    { id: 'wed-20', time: "12:30-4:30AM", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "Emmanuel Howard", type: "Special" },
-    { id: 'wed-21', time: "4:30-5:00AM", timeSlot: 4.5, duration: 0.5, name: "Thru The Bible", presenter: "Various", type: "Bible Teaching" }
+    { id: 'wed-19', time: "10:00PM-12:30AM", timeSlot: 22, duration: 2.5, name: "Music", presenter: "Emmanuel Howard", type: "Music" }
   ],
   Thursday: [
     { id: 'thu-1', time: "5:00-8:00AM", timeSlot: 5, duration: 3, name: "The Quiet Storm", presenter: "New Life Africa", type: "Special" },
@@ -192,9 +141,7 @@ const enhancedPrograms = {
     { id: 'thu-15', time: "7:00-7:30PM", timeSlot: 19, duration: 0.5, name: "Music", presenter: "Sam W. Doe", type: "Music" },
     { id: 'thu-16', time: "7:30-8:45PM", timeSlot: 19.5, duration: 1.25, name: "Vox Talk", presenter: "Maxim And Sam", type: "Interactive" },
     { id: 'thu-17', time: "8:45-9:00PM", timeSlot: 20.75, duration: 0.25, name: "Announcement", presenter: "Maxim Somah", type: "Community" },
-    { id: 'thu-18', time: "10:00PM-12:30AM", timeSlot: 22, duration: 2.5, name: "Music", presenter: "Sam W. Doe", type: "Music" },
-    { id: 'thu-19', time: "12:30-4:30AM", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "Maxim and Sam", type: "Special" },
-    { id: 'thu-20', time: "4:30-5:00AM", timeSlot: 4.5, duration: 0.5, name: "Thru The Bible", presenter: "Various", type: "Bible Teaching" }
+    { id: 'thu-18', time: "10:00PM-12:30AM", timeSlot: 22, duration: 2.5, name: "Music", presenter: "Sam W. Doe", type: "Music" }
   ],
   Friday: [
     { id: 'fri-1', time: "5:00-8:00AM", timeSlot: 5, duration: 3, name: "The Quiet Storm", presenter: "New Life Africa", type: "Special" },
@@ -215,9 +162,7 @@ const enhancedPrograms = {
     { id: 'fri-16', time: "7:00-8:45PM", timeSlot: 19, duration: 1.75, name: "Music", presenter: "T. KCalvin Walter", type: "Music" },
     { id: 'fri-17', time: "8:45-9:00PM", timeSlot: 20.75, duration: 0.25, name: "Announcement", presenter: "T. KCalvin Walter", type: "Community" },
     { id: 'fri-18', time: "9:00-10:00PM", timeSlot: 21, duration: 1, name: "The Conversation", presenter: "T. KCalvin Walter", type: "Interactive" },
-    { id: 'fri-19', time: "10:00PM-12:30AM", timeSlot: 22, duration: 2.5, name: "Music", presenter: "T. KCalvin Walter", type: "Music" },
-    { id: 'fri-20', time: "12:30-4:30AM", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "T. KCalvin Walter", type: "Special" },
-    { id: 'fri-21', time: "4:30-5:00AM", timeSlot: 4.5, duration: 0.5, name: "Thru The Bible", presenter: "Various", type: "Bible Teaching" }
+    { id: 'fri-19', time: "10:00PM-12:30AM", timeSlot: 22, duration: 2.5, name: "Music", presenter: "T. KCalvin Walter", type: "Music" }
   ],
   Saturday: [
     { id: 'sat-1', time: "5:00-7:00AM", timeSlot: 5, duration: 2, name: "Music", presenter: "KCalvin", type: "Music" },
@@ -239,7 +184,6 @@ const EnhancedProgramSchedule = ({ isFullPage = false }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [currentProgram, setCurrentProgram] = useState(null);
   const [selectedDay, setSelectedDay] = useState('Monday');
-  const [isExpanded, setIsExpanded] = useState(false);
   const [selectedType, setSelectedType] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [favorites, setFavorites] = useState([]);
@@ -317,7 +261,7 @@ const EnhancedProgramSchedule = ({ isFullPage = false }) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [days]);
+  }, []);
 
   const getFilteredPrograms = () => {
     let dayPrograms = enhancedPrograms[selectedDay] || [];
@@ -350,397 +294,257 @@ const EnhancedProgramSchedule = ({ isFullPage = false }) => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white border-b border-orange-500">
-      {/* Mobile Layout */}
-      <div className="sm:hidden">
-        <div className="px-4 py-3">
-          {/* Mobile Header */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Radio className="text-orange-400 animate-pulse" size={16} />
-              <span className="text-sm font-bold text-orange-400">ENHANCED SCHEDULE</span>
+    <div className="bg-gradient-to-r from-gray-900 via-black to-gray-900 text-white">
+      {/* Header Section */}
+      <div className="px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between space-y-4 lg:space-y-0">
+          <div className="flex items-center space-x-3">
+            <Radio className="text-orange-400 animate-pulse" size={24} />
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-orange-400">VOX RADIO PROGRAMS</h2>
+              <p className="text-sm text-gray-400">Complete daily programming schedule</p>
             </div>
             
-            {/* Current Program Display - Mobile */}
+            {/* Current Program Indicator */}
             {currentProgram && (
-              <div className="flex items-center space-x-1 bg-orange-500 px-2 py-1 rounded-full">
-                <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="font-bold text-white text-xs">LIVE: {currentProgram.name}</span>
+              <div className="hidden lg:flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-red-500 px-4 py-2 rounded-full">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="font-bold text-white text-sm">
+                  ON AIR: {currentProgram.name} with {currentProgram.presenter}
+                </span>
+                <Clock size={16} className="text-yellow-300" />
               </div>
             )}
-            
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="text-orange-400 hover:text-orange-300 transition-colors"
-            >
-              {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-            </button>
           </div>
 
-          {/* Mobile Expanded Content */}
-          {isExpanded && (
-            <div className="mt-4 space-y-4">
-              {/* Search and Favorites Controls */}
-              <div className="space-y-3">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
-                  <Input
-                    type="text"
-                    placeholder="Search programs, presenters, or types..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 pr-10 bg-gray-800 border-gray-600 text-white placeholder-gray-400"
-                  />
-                  {searchTerm && (
-                    <button
-                      onClick={() => setSearchTerm('')}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
-                    >
-                      <X size={16} />
-                    </button>
-                  )}
-                </div>
-                
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-                    className={`flex items-center space-x-1 px-3 py-1 rounded-full text-xs font-medium ${
-                      showFavoritesOnly 
-                        ? 'bg-red-500 text-white' 
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                    }`}
-                  >
-                    <Heart size={12} fill={showFavoritesOnly ? 'white' : 'none'} />
-                    <span>Favorites Only</span>
-                  </button>
-                  
-                  {!isFullPage && (
-                    <Button
-                      size="sm"
-                      onClick={() => window.open('/enhanced-schedule', '_blank')}
-                      className="bg-orange-500 hover:bg-orange-600 text-white text-xs"
-                    >
-                      Full Schedule
-                    </Button>
-                  )}
-                </div>
-              </div>
-              {/* Day Selector */}
-              <div className="overflow-x-auto">
-                <div className="flex space-x-2 pb-2">
-                  {days.map((day) => (
-                    <button
-                      key={day}
-                      onClick={() => setSelectedDay(day)}
-                      className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
-                        selectedDay === day 
-                          ? 'bg-orange-500 text-white' 
-                          : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                      }`}
-                    >
-                      {day.substring(0, 3)}
-                    </button>
-                  ))}
-                </div>
-              </div>
+          {/* Search and Controls */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-3 w-full lg:w-auto">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+              <Input
+                type="text"
+                placeholder="Search programs..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 pr-10 w-full sm:w-64 bg-gray-800 border-gray-600 text-white placeholder-gray-400"
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm('')}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
+                >
+                  <X size={16} />
+                </button>
+              )}
+            </div>
+            
+            <button
+              onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+              className={`flex items-center justify-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                showFavoritesOnly 
+                  ? 'bg-red-500 text-white shadow-lg' 
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              <Heart size={16} fill={showFavoritesOnly ? 'white' : 'none'} />
+              <span className="hidden sm:inline">Favorites ({favorites.length})</span>
+              <span className="sm:hidden">❤️ {favorites.length}</span>
+            </button>
+            
+            {!isFullPage && (
+              <Button
+                onClick={() => window.open('/enhanced-schedule', '_blank')}
+                className="bg-orange-500 hover:bg-orange-600 text-white whitespace-nowrap"
+              >
+                Full View
+              </Button>
+            )}
+          </div>
+        </div>
 
-              {/* Type Filter */}
-              <div className="overflow-x-auto">
-                <div className="flex space-x-2 pb-2">
-                  <button
-                    onClick={() => setSelectedType('All')}
-                    className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
-                      selectedType === 'All' 
-                        ? 'bg-orange-500 text-white' 
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                    }`}
-                  >
-                    All
-                  </button>
-                  {Object.keys(PROGRAM_TYPES).map((type) => (
-                    <button
-                      key={type}
-                      onClick={() => setSelectedType(type)}
-                      className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap flex items-center space-x-1 ${
-                        selectedType === type 
-                          ? `${PROGRAM_TYPES[type].color} text-white` 
-                          : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                      }`}
-                    >
-                      {getProgramTypeIcon(type)}
-                      <span>{type}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
+        {/* Mobile Current Program */}
+        {currentProgram && (
+          <div className="lg:hidden mt-4 flex items-center space-x-2 bg-gradient-to-r from-orange-500 to-red-500 px-4 py-2 rounded-full">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+            <span className="font-bold text-white text-sm">
+              ON AIR: {currentProgram.name}
+            </span>
+          </div>
+        )}
+      </div>
 
-              {/* Program List */}
-              <div className="space-y-2 max-h-96 overflow-y-auto">
+      {/* Type Filters */}
+      <div className="px-4 sm:px-6 lg:px-8 pb-4">
+        <div className="flex items-center space-x-2 overflow-x-auto pb-2">
+          <Filter size={16} className="text-gray-400 flex-shrink-0" />
+          <button
+            onClick={() => setSelectedType('All')}
+            className={`px-3 py-1 rounded-full text-sm font-medium whitespace-nowrap ${
+              selectedType === 'All' 
+                ? 'bg-orange-500 text-white' 
+                : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+            }`}
+          >
+            All Programs
+          </button>
+          {Object.keys(PROGRAM_TYPES).map((type) => (
+            <button
+              key={type}
+              onClick={() => setSelectedType(type)}
+              className={`px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1 whitespace-nowrap ${
+                selectedType === type 
+                  ? `${PROGRAM_TYPES[type].color} text-white` 
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              {getProgramTypeIcon(type)}
+              <span>{type}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Day Tabs */}
+      <div className="px-4 sm:px-6 lg:px-8 pb-6">
+        <div className="flex space-x-1 overflow-x-auto pb-2">
+          {days.map((day) => (
+            <button
+              key={day}
+              onClick={() => setSelectedDay(day)}
+              className={`px-4 py-2 rounded-lg font-medium transition-all whitespace-nowrap ${
+                selectedDay === day 
+                  ? 'bg-orange-500 text-white shadow-lg' 
+                  : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
+            >
+              {day}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Program Table - Kioo Radio Style */}
+      <div className="px-4 sm:px-6 lg:px-8 pb-8">
+        <div className="bg-white rounded-lg shadow-xl overflow-hidden">
+          <div className="bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-3">
+            <h3 className="text-lg font-bold text-white">
+              {selectedDay} Program Schedule
+              <span className="ml-2 text-sm text-orange-100">
+                ({getFilteredPrograms().length} programs)
+              </span>
+            </h3>
+          </div>
+          
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Time
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Program
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Presenter
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Type
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
                 {getFilteredPrograms().length === 0 ? (
-                  <div className="text-center py-8 text-gray-400">
-                    <div className="mb-2">
-                      {searchTerm ? <Search size={24} /> : showFavoritesOnly ? <Heart size={24} /> : <Calendar size={24} />}
-                    </div>
-                    <p className="text-sm">
-                      {searchTerm 
-                        ? `No programs found matching "${searchTerm}"` 
-                        : showFavoritesOnly 
-                        ? 'No favorite programs for this day' 
-                        : 'No programs scheduled for this day'
-                      }
-                    </p>
-                  </div>
+                  <tr>
+                    <td colSpan="5" className="px-6 py-12 text-center">
+                      <div className="text-gray-400">
+                        <Calendar size={48} className="mx-auto mb-4" />
+                        <h3 className="text-lg font-medium mb-2">
+                          {searchTerm 
+                            ? 'No Results Found' 
+                            : showFavoritesOnly 
+                            ? 'No Favorite Programs' 
+                            : 'No Programs Scheduled'
+                          }
+                        </h3>
+                        <p className="text-sm">
+                          {searchTerm 
+                            ? `No programs found matching "${searchTerm}" for ${selectedDay}` 
+                            : showFavoritesOnly 
+                            ? `You haven't favorited any programs for ${selectedDay} yet` 
+                            : `No programs are scheduled for ${selectedDay}`
+                          }
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
                 ) : (
                   getFilteredPrograms().map((program, index) => {
-                    const isCurrent = currentProgram && currentProgram.name === program.name;
+                    const isCurrent = currentProgram && currentProgram.id === program.id;
                     const typeConfig = PROGRAM_TYPES[program.type];
                     const isCurrentFavorite = isFavorite(program, selectedDay);
                     
                     return (
-                      <div 
-                        key={index} 
-                        className={`p-3 rounded-lg border-l-4 ${typeConfig?.borderColor} ${
+                      <tr 
+                        key={program.id} 
+                        className={`transition-all duration-200 ${
                           isCurrent 
-                            ? 'bg-orange-500 text-white' 
-                            : `${typeConfig?.bgLight} bg-opacity-10 text-gray-300`
+                            ? 'bg-gradient-to-r from-orange-50 to-red-50 border-l-4 border-orange-500 shadow-md' 
+                            : 'hover:bg-gray-50'
                         }`}
                       >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2 flex-1">
-                            {getProgramTypeIcon(program.type)}
-                            <div className="flex-1">
-                              <div className="text-sm font-medium">{program.name}</div>
-                              <div className="text-xs opacity-75">with {program.presenter}</div>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className={`text-sm font-medium ${isCurrent ? 'text-orange-600' : 'text-gray-900'}`}>
+                              {program.time}
                             </div>
                             {isCurrent && (
-                              <div className="flex items-center space-x-1">
-                                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                                <span className="text-xs font-bold bg-green-400 text-black px-1.5 py-0.5 rounded-full">LIVE</span>
+                              <div className="ml-2 flex items-center space-x-1">
+                                <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                                <span className="text-xs font-bold text-red-600 bg-red-100 px-2 py-0.5 rounded-full">
+                                  LIVE
+                                </span>
                               </div>
                             )}
                           </div>
-                          <div className="flex items-center space-x-2">
-                            <div className="text-right">
-                              <div className="text-xs font-medium">{program.time}</div>
-                              <div className={`text-xs ${typeConfig?.textColor}`}>{program.type}</div>
-                            </div>
-                            <button
-                              onClick={() => toggleFavorite(program, selectedDay)}
-                              className={`p-1 rounded-full transition-colors ${
-                                isCurrentFavorite 
-                                  ? 'text-red-500 hover:text-red-400' 
-                                  : 'text-gray-400 hover:text-red-500'
-                              }`}
-                            >
-                              <Heart size={14} fill={isCurrentFavorite ? 'currentColor' : 'none'} />
-                            </button>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className={`text-sm font-medium ${isCurrent ? 'text-orange-600' : 'text-gray-900'}`}>
+                            {program.name}
                           </div>
-                        </div>
-                      </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className={`text-sm ${isCurrent ? 'text-orange-600 font-medium' : 'text-gray-500'}`}>
+                            {program.presenter}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${typeConfig?.color} text-white`}>
+                            {getProgramTypeIcon(program.type)}
+                            <span className="ml-1">{program.type}</span>
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <button
+                            onClick={() => toggleFavorite(program, selectedDay)}
+                            className={`p-2 rounded-full transition-colors ${
+                              isCurrentFavorite 
+                                ? 'text-red-500 hover:text-red-400 bg-red-50' 
+                                : 'text-gray-400 hover:text-red-500 hover:bg-gray-50'
+                            }`}
+                          >
+                            <Heart size={16} fill={isCurrentFavorite ? 'currentColor' : 'none'} />
+                          </button>
+                        </td>
+                      </tr>
                     );
                   })
                 )}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Desktop Layout */}
-      <div className="hidden sm:block py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center space-x-3">
-              <Radio className="text-orange-400 animate-pulse" size={20} />
-              <span className="text-lg font-bold text-orange-400">ENHANCED VOX RADIO SCHEDULE</span>
-              
-              {currentProgram && (
-                <div className="flex items-center space-x-2 bg-orange-500 px-4 py-2 rounded-full">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="font-bold text-white">NOW LIVE: {currentProgram.name}</span>
-                  <Clock size={16} className="text-yellow-300" />
-                </div>
-              )}
-            </div>
-
-            {/* Desktop Search and Controls */}
-            <div className="flex items-center space-x-3">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
-                <Input
-                  type="text"
-                  placeholder="Search programs..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-10 w-64 bg-gray-800 border-gray-600 text-white placeholder-gray-400"
-                />
-                {searchTerm && (
-                  <button
-                    onClick={() => setSearchTerm('')}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
-                  >
-                    <X size={16} />
-                  </button>
-                )}
-              </div>
-              
-              <button
-                onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all ${
-                  showFavoritesOnly 
-                    ? 'bg-red-500 text-white shadow-lg' 
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                }`}
-              >
-                <Heart size={16} fill={showFavoritesOnly ? 'white' : 'none'} />
-                <span>Favorites ({favorites.length})</span>
-              </button>
-              
-              {!isFullPage && (
-                <Button
-                  onClick={() => window.open('/enhanced-schedule', '_blank')}
-                  className="bg-orange-500 hover:bg-orange-600 text-white"
-                >
-                  Full Schedule View
-                </Button>
-              )}
-            </div>
-          </div>
-
-          {/* Desktop Type Filter */}
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center space-x-2">
-              <Filter size={16} className="text-gray-400" />
-              <span className="text-sm text-gray-400">Filter by type:</span>
-              <button
-                onClick={() => setSelectedType('All')}
-                className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  selectedType === 'All' 
-                    ? 'bg-orange-500 text-white' 
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                }`}
-              >
-                All Programs
-              </button>
-              {Object.keys(PROGRAM_TYPES).map((type) => (
-                <button
-                  key={type}
-                  onClick={() => setSelectedType(type)}
-                  className={`px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1 ${
-                    selectedType === type 
-                      ? `${PROGRAM_TYPES[type].color} text-white` 
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                  }`}
-                >
-                  {getProgramTypeIcon(type)}
-                  <span>{type}</span>
-                </button>
-              ))}
-            </div>
-            
-            <div className="text-sm text-gray-400">
-              Showing {getFilteredPrograms().length} programs for {selectedDay}
-            </div>
-          </div>
-
-          {/* Desktop Day Tabs */}
-          <div className="flex space-x-1 mb-4">
-            {days.map((day) => (
-              <button
-                key={day}
-                onClick={() => setSelectedDay(day)}
-                className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                  selectedDay === day 
-                    ? 'bg-orange-500 text-white' 
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                }`}
-              >
-                {day}
-              </button>
-            ))}
-          </div>
-
-          {/* Desktop Program Grid */}
-          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ${isFullPage ? 'max-h-screen' : 'max-h-96'} overflow-y-auto`}>
-            {getFilteredPrograms().length === 0 ? (
-              <div className="col-span-full text-center py-12 text-gray-400">
-                <div className="mb-4">
-                  {searchTerm ? <Search size={48} /> : showFavoritesOnly ? <Heart size={48} /> : <Calendar size={48} />}
-                </div>
-                <h3 className="text-lg font-medium mb-2">
-                  {searchTerm 
-                    ? 'No Results Found' 
-                    : showFavoritesOnly 
-                    ? 'No Favorite Programs' 
-                    : 'No Programs Scheduled'
-                  }
-                </h3>
-                <p className="text-sm">
-                  {searchTerm 
-                    ? `No programs found matching "${searchTerm}" for ${selectedDay}` 
-                    : showFavoritesOnly 
-                    ? `You haven't favorited any programs for ${selectedDay} yet` 
-                    : `No programs are scheduled for ${selectedDay}`
-                  }
-                </p>
-              </div>
-            ) : (
-              getFilteredPrograms().map((program, index) => {
-                const isCurrent = currentProgram && currentProgram.name === program.name;
-                const typeConfig = PROGRAM_TYPES[program.type];
-                const isCurrentFavorite = isFavorite(program, selectedDay);
-                
-                return (
-                  <div 
-                    key={index} 
-                    className={`p-4 rounded-lg border-l-4 ${typeConfig?.borderColor} transition-all duration-300 relative group ${
-                      isCurrent 
-                        ? 'bg-orange-500 text-white shadow-lg scale-105' 
-                        : `${typeConfig?.bgLight} bg-opacity-10 text-gray-300 hover:bg-opacity-20 hover:scale-102`
-                    }`}
-                  >
-                    {/* Favorite Button */}
-                    <button
-                      onClick={() => toggleFavorite(program, selectedDay)}
-                      className={`absolute top-2 right-2 p-2 rounded-full transition-all duration-200 ${
-                        isCurrentFavorite 
-                          ? 'text-red-500 hover:text-red-400 bg-white bg-opacity-20' 
-                          : 'text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100'
-                      }`}
-                    >
-                      <Heart size={16} fill={isCurrentFavorite ? 'currentColor' : 'none'} />
-                    </button>
-
-                    <div className="flex items-start justify-between pr-8">
-                      <div className="flex items-start space-x-3">
-                        <div className={`p-2 rounded ${typeConfig?.color} text-white`}>
-                          {getProgramTypeIcon(program.type)}
-                        </div>
-                        <div>
-                          <div className="font-medium text-lg">{program.name}</div>
-                          <div className="text-sm opacity-75">with {program.presenter}</div>
-                          <div className="text-sm font-medium mt-1">{program.time}</div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between mt-3">
-                      <div className={`text-xs px-2 py-1 rounded ${typeConfig?.color} text-white`}>
-                        {program.type}
-                      </div>
-                      {isCurrent && (
-                        <div className="flex items-center space-x-2">
-                          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                          <span className="text-xs font-bold bg-green-400 text-black px-2 py-0.5 rounded-full">
-                            LIVE NOW
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })
-            )}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
