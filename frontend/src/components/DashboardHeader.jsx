@@ -274,13 +274,6 @@ const DashboardHeader = () => {
           )}
         </div>
       </div>
-      
-      {/* Scrolling Marquee */}
-      <div className="bg-black bg-opacity-20 py-2 overflow-hidden">
-        <div className="whitespace-nowrap animate-marquee text-sm text-orange-100">
-          {createMarqueeContent()}
-        </div>
-      </div>
     </div>
   );
 };
