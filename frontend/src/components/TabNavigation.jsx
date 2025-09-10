@@ -5,6 +5,7 @@ const TabNavigation = ({ activeTab, setActiveTab }) => {
   const tabs = [
     { id: 'current-weather', label: 'Current Weather', icon: '🌤️', shortLabel: 'Weather' },
     { id: 'weather-forecast', label: 'Weather Forecast', icon: '🌈', shortLabel: 'Forecast' },
+    { id: 'program-log', label: 'Program Log', icon: '📊', shortLabel: 'Log' },
     { id: 'enhanced-schedule', label: 'Enhanced Schedule', icon: '📅', shortLabel: 'Schedule' },
     { id: 'whatsapp', label: 'WhatsApp', icon: '💬', shortLabel: 'WhatsApp' },
     { id: 'submit-testimony', label: 'Submit Testimony', icon: '✍️', shortLabel: 'Testimony' },
