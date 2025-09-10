@@ -39,6 +39,7 @@ const enhancedPrograms = {
     { id: 'mon-21', time: "23:00-00:30", timeSlot: 23, duration: 1.5, name: "Music", presenter: "Sam W. Doe", type: "Music" }
   ],
   Tuesday: [
+    { id: 'tue-0', time: "00:30-04:30", timeSlot: 0.5, duration: 4, name: "International Kapoa Secure Liberia", presenter: "Sam W. Doe", type: "Community" },
     { id: 'tue-1', time: "05:00-08:00", timeSlot: 5, duration: 3, name: "The Quiet Storm", presenter: "New Life Africa", type: "Special" },
     { id: 'tue-2', time: "08:00-09:00", timeSlot: 8, duration: 1, name: "Good Shepherd Fellowship", presenter: "Bishop Thomas", type: "Bible Teaching" },
     { id: 'tue-3', time: "09:00-10:00", timeSlot: 9, duration: 1, name: "Living Word", presenter: "Pastor Mensa", type: "Bible Teaching" },
