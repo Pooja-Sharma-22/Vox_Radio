@@ -161,12 +161,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Convert program schedule to 24-hour format"
-    - "Add current presenter/program display under dashboard header"
-    - "Remove Show Player functionality while keeping Listen Live"
-    - "Add 2-day weather forecast"
+    - "Implement scrolling marquee for program information"
+    - "Simplify live program display with animated audio waves"
+    - "Display NEXT PROGRAM information at top of header"
   stuck_tasks: []
-  test_all: false
+  test_all: true
   test_priority: "high_first"
 
 agent_communication:
