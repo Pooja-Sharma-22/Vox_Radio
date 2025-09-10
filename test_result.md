@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Refine the display and logic for the list of programs, change the weather temperature unit from Celsius to Fahrenheit, and further optimize and ensure a mobile-first design approach across the application."
+user_problem_statement: "Complete the redesign of enhanced program schedule to match Kioo Radio programs page with 24-hour format, add current presenter/program display under dashboard header, remove Show Player functionality while keeping Listen Live, add 2-day weather forecast, and remove Made with Emergent logo."
 
 frontend:
   - task: "Convert weather data from Celsius to Fahrenheit"
