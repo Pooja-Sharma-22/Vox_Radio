@@ -45,7 +45,30 @@ class StatusCheckCreate(BaseModel):
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Vox Radio Dashboard API", "status": "running"}
+
+@api_router.get("/health")
+async def health_check():
+    try:
+        # Test database connection
+        if db is not None:
+            await db.status_checks.find_one()
+            db_status = "connected"
+        else:
+            db_status = "disconnected"
+        
+        return {
+            "status": "healthy",
+            "database": db_status,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    except Exception as e:
+        return {
+            "status": "unhealthy",
+            "database": "error",
+            "error": str(e),
+            "timestamp": datetime.utcnow().isoformat()
+        }
 
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
