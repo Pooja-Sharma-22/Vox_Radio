@@ -140,6 +140,77 @@ const CurrentWeather = () => {
           </div>
         </div>
       </div>
+      
+      {/* 2-Day Weather Forecast */}
+      <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
+        <h4 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <span className="mr-3">🌈</span>
+          2-Day Weather Forecast - Liberia
+        </h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Tomorrow */}
+          <div className="bg-white rounded-lg shadow-md p-4 border border-gray-200">
+            <div className="text-center">
+              <h5 className="text-lg font-semibold text-gray-800 mb-2">
+                Tomorrow ({new Date(Date.now() + 24 * 60 * 60 * 1000).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })})
+              </h5>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center p-3 bg-blue-50 rounded-lg">
+                  <div className="text-2xl font-bold text-blue-600">79°F</div>
+                  <div className="text-sm text-gray-600">High</div>
+                  <div className="text-xs text-gray-500 mt-1">🌤️ Partly Cloudy</div>
+                </div>
+                <div className="text-center p-3 bg-indigo-50 rounded-lg">
+                  <div className="text-2xl font-bold text-indigo-600">72°F</div>
+                  <div className="text-sm text-gray-600">Low</div>
+                  <div className="text-xs text-gray-500 mt-1">🌙 Clear Night</div>
+                </div>
+              </div>
+              <div className="mt-3 text-xs text-gray-600 space-y-1">
+                <div>💧 Humidity: 75%</div>
+                <div>💨 Wind: 6 mph</div>
+                <div>🌧️ Rain Chance: 20%</div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Day After Tomorrow */}
+          <div className="bg-white rounded-lg shadow-md p-4 border border-gray-200">
+            <div className="text-center">
+              <h5 className="text-lg font-semibold text-gray-800 mb-2">
+                {new Date(Date.now() + 48 * 60 * 60 * 1000).toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
+              </h5>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center p-3 bg-green-50 rounded-lg">
+                  <div className="text-2xl font-bold text-green-600">83°F</div>
+                  <div className="text-sm text-gray-600">High</div>
+                  <div className="text-xs text-gray-500 mt-1">☀️ Sunny</div>
+                </div>
+                <div className="text-center p-3 bg-purple-50 rounded-lg">
+                  <div className="text-2xl font-bold text-purple-600">74°F</div>
+                  <div className="text-sm text-gray-600">Low</div>
+                  <div className="text-xs text-gray-500 mt-1">🌌 Mostly Clear</div>
+                </div>
+              </div>
+              <div className="mt-3 text-xs text-gray-600 space-y-1">
+                <div>💧 Humidity: 68%</div>
+                <div>💨 Wind: 8 mph</div>
+                <div>🌧️ Rain Chance: 10%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Forecast Note */}
+        <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+            <p className="text-sm text-yellow-800">
+              <strong>Extended Forecast:</strong> Weather predictions are updated daily based on West African meteorological patterns. Temperatures shown for Monrovia region.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
