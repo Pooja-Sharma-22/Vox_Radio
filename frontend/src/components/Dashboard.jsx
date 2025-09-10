@@ -9,14 +9,12 @@ import WhatsAppSection from './WhatsAppSection';
 import SubmitTestimony from './SubmitTestimony';
 import LogPhoneCall from './LogPhoneCall';
 import RecentSubmissions from './RecentSubmissions';
-import RadioPlayer from './RadioPlayer';
 import NotificationSystem from './NotificationSystem';
 import { Button } from './ui/button';
-import { Download, Radio } from 'lucide-react';
+import { Download } from 'lucide-react';
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('current-weather');
-  const [showRadioPlayer, setShowRadioPlayer] = useState(false);
 
   const handleDownloadExcel = () => {
     const data = {
@@ -64,17 +62,7 @@ const Dashboard = () => {
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-4 sm:py-6 border-b border-gray-300 gap-4">
           <TabNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
-          <div className="flex items-center justify-center sm:justify-end gap-2 sm:gap-3">
-            <Button 
-              onClick={() => setShowRadioPlayer(!showRadioPlayer)}
-              variant="outline"
-              size="sm"
-              className="flex items-center gap-1 sm:gap-2 border-orange-500 text-orange-600 hover:bg-orange-50 text-xs sm:text-sm"
-            >
-              <Radio size={14} className="sm:w-4 sm:h-4" />
-              <span className="hidden sm:inline">{showRadioPlayer ? 'Hide Player' : 'Show Player'}</span>
-              <span className="sm:hidden">{showRadioPlayer ? 'Hide' : 'Player'}</span>
-            </Button>
+          <div className="flex items-center justify-center sm:justify-end">
             <Button 
               onClick={handleDownloadExcel}
               size="sm"
@@ -90,12 +78,6 @@ const Dashboard = () => {
           {renderTabContent()}
         </div>
       </div>
-      
-      {/* Radio Player */}
-      <RadioPlayer 
-        isVisible={showRadioPlayer} 
-        onClose={() => setShowRadioPlayer(false)} 
-      />
       
       {/* Notification System */}
       <NotificationSystem />
