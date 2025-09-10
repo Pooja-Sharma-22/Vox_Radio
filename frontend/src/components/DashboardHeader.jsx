@@ -175,26 +175,11 @@ const DashboardHeader = () => {
     const timer = setInterval(() => {
       const activeProgram = getCurrentProgram();
       setCurrentProgram(activeProgram);
-      
-      // Debug logging (can be removed later)
-      if (activeProgram) {
-        console.log('Current program found:', activeProgram);
-      } else {
-        const now = new Date(new Date().toLocaleString("en-US", {timeZone: "Africa/Monrovia"}));
-        const currentDay = days[now.getDay()];
-        const currentHour = now.getHours();
-        const currentMinutes = now.getMinutes();
-        const currentTimeDecimal = currentHour + (currentMinutes / 60);
-        console.log(`No current program. Day: ${currentDay}, Time: ${currentHour}:${currentMinutes} (${currentTimeDecimal})`);
-      }
     }, 5000); // Check every 5 seconds
 
     // Initial check
     const initialProgram = getCurrentProgram();
     setCurrentProgram(initialProgram);
-    if (initialProgram) {
-      console.log('Initial program found:', initialProgram);
-    }
 
     return () => clearInterval(timer);
   }, []);
