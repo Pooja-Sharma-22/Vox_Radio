@@ -123,7 +123,7 @@ const AIAnalytics = () => {
       name: "Google Trends",
       description: "Discover trending topics in your region",
       category: "Research",
-      url: "https://trends.google.com",
+      url: process.env.REACT_APP_TRENDS_URL || "https://trends.google.com",
       useCase: "Identify popular topics to cover in your programs"
     },
     {
