@@ -207,13 +207,7 @@ const DashboardHeader = () => {
       .sort((a, b) => a.timeSlot - b.timeSlot)[0];
   };
 
-  // Create scrolling marquee content
-  const createMarqueeContent = () => {
-    const allPrograms = programScheduleData.map(program => 
-      `${program.Day} • ${program['Time (24h)']} • ${program.Program} • ${program['Presenter(s)'] || 'Various'}`
-    );
-    return allPrograms.join(' • • • ');
-  };
+
 
   useEffect(() => {
     const timer = setInterval(() => {
