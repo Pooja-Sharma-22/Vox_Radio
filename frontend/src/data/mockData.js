@@ -128,7 +128,13 @@ export const allLiberianCities = [
       condition: "Light Rain",
       humidity: "88%",
       windSpeed: "7 mph", // Changed from 11 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 95,
+        nextRainIn: "Currently raining",
+        intensity: "Light",
+        duration: "Ongoing (1-2 more hours)"
+      }
     }
   ],
   // Set 3 - Northern Cities
