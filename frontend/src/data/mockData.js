@@ -71,7 +71,13 @@ export const allLiberianCities = [
       condition: "Overcast",
       humidity: "71%",
       windSpeed: "6 mph",
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 90,
+        nextRainIn: "30 minutes",
+        intensity: "Heavy",
+        duration: "2-4 hours"
+      }
     }
   ],
   // Set 2 - Coastal Cities
