@@ -56,7 +56,13 @@ export const allLiberianCities = [
       condition: "Clear",
       humidity: "82%",
       windSpeed: "9 mph",
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 85,
+        nextRainIn: "1 hour",
+        intensity: "Heavy",
+        duration: "2-3 hours"
+      }
     },
     {
       city: "Kakata",
