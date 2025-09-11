@@ -167,7 +167,13 @@ export const allLiberianCities = [
       condition: "Foggy",
       humidity: "90%",
       windSpeed: "4 mph", // Changed from 6 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 75,
+        nextRainIn: "2 hours",
+        intensity: "Moderate",
+        duration: "2-3 hours"
+      }
     },
     {
       city: "Foya",
@@ -176,7 +182,13 @@ export const allLiberianCities = [
       condition: "Partly Cloudy",
       humidity: "68%",
       windSpeed: "6 mph", // Changed from 10 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 55,
+        nextRainIn: "6 hours",
+        intensity: "Light",
+        duration: "1 hour"
+      }
     },
     {
       city: "Zorzor",
@@ -185,7 +197,13 @@ export const allLiberianCities = [
       condition: "Cool",
       humidity: "75%",
       windSpeed: "4 mph", // Changed from 7 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 70,
+        nextRainIn: "3 hours",
+        intensity: "Light",
+        duration: "1-2 hours"
+      }
     }
   ],
   // Set 4 - Central/Eastern Cities
@@ -212,7 +230,13 @@ export const allLiberianCities = [
       condition: "Humid",
       humidity: "87%",
       windSpeed: "9 mph", // Changed from 15 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 80,
+        nextRainIn: "1.5 hours",
+        intensity: "Heavy",
+        duration: "2-4 hours"
+      }
     },
     {
       city: "Tubmanburg",
@@ -221,7 +245,13 @@ export const allLiberianCities = [
       condition: "Partly Cloudy",
       humidity: "73%",
       windSpeed: "7 mph", // Changed from 11 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 65,
+        nextRainIn: "4 hours",
+        intensity: "Moderate",
+        duration: "1-2 hours"
+      }
     },
     {
       city: "Robertsport",
@@ -230,7 +260,13 @@ export const allLiberianCities = [
       condition: "Windy",
       humidity: "79%",
       windSpeed: "12 mph", // Changed from 20 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 70,
+        nextRainIn: "2.5 hours",
+        intensity: "Moderate",
+        duration: "1-3 hours"
+      }
     }
   ],
   // Set 5 - Mining/Rural Areas
@@ -242,7 +278,13 @@ export const allLiberianCities = [
       condition: "Cool",
       humidity: "70%",
       windSpeed: "5 mph", // Changed from 8 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 60,
+        nextRainIn: "5 hours",
+        intensity: "Light",
+        duration: "1 hour"
+      }
     },
     {
       city: "Bong Mines",
@@ -251,7 +293,13 @@ export const allLiberianCities = [
       condition: "Misty",
       humidity: "83%",
       windSpeed: "6 mph", // Changed from 9 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 75,
+        nextRainIn: "2 hours",
+        intensity: "Moderate",
+        duration: "2-3 hours"
+      }
     },
     {
       city: "Harbel",
@@ -260,7 +308,13 @@ export const allLiberianCities = [
       condition: "Warm",
       humidity: "76%",
       windSpeed: "7 mph", // Changed from 12 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 65,
+        nextRainIn: "3.5 hours",
+        intensity: "Light",
+        duration: "1-2 hours"
+      }
     },
     {
       city: "Bomi Hills",
@@ -269,7 +323,13 @@ export const allLiberianCities = [
       condition: "Overcast",
       humidity: "74%",
       windSpeed: "6 mph", // Changed from 10 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 80,
+        nextRainIn: "1 hour",
+        intensity: "Moderate",
+        duration: "2-3 hours"
+      }
     }
   ]
 ];
@@ -278,183 +338,116 @@ export const allLiberianCities = [
 export const getCurrentWeatherData = () => {
   const now = new Date();
   const minutes = now.getMinutes();
-  const rotationIndex = Math.floor(minutes / 15); // Changes every 15 minutes (0, 1, 2, 3)
-  const setIndex = rotationIndex % allLiberianCities.length;
-  return allLiberianCities[setIndex];
+  const rotationIndex = Math.floor(minutes / 15);
+  return allLiberianCities[rotationIndex % allLiberianCities.length];
 };
 
-// Legacy export for backward compatibility
-export const mockWeatherData = getCurrentWeatherData();
+// Sample program schedule
+export const programs = [
+  {
+    id: 1,
+    name: "Morning Drive",
+    presenter: "John Doe",
+    time: "06:00 - 10:00",
+    day: "Monday",
+    description: "Start your day with the latest news and music",
+    category: "Talk Show"
+  },
+  {
+    id: 2,
+    name: "Liberian Hits",
+    presenter: "Jane Smith",
+    time: "10:00 - 14:00",
+    day: "Monday",
+    description: "The best of Liberian music",
+    category: "Music"
+  },
+  {
+    id: 3,
+    name: "Evening Talk",
+    presenter: "Mike Johnson",
+    time: "18:00 - 20:00",
+    day: "Monday",
+    description: "Community discussions and call-ins",
+    category: "Talk Show"
+  },
+  {
+    id: 4,
+    name: "Late Night Jazz",
+    presenter: "Sarah Wilson",
+    time: "22:00 - 02:00",
+    day: "Monday",
+    description: "Smooth jazz and soul music",
+    category: "Music"
+  }
+];
 
-// Mock flight data for Monrovia Roberts International Airport
-export const mockFlightData = {
-  arrivals: [
-    {
-      id: 1,
-      flight: "ET 588",
-      airline: "Ethiopian Airlines",
-      from: "Addis Ababa (ADD)",
-      scheduledTime: "14:30",
-      actualTime: "14:25",
-      status: "Landed",
-      gate: "A2"
-    },
-    {
-      id: 2,
-      flight: "AF 718",
-      airline: "Air France",
-      from: "Paris (CDG)",
-      scheduledTime: "16:45",
-      actualTime: "On Time",
-      status: "En Route",
-      gate: "B1"
-    },
-    {
-      id: 3,
-      flight: "DL 157",
-      airline: "Delta Airlines", 
-      from: "New York (JFK)",
-      scheduledTime: "18:20",
-      actualTime: "18:20",
-      status: "Scheduled",
-      gate: "A3"
-    }
-  ],
-  departures: [
-    {
-      id: 1,
-      flight: "ET 589",
-      airline: "Ethiopian Airlines",
-      to: "Addis Ababa (ADD)",
-      scheduledTime: "15:45",
-      actualTime: "15:40",
-      status: "Departed",
-      gate: "A2"
-    },
-    {
-      id: 2,
-      flight: "AF 719",
-      airline: "Air France",
-      to: "Paris (CDG)",
-      scheduledTime: "17:30",
-      actualTime: "On Time",
-      status: "Boarding",
-      gate: "B1"
-    },
-    {
-      id: 3,
-      flight: "WN 254",
-      airline: "West African Airlines",
-      to: "Accra (ACC)",
-      scheduledTime: "19:15",
-      actualTime: "19:15",
-      status: "Scheduled",
-      gate: "A1"
-    }
-  ]
-};
-
-// Mock testimonies data
-const mockTimestamp = new Date().toLocaleString();
-
-export const mockTestimonies = [
+// Sample testimonies
+export const testimonies = [
   {
     id: 1,
     name: "Mary Johnson",
-    phone: "0777123456",
-    message: "Vox Radio has been such a blessing to our community. Thank you for the wonderful programs!",
-    date: "2025-01-03",
-    time: "08:30",
-    approved: true,
-    category: "General Praise"
+    testimony: "Vox Radio has been a blessing to our community. The programs are inspiring and informative.",
+    location: "Monrovia",
+    date: "2024-01-15",
+    approved: true
   },
   {
     id: 2,
-    name: "Samuel Roberts", 
-    phone: "0777654321",
-    message: "I love the morning show and the inspirational music. Keep up the great work!",
-    date: "2025-01-02",
-    time: "15:45",
-    approved: false,
-    category: "Program Feedback"
-  },
-  {
-    id: 3,
-    name: "Grace Williams",
-    phone: "0777987654",
-    message: "Please pray for my family. We are going through difficult times.",
-    date: "2025-01-02",
-    time: "12:20",
-    approved: true,
-    category: "Prayer Request"
+    name: "Joseph Smith",
+    testimony: "I love the morning show. It keeps me informed about what's happening in Liberia.",
+    location: "Gbarnga",
+    date: "2024-01-14",
+    approved: false
   }
 ];
 
-// Mock phone calls data
-export const mockPhoneCalls = [
+// Sample phone calls
+export const phoneCalls = [
   {
     id: 1,
-    caller: "Anonymous Listener",
-    phone: "0777***234",
-    topic: "Prayer Request - Family Issues",
-    duration: "5:30",
-    notes: "Caller requested prayer for sick family member",
-    presenter: "John Smith",
-    timestamp: "2025-01-03 08:15",
-    followUpRequired: true
+    callerName: "Patricia Williams",
+    phoneNumber: "+231-77-555-0123",
+    callDate: "2024-01-15",
+    callTime: "09:30 AM",
+    purpose: "Program Feedback",
+    notes: "Caller praised the morning show and suggested more local music",
+    followUpRequired: false,
+    duration: "5 minutes"
   },
   {
     id: 2,
-    caller: "Mike Davis",
-    phone: "0777***567", 
-    topic: "Song Request - Gospel Music",
-    duration: "2:45",
-    notes: "Requested 'Amazing Grace' for birthday celebration",
-    presenter: "Sarah Wilson",
-    timestamp: "2025-01-03 07:30",
-    followUpRequired: false
-  },
-  {
-    id: 3,
-    caller: "Alice Cooper",
-    phone: "0777***890",
-    topic: "Program Suggestion",
-    duration: "4:15",
-    notes: "Suggested weekly health program for community",
-    presenter: "John Smith", 
-    timestamp: "2025-01-02 16:45",
-    followUpRequired: true
+    callerName: "Robert Johnson",
+    phoneNumber: "+231-88-555-0456",
+    callDate: "2024-01-15",
+    callTime: "02:15 PM",
+    purpose: "Advertisement Inquiry",
+    notes: "Local business owner interested in advertising slots",
+    followUpRequired: true,
+    duration: "12 minutes"
   }
 ];
 
-// Mock WhatsApp data
-export const mockWhatsAppData = {
-  number: "0777975975",
-  todayMessages: 23,
-  weekMessages: 156,
-  monthMessages: 642,
-  recentMessages: [
-    {
-      id: 1,
-      sender: "Mary K.",
-      message: "Good morning! Please play some gospel music.",
-      time: "08:45",
-      replied: true
-    },
-    {
-      id: 2,
-      sender: "Samuel R.",
-      message: "Thank you for yesterday's program about health.",
-      time: "08:30",
-      replied: false
-    },
-    {
-      id: 3,
-      sender: "Grace W.",
-      message: "Can you announce our church event this Sunday?",
-      time: "08:15",
-      replied: true
-    }
-  ],
-  lastUpdate: "2025-01-03 08:50"
-};
+// Sample flight information
+export const flightInfo = [
+  {
+    id: 1,
+    airline: "Brussels Airlines",
+    flight: "SN238",
+    route: "Monrovia → Brussels",
+    departure: "11:30 PM",
+    arrival: "06:45 AM +1",
+    status: "On Time",
+    gate: "A2"
+  },
+  {
+    id: 2,
+    airline: "Royal Air Maroc",
+    flight: "AT561",
+    route: "Casablanca → Monrovia",
+    departure: "02:15 PM",
+    arrival: "07:30 PM",
+    status: "Delayed 30min",
+    gate: "B1"
+  }
+];
