@@ -2,6 +2,20 @@
 // Create timestamp once to prevent infinite re-renders
 const weatherTimestamp = new Date().toLocaleString();
 
+// Rain prediction data for Liberian regions
+const generateRainPrediction = () => {
+  const rainConditions = [
+    { condition: "Heavy Rain", probability: 85, intensity: "Heavy", duration: "2-4 hours" },
+    { condition: "Light Rain", probability: 70, intensity: "Light", duration: "1-2 hours" },
+    { condition: "Thunderstorms", probability: 75, intensity: "Heavy", duration: "1-3 hours" },
+    { condition: "Drizzle", probability: 60, intensity: "Light", duration: "30min-1hour" },
+    { condition: "Rain Showers", probability: 80, intensity: "Moderate", duration: "1-2 hours" },
+    { condition: "Scattered Showers", probability: 65, intensity: "Light", duration: "15-45 minutes" }
+  ];
+  
+  return rainConditions[Math.floor(Math.random() * rainConditions.length)];
+};
+
 export const allLiberianCities = [
   // Set 1 - Major Cities
   [
