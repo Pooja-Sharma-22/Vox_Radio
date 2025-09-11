@@ -41,7 +41,13 @@ export const allLiberianCities = [
       condition: "Sunny",
       humidity: "65%",
       windSpeed: "5 mph",
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 60,
+        nextRainIn: "4 hours",
+        intensity: "Light",
+        duration: "30min-1hour"
+      }
     },
     {
       city: "Buchanan",
