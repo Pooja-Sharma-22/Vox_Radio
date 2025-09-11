@@ -104,7 +104,13 @@ export const allLiberianCities = [
       condition: "Partly Cloudy",
       humidity: "80%",
       windSpeed: "10 mph", // Changed from 16 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 80,
+        nextRainIn: "1.5 hours",
+        intensity: "Heavy",
+        duration: "2-3 hours"
+      }
     },
     {
       city: "Grand Bassa",
