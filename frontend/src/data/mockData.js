@@ -119,7 +119,13 @@ export const allLiberianCities = [
       condition: "Clear",
       humidity: "77%",
       windSpeed: "9 mph", // Changed from 14 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 65,
+        nextRainIn: "5 hours",
+        intensity: "Moderate",
+        duration: "1-2 hours"
+      }
     },
     {
       city: "River Cess",
