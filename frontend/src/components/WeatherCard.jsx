@@ -3,6 +3,21 @@ import { Card, CardContent } from './ui/card';
 import { Thermometer, Droplets, Wind, CloudRain, Clock, Zap } from 'lucide-react';
 
 const WeatherCard = ({ weather }) => {
+  const getRainColor = (probability) => {
+    if (probability >= 80) return 'text-red-600 bg-red-50';
+    if (probability >= 60) return 'text-orange-600 bg-orange-50';
+    return 'text-blue-600 bg-blue-50';
+  };
+
+  const getIntensityIcon = (intensity) => {
+    switch (intensity?.toLowerCase()) {
+      case 'heavy': return <Zap size={12} className="text-red-500" />;
+      case 'moderate': return <CloudRain size={12} className="text-orange-500" />;
+      case 'light': return <Droplets size={12} className="text-blue-500" />;
+      default: return <CloudRain size={12} className="text-gray-500" />;
+    }
+  };
+
   return (
     <Card className="hover:shadow-lg transition-all duration-300 border-2 hover:border-orange-300">
       <CardContent className="p-3 sm:p-4">
@@ -14,6 +29,30 @@ const WeatherCard = ({ weather }) => {
         </div>
         
         <p className="text-gray-700 font-medium mb-3 sm:mb-4 text-sm sm:text-base">{weather.condition}</p>
+        
+        {/* Rain Prediction Section */}
+        {weather.rainPrediction && (
+          <div className={`mb-3 p-2 rounded-lg border ${getRainColor(weather.rainPrediction.probability)}`}>
+            <div className="flex items-center justify-between mb-1">
+              <div className="flex items-center space-x-1">
+                <CloudRain size={14} />
+                <span className="font-semibold text-xs">Rain Prediction</span>
+              </div>
+              <span className="text-xs font-bold">{weather.rainPrediction.probability}%</span>
+            </div>
+            
+            <div className="space-y-1 text-xs">
+              <div className="flex items-center space-x-1">
+                <Clock size={10} />
+                <span>Next: {weather.rainPrediction.nextRainIn}</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                {getIntensityIcon(weather.rainPrediction.intensity)}
+                <span>{weather.rainPrediction.intensity} • {weather.rainPrediction.duration}</span>
+              </div>
+            </div>
+          </div>
+        )}
         
         <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm">
           <div className="flex items-center text-gray-600">
