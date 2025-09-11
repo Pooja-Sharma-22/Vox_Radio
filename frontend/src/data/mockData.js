@@ -89,7 +89,13 @@ export const allLiberianCities = [
       condition: "Sunny",
       humidity: "85%",
       windSpeed: "11 mph", // Changed from 18 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 70,
+        nextRainIn: "3 hours",
+        intensity: "Moderate",
+        duration: "1-2 hours"
+      }
     },
     {
       city: "Greenville",
