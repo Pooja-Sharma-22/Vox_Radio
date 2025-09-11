@@ -197,7 +197,13 @@ export const allLiberianCities = [
       condition: "Thunderstorms",
       humidity: "92%",
       windSpeed: "8 mph", // Changed from 13 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 95,
+        nextRainIn: "Currently storming",
+        intensity: "Heavy",
+        duration: "Ongoing (2-3 more hours)"
+      }
     },
     {
       city: "Pleebo",
