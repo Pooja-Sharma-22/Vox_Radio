@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent } from './ui/card';
-import { Thermometer, Droplets, Wind } from 'lucide-react';
+import { Thermometer, Droplets, Wind, CloudRain, Clock, Zap } from 'lucide-react';
 
 const WeatherCard = ({ weather }) => {
   return (
