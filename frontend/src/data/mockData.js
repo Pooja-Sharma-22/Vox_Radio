@@ -152,7 +152,13 @@ export const allLiberianCities = [
       condition: "Overcast",
       humidity: "72%",
       windSpeed: "6 mph", // Changed from 9 km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 85,
+        nextRainIn: "1 hour",
+        intensity: "Heavy",
+        duration: "3-4 hours"
+      }
     },
     {
       city: "Kolahun",
