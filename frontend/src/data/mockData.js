@@ -26,7 +26,13 @@ export const allLiberianCities = [
       condition: "Partly Cloudy",
       humidity: "78%",
       windSpeed: "7.5 mph", // Changed from km/h to mph
-      updated: weatherTimestamp
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 75,
+        nextRainIn: "2 hours",
+        intensity: "Moderate",
+        duration: "1-2 hours"
+      }
     },
     {
       city: "Gbarnga", 
