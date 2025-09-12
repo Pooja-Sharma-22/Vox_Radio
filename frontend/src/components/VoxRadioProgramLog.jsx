@@ -508,7 +508,12 @@ const VoxRadioProgramLog = ({ isFullPage = false }) => {
                       <span className="font-medium text-gray-900">{program.Day}</span>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="text-gray-700 font-mono text-sm">{program['Time (24h)']}</span>
+                      <span 
+                        className="text-gray-700 font-mono text-sm" 
+                        title={`Full UTC time: ${program['Time (24h)']} (Africa/Monrovia timezone)`}
+                      >
+                        {program['Time (24h)']} GMT
+                      </span>
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center">
