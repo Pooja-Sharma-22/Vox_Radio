@@ -70,6 +70,35 @@ async def health_check():
             "timestamp": datetime.utcnow().isoformat()
         }
 
+@api_router.get("/server-time")
+async def get_server_time():
+    """
+    Get current server time in UTC and Monrovia timezone
+    Used to sync client clocks and avoid timezone issues
+    """
+    try:
+        utc_now = datetime.utcnow()
+        
+        # Create timezone-aware datetime for Monrovia (UTC+0, same as UTC)
+        monrovia_tz = timezone.utc  # Monrovia is UTC+0
+        monrovia_now = utc_now.replace(tzinfo=monrovia_tz)
+        
+        return {
+            "utc": utc_now.isoformat() + "Z",
+            "monrovia": monrovia_now.isoformat(),
+            "timezone": "Africa/Monrovia",
+            "offset": "+00:00"
+        }
+    except Exception as e:
+        logging.error(f"Error getting server time: {e}")
+        return {
+            "error": "Failed to get server time",
+            "utc": datetime.utcnow().isoformat() + "Z",
+            "monrovia": datetime.utcnow().isoformat() + "Z",
+            "timezone": "Africa/Monrovia",
+            "offset": "+00:00"
+        }
+
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
     try:
