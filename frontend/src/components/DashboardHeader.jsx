@@ -28,7 +28,7 @@ const programScheduleData = [
   { Day: 'MONDAY', 'Time (24h)': '10:20-10:45', Program: 'Back To The Bible Canada', 'Presenter(s)': 'Dr. John Neufeld', timeSlot: 10.33, duration: 0.42 },
   { Day: 'MONDAY', 'Time (24h)': '10:45-11:00', Program: 'Music', 'Presenter(s)': 'Deddeh Gayflor', timeSlot: 10.75, duration: 0.25 },
   { Day: 'MONDAY', 'Time (24h)': '11:00-13:00', Program: 'Worship Connexion', 'Presenter(s)': 'New Life Africa / TWR', timeSlot: 11, duration: 2 },
-  { Day: 'MONDAY', 'Time (24h)': '13:00-13:05', Program: 'Word To Go', 'Presenter(s)': 'Pastor Mensa', timeSlot: 13, duration: 0.08 },
+  { Day: 'MONDAY', 'Time (24h)': '13:00-13:05', Program: 'Word To Go', 'Presenter(s)': 'Dr Mensah Otabil', timeSlot: 13, duration: 0.08 },
   { Day: 'MONDAY', 'Time (24h)': '13:05-15:00', Program: 'Launch Time Connection', 'Presenter(s)': 'Deddeh Gayflor', timeSlot: 13.08, duration: 1.92 },
   { Day: 'MONDAY', 'Time (24h)': '15:00-16:30', Program: 'The Heart Beat', 'Presenter(s)': 'Various', timeSlot: 15, duration: 1.5 },
   { Day: 'MONDAY', 'Time (24h)': '16:30-17:30', Program: 'Thru The Bible', 'Presenter(s)': 'Pastor Mcquee', timeSlot: 16.5, duration: 1 },
