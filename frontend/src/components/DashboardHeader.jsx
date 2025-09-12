@@ -161,7 +161,15 @@ const DashboardHeader = () => {
   { Day: 'SATURDAY', 'Time (24h)': '19:00-00:00', Program: 'Transformed DJ', 'Presenter(s)': 'New Life Africa', timeSlot: 19, duration: 5 }
 ];
 
-  // Update current time every second
+  // Use the program schedule hook for proper Monrovia time handling
+  const { 
+    currentProgram, 
+    nextProgram, 
+    countdown,
+    isServerTimeSynced 
+  } = useProgramSchedule(programScheduleData);
+
+  // Update current time every second for display
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -170,64 +178,10 @@ const DashboardHeader = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Get current program based on Liberia time
-  const getCurrentProgram = useMemo(() => {
-    // Create a new date object to avoid infinite re-renders
-    const now = new Date();
-    
-    // Convert to Liberia time (GMT+0, no timezone offset)
-    const liberiaTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-    
-    const currentDay = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'][liberiaTime.getDay()];
-    const currentHour = liberiaTime.getHours();
-    const currentMinutes = liberiaTime.getMinutes();
-    const currentTimeSlot = currentHour + (currentMinutes / 60);
-
-    return programScheduleData.find(program => {
-      return program.Day === currentDay && 
-             currentTimeSlot >= program.timeSlot && 
-             currentTimeSlot < (program.timeSlot + program.duration);
-    });
-  }, [currentTime]);
-
-  // Get next program
-  const getNextProgram = useMemo(() => {
-    if (!getCurrentProgram) return null;
-
-    const now = new Date();
-    const liberiaTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-    const currentDay = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'][liberiaTime.getDay()];
-    const currentEndTime = getCurrentProgram.timeSlot + getCurrentProgram.duration;
-
-    // Find next program on the same day
-    let nextProgram = programScheduleData.find(program => {
-      return program.Day === currentDay && program.timeSlot >= currentEndTime;
-    });
-
-    // If no program found on same day, get first program of next day
-    if (!nextProgram) {
-      const tomorrowIndex = (liberiaTime.getDay() + 1) % 7;
-      const tomorrowDay = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'][tomorrowIndex];
-      nextProgram = programScheduleData.find(program => program.Day === tomorrowDay);
-    }
-
-    return nextProgram;
-  }, [getCurrentProgram, currentTime]);
-
-  // Format Liberia time
+  // Format current time in Monrovia timezone
   const formatLiberiaTime = useMemo(() => {
-    const now = new Date();
-    const liberiaTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
-    
-    return liberiaTime.toLocaleTimeString('en-US', {
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit'
-    });
+    return formatMonrovia(currentTime, true);
   }, [currentTime]);
-
-  const currentProgram = getCurrentProgram;
-  const nextProgram = getNextProgram;
 
   return (
     <div className="bg-gradient-to-r from-orange-600 to-orange-800 text-white">
