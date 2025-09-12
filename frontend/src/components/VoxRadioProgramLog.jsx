@@ -492,16 +492,13 @@ const VoxRadioProgramLog = ({ isFullPage = false }) => {
             <tbody>
               {filteredPrograms.map((program, index) => {
                 const programId = getProgramId(program);
-                const isCurrentProgram = currentProgram && 
-                  currentProgram.Day === program.Day && 
-                  currentProgram.timeSlot === program.timeSlot &&
-                  currentProgram.Program === program.Program;
+                const isLive = isProgramLive(program);
                 
                 return (
                   <tr 
                     key={`${program.Day}-${program.timeSlot}-${index}`}
                     className={`border-b border-gray-200 hover:bg-gray-50 transition-colors ${
-                      isCurrentProgram ? 'bg-green-50 border-green-200' : ''
+                      isLive ? 'bg-red-50 border-red-200' : ''
                     }`}
                   >
                     <td className="px-4 py-3">
