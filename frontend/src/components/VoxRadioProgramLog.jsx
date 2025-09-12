@@ -168,6 +168,15 @@ const VoxRadioProgramLog = ({ isFullPage = false }) => {
   const [sortBy, setSortBy] = useState('time');
   const [favorites, setFavorites] = useState(new Set());
 
+  // Use the program schedule hook for proper Monrovia time handling
+  const { 
+    currentProgram, 
+    nextProgram, 
+    countdown,
+    isProgramLive,
+    isServerTimeSynced 
+  } = useProgramSchedule(programScheduleData);
+
   // Get unique days and categories for filters
   const uniqueDays = ['ALL', ...new Set(programScheduleData.map(item => item.Day))];
   const uniqueCategories = ['ALL', ...new Set(programScheduleData.map(item => item.Category).filter(Boolean))];
