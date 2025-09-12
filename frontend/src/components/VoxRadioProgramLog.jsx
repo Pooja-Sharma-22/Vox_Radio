@@ -217,50 +217,39 @@ const VoxRadioProgramLog = ({ isFullPage = false }) => {
     return filtered;
   }, [searchTerm, selectedDay, selectedCategory, sortBy]);
 
-  // Get current program (simplified logic for demo)
-  const getCurrentProgram = () => {
-    const now = new Date();
-    const currentDay = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'][now.getDay()];
-    const currentHour = now.getHours();
-    const currentMinutes = now.getMinutes();
-    const currentTimeSlot = currentHour + (currentMinutes / 60);
-
-    return programScheduleData.find(program => {
-      return program.Day === currentDay && 
-             currentTimeSlot >= program.timeSlot && 
-             currentTimeSlot < (program.timeSlot + program.duration);
-    });
-  };
-
-  // Get upcoming programs (next 3 programs)
+  // Get upcoming programs (next 3 programs) using the hook's next program
   const getUpcomingPrograms = () => {
-    const now = new Date();
-    const currentDay = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'][now.getDay()];
-    const currentHour = now.getHours();
-    const currentMinutes = now.getMinutes();
-    const currentTimeSlot = currentHour + (currentMinutes / 60);
-
-    // Get programs starting after current time today
-    let upcoming = programScheduleData.filter(program => {
-      return program.Day === currentDay && program.timeSlot > currentTimeSlot;
-    }).slice(0, 3);
-
-    // If we don't have 3 upcoming programs today, add some from tomorrow
+    if (!nextProgram) return [];
+    
+    // Get the next few programs after the next program
+    const dayOrder = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+    const nextDay = nextProgram.Day;
+    const nextTimeSlot = nextProgram.timeSlot;
+    
+    // Get programs starting after next program on same day
+    let upcoming = [nextProgram];
+    const sameDayPrograms = programScheduleData
+      .filter(program => program.Day === nextDay && program.timeSlot > nextTimeSlot)
+      .sort((a, b) => a.timeSlot - b.timeSlot)
+      .slice(0, 2);
+    
+    upcoming = upcoming.concat(sameDayPrograms);
+    
+    // If we need more programs, get from next day
     if (upcoming.length < 3) {
-      const tomorrowIndex = (now.getDay() + 1) % 7;
-      const tomorrowDay = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'][tomorrowIndex];
+      const dayAfterIndex = (dayOrder.indexOf(nextDay) + 1) % 7;
+      const dayAfter = dayOrder[dayAfterIndex];
+      const dayAfterPrograms = programScheduleData
+        .filter(program => program.Day === dayAfter)
+        .sort((a, b) => a.timeSlot - b.timeSlot)
+        .slice(0, 3 - upcoming.length);
       
-      const tomorrowPrograms = programScheduleData.filter(program => {
-        return program.Day === tomorrowDay;
-      }).slice(0, 3 - upcoming.length);
-      
-      upcoming = [...upcoming, ...tomorrowPrograms];
+      upcoming = upcoming.concat(dayAfterPrograms);
     }
-
-    return upcoming;
+    
+    return upcoming.slice(0, 3);
   };
 
-  const currentProgram = getCurrentProgram();
   const upcomingPrograms = getUpcomingPrograms();
 
   const toggleFavorite = (programId) => {
