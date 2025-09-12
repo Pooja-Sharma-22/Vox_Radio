@@ -310,11 +310,25 @@ const VoxRadioProgramLog = ({ isFullPage = false }) => {
     <div className={`${isFullPage ? 'min-h-screen' : ''} p-4 sm:p-6`}>
       {!isFullPage && (
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center">
-            <Book className="mr-3 text-orange-600" size={28} />
-            Vox Radio 24/7 Program Log
-          </h2>
-          <p className="text-gray-600">Complete weekly program schedule with search and filter capabilities</p>
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <Book className="mr-3 text-orange-600" size={28} />
+              Vox Radio 24/7 Program Log
+            </h2>
+            <div className="flex items-center text-sm text-gray-600">
+              {isServerTimeSynced ? (
+                <><Wifi size={16} className="mr-1 text-green-600" />Server Synced</>
+              ) : (
+                <><WifiOff size={16} className="mr-1 text-yellow-600" />Local Time</>
+              )}
+            </div>
+          </div>
+          <p className="text-gray-600">
+            Complete weekly program schedule with search and filter capabilities
+            <span className="ml-2 text-sm text-gray-500">
+              • All times in {TIME_CONFIG.LABEL_TZ} (Africa/Monrovia)
+            </span>
+          </p>
         </div>
       )}
 
