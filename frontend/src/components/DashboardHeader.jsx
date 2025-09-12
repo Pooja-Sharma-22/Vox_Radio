@@ -189,17 +189,20 @@ const DashboardHeader = () => {
         <div className="py-3 px-2 sm:py-6 sm:px-0">
           <h2 className="text-lg sm:text-2xl lg:text-3xl font-bold text-center mb-2">Vox Radio Presenters Dashboard</h2>
           
-          {/* Current Program Display - Mobile First */}
+          {/* LIVE NOW Banner with ARIA accessibility */}
           {currentProgram && (
-            <div className="mt-2 px-2">
+            <div className="mt-2 px-2" role="status" aria-live="polite">
               <div className="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0 sm:space-x-3">
-                {/* Audio waves animation - smaller on mobile */}
-                <div className="flex items-center space-x-1">
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '8px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '12px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '10px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '14px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '11px', animationDelay: '400ms', animationDuration: '600ms'}}></div>
+                {/* Audio waves animation with pulsing dot */}
+                <div className="flex items-center space-x-2">
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                  <div className="flex items-center space-x-1">
+                    <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '8px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
+                    <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '12px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
+                    <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '10px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
+                    <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '14px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
+                    <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '11px', animationDelay: '400ms', animationDuration: '600ms'}}></div>
+                  </div>
                 </div>
                 
                 <div className="text-center">
@@ -207,30 +210,41 @@ const DashboardHeader = () => {
                     LIVE NOW: {currentProgram.Program.toUpperCase()}
                   </div>
                   <div className="text-xs sm:text-sm lg:text-base text-orange-100 font-medium mt-1">
-                    with {currentProgram['Presenter(s)'] || 'Various'}
+                    — {currentProgram['Presenter(s)'] || 'Various'}
                   </div>
-                  <div className="text-xs sm:text-sm text-orange-200 mt-1">
-                    {currentProgram['Time (24h)']}
+                  <div className="text-xs sm:text-sm text-orange-200 mt-1" title={`Full time: ${currentProgram['Time (24h)']} Africa/Monrovia`}>
+                    {currentProgram['Time (24h)']} GMT
                   </div>
                 </div>
                 
-                {/* Audio waves animation - smaller on mobile */}
-                <div className="flex items-center space-x-1">
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '11px', animationDelay: '500ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '14px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '10px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '12px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
-                  <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '8px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
+                {/* Audio waves animation with pulsing dot */}
+                <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-1">
+                    <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '11px', animationDelay: '500ms', animationDuration: '600ms'}}></div>
+                    <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '14px', animationDelay: '0ms', animationDuration: '600ms'}}></div>
+                    <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '10px', animationDelay: '100ms', animationDuration: '600ms'}}></div>
+                    <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '12px', animationDelay: '200ms', animationDuration: '600ms'}}></div>
+                    <div className="w-1 bg-yellow-300 rounded-full animate-pulse" style={{height: '8px', animationDelay: '300ms', animationDuration: '600ms'}}></div>
+                  </div>
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Next Program Display - Mobile First */}
+          {/* NEXT UP Display with Countdown */}
           {nextProgram && (
             <div className="mt-3 px-2 text-center">
               <div className="text-xs sm:text-sm font-medium text-orange-200">
-                NEXT PROGRAM: {nextProgram.Program} with {nextProgram['Presenter(s)'] || 'Various'} | {nextProgram['Time (24h)']}
+                NEXT UP: {nextProgram.Program} with {nextProgram['Presenter(s)'] || 'Various'}
+              </div>
+              <div className="text-xs text-orange-300 mt-1" title={`Starts at ${nextProgram['Time (24h)']} Africa/Monrovia`}>
+                {nextProgram['Time (24h)']} GMT
+                {countdown && countdown.formatted !== 'Starting now' && (
+                  <span className="ml-2 bg-orange-200 text-orange-800 px-2 py-0.5 rounded-full text-xs font-bold">
+                    in {countdown.formatted}
+                  </span>
+                )}
               </div>
             </div>
           )}
