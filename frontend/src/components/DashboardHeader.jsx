@@ -249,10 +249,19 @@ const DashboardHeader = () => {
             </div>
           )}
 
-          {/* Current Time Display */}
+          {/* Current Time Display with Sync Status */}
           <div className="mt-2 text-center">
             <div className="text-xs sm:text-sm text-orange-200">
               Current Liberia Time: {formatLiberiaTime}
+              {isServerTimeSynced && (
+                <span className="ml-2 text-green-300 text-xs">● Synced</span>
+              )}
+              {!isServerTimeSynced && (
+                <span className="ml-2 text-yellow-300 text-xs">○ Local</span>
+              )}
+            </div>
+            <div className="text-xs text-orange-300 mt-1">
+              All times shown in {TIME_CONFIG.LABEL_TZ} (Africa/Monrovia)
             </div>
           </div>
         </div>
