@@ -22,7 +22,7 @@ const programScheduleData = [
   { Day: 'MONDAY', 'Time (24h)': '04:30-05:00', Program: 'Thru the Bible', 'Presenter(s)': 'Dr. J. Vernon McGee', timeSlot: 4.5, duration: 0.5 },
   { Day: 'MONDAY', 'Time (24h)': '05:00-08:00', Program: 'The Quiet Storm', 'Presenter(s)': 'New Life Africa', timeSlot: 5, duration: 3 },
   { Day: 'MONDAY', 'Time (24h)': '08:00-09:00', Program: 'Good Shepherd Fellowship', 'Presenter(s)': 'Bishop Thomas', timeSlot: 8, duration: 1 },
-  { Day: 'MONDAY', 'Time (24h)': '09:00-10:00', Program: 'Living Word', 'Presenter(s)': 'Pastor Mensa', timeSlot: 9, duration: 1 },
+  { Day: 'MONDAY', 'Time (24h)': '09:00-10:00', Program: 'Living Word', 'Presenter(s)': 'Dr Mensah Otabil', timeSlot: 9, duration: 1 },
   { Day: 'MONDAY', 'Time (24h)': '10:00-10:10', Program: 'Jingles and Music', 'Presenter(s)': 'Deddeh Gayflor', timeSlot: 10, duration: 0.17 },
   { Day: 'MONDAY', 'Time (24h)': '10:10-10:20', Program: 'Announcement', 'Presenter(s)': 'Deddeh Gayflor', timeSlot: 10.17, duration: 0.17 },
   { Day: 'MONDAY', 'Time (24h)': '10:20-10:45', Program: 'Back To The Bible', 'Presenter(s)': 'Various', timeSlot: 10.33, duration: 0.42 },
