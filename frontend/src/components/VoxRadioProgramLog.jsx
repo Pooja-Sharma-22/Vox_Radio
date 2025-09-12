@@ -517,10 +517,10 @@ const VoxRadioProgramLog = ({ isFullPage = false }) => {
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center">
-                        {isCurrentProgram && (
+                        {isProgramLive(program) && (
                           <div className="flex items-center mr-2">
-                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></div>
-                            <span className="text-xs bg-green-500 text-white px-2 py-1 rounded-full font-bold">
+                            <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse mr-2"></div>
+                            <span className="text-xs bg-red-500 text-white px-2 py-1 rounded-full font-bold">
                               LIVE
                             </span>
                           </div>
