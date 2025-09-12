@@ -395,20 +395,74 @@ const VoxRadioProgramLog = ({ isFullPage = false }) => {
         </div>
       </div>
 
-      {/* Upcoming Programs */}
-      {upcomingPrograms.length > 0 && (
-        <div className="bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg p-4 mb-6 border border-orange-200">
-          <h3 className="font-semibold text-orange-900 mb-3 flex items-center">
-            <Clock size={20} className="mr-2" />
-            Upcoming Programs
+      {/* LIVE NOW and Upcoming Programs */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6">
+        {/* Current Program - LIVE NOW */}
+        {currentProgram && (
+          <div className="bg-gradient-to-r from-red-50 to-red-100 rounded-lg p-4 border border-red-200">
+            <div className="flex items-center mb-3" role="status" aria-live="polite">
+              <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse mr-2"></div>
+              <h3 className="font-bold text-red-900 text-lg">LIVE NOW</h3>
+            </div>
+            <div className="bg-white rounded-lg p-3 border border-red-200">
+              <div className="font-bold text-gray-900 text-lg">{currentProgram.Program}</div>
+              <div className="text-sm text-gray-600 mt-1">— {currentProgram['Presenter(s)']}</div>
+              <div className="text-xs text-red-600 mt-2" title={`Full schedule: ${formatMonroviaFull(new Date())}`}>
+                {currentProgram.Day} • {currentProgram['Time (24h)']} GMT
+              </div>
+              {currentProgram.Category && (
+                <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium mt-2 ${getCategoryColor(currentProgram.Category)}`}>
+                  {currentProgram.Category}
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Next Program with Countdown */}
+        {nextProgram && (
+          <div className="bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg p-4 border border-orange-200">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-semibold text-orange-900 flex items-center">
+                <Clock size={20} className="mr-2" />
+                NEXT UP
+              </h3>
+              {countdown && countdown.formatted !== 'Starting now' && (
+                <span className="bg-orange-200 text-orange-800 px-2 py-1 rounded-full text-xs font-bold">
+                  in {countdown.formatted}
+                </span>
+              )}
+            </div>
+            <div className="bg-white rounded-lg p-3 border border-orange-200">
+              <div className="font-medium text-gray-900">{nextProgram.Program}</div>
+              <div className="text-sm text-gray-600 mt-1">— {nextProgram['Presenter(s)']}</div>
+              <div className="text-xs text-orange-600 mt-2" title={`Starts at ${nextProgram['Time (24h)']} Africa/Monrovia`}>
+                {nextProgram.Day} • {nextProgram['Time (24h)']} GMT
+              </div>
+              {nextProgram.Category && (
+                <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium mt-2 ${getCategoryColor(nextProgram.Category)}`}>
+                  {nextProgram.Category}
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Additional Upcoming Programs */}
+      {upcomingPrograms.length > 1 && (
+        <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-4 mb-6 border border-blue-200">
+          <h3 className="font-semibold text-blue-900 mb-3 flex items-center">
+            <Calendar size={20} className="mr-2" />
+            Coming Up Later
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {upcomingPrograms.map((program, index) => (
-              <div key={index} className="bg-white rounded-lg p-3 border border-orange-200">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {upcomingPrograms.slice(1).map((program, index) => (
+              <div key={index} className="bg-white rounded-lg p-3 border border-blue-200">
                 <div className="font-medium text-gray-900">{program.Program}</div>
                 <div className="text-sm text-gray-600">{program['Presenter(s)']}</div>
-                <div className="text-xs text-orange-600 mt-1">
-                  {program.Day} • {program['Time (24h)']}
+                <div className="text-xs text-blue-600 mt-1" title={`Starts at ${program['Time (24h)']} Africa/Monrovia`}>
+                  {program.Day} • {program['Time (24h)']} GMT
                 </div>
                 {program.Category && (
                   <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium mt-2 ${getCategoryColor(program.Category)}`}>
