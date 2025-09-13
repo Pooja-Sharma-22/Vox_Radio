@@ -13,6 +13,55 @@ const CurrentWeather = () => {
   const [serverTimeOffset, setServerTimeOffset] = useState(0);
   const [isServerTimeSynced, setIsServerTimeSynced] = useState(false);
 
+  // Backend URL from environment
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+
+  // Sync with server time on mount
+  useEffect(() => {
+    const syncServerTime = async () => {
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/server-time`);
+        if (response.ok) {
+          const serverTime = await response.json();
+          const serverUTC = new Date(serverTime.utc);
+          const clientUTC = new Date();
+          const offset = serverUTC.getTime() - clientUTC.getTime();
+          
+          setServerTimeOffset(offset);
+          setIsServerTimeSynced(true);
+          console.log('Weather page: Server time synced, offset:', offset, 'ms');
+        } else {
+          console.warn('Weather page: Failed to sync server time, using client time');
+          setIsServerTimeSynced(false);
+        }
+      } catch (error) {
+        console.warn('Weather page: Server time sync failed:', error.message);
+        setIsServerTimeSynced(false);
+      }
+    };
+
+    syncServerTime();
+  }, [BACKEND_URL]);
+
+  // Update Liberia time every minute
+  useEffect(() => {
+    const updateLiberiaTime = () => {
+      const now = nowMonrovia();
+      if (isServerTimeSynced) {
+        now.setTime(now.getTime() + serverTimeOffset);
+      }
+      setCurrentLiberiaTime(now);
+    };
+
+    // Update immediately
+    updateLiberiaTime();
+
+    // Then update every minute
+    const timer = setInterval(updateLiberiaTime, 60000);
+
+    return () => clearInterval(timer);
+  }, [serverTimeOffset, isServerTimeSynced]);
+
   // Calculate next rotation time - stable function
   const calculateNextRotation = () => {
     const now = new Date();
