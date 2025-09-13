@@ -3,6 +3,8 @@ import { Mic, Radio, Users, Copy, Check, ExternalLink, Shield, ChevronDown, Chev
 import { Button } from './ui/button';
 import VDONinjaStudio from './VDONinjaStudio';
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+
 const CleanfeedStudio = () => {
   const [passwordCopied, setPasswordCopied] = useState(false);
   const [guestLinkCopied, setGuestLinkCopied] = useState(false);
