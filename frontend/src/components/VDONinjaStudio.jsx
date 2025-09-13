@@ -25,8 +25,6 @@ const VDONinjaStudio = () => {
     levelsOK: false
   });
 
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
-
   // Load VDO.Ninja settings on component mount
   useEffect(() => {
     const loadSettings = async () => {
