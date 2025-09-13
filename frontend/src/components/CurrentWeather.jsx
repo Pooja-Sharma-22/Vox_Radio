@@ -9,6 +9,9 @@ const CurrentWeather = () => {
   const [weatherData, setWeatherData] = useState(getCurrentWeatherData());
   const [lastUpdate, setLastUpdate] = useState(new Date());
   const [nextRotation, setNextRotation] = useState('');
+  const [currentLiberiaTime, setCurrentLiberiaTime] = useState(new Date());
+  const [serverTimeOffset, setServerTimeOffset] = useState(0);
+  const [isServerTimeSynced, setIsServerTimeSynced] = useState(false);
 
   // Calculate next rotation time - stable function
   const calculateNextRotation = () => {
