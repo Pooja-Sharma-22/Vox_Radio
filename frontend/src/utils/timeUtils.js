@@ -1,4 +1,4 @@
-import { TIME_CONFIG, DEV_CONFIG } from '../config/timeConfig.js';
+import { TIME_CONFIG, DEV_CONFIG } from '../config/timeConfig';
 
 /**
  * Get current time in Monrovia timezone
