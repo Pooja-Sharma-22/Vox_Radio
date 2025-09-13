@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Save, ExternalLink, Shield, AlertCircle, Check } from 'lucide-react';
 import { Button } from './ui/button';
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+
 const CleanfeedSettings = () => {
   const [settings, setSettings] = useState({
     cleanfeedGuestUrl: 'https://cleanfeed.net/k?iUc5ijKCFYUj',
@@ -22,8 +24,6 @@ const CleanfeedSettings = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [saveStatus, setSaveStatus] = useState('');
   const [showSecrets, setShowSecrets] = useState(false);
-
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
   // Load settings on component mount
   useEffect(() => {
