@@ -231,22 +231,26 @@ const CleanfeedStudio = () => {
           <ol className="space-y-3 text-sm text-gray-600">
             <li className="flex items-start">
               <div className="w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">1</div>
-              <span>Click "Launch Cleanfeed Studio" button above</span>
+              <span>Click "Launch in Google Chrome" button above</span>
             </li>
             <li className="flex items-start">
               <div className="w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">2</div>
-              <span>Enter the studio password when prompted</span>
+              <span>If not in Chrome, copy the URL and paste it in Chrome</span>
             </li>
             <li className="flex items-start">
               <div className="w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">3</div>
-              <span>Allow microphone access in your browser</span>
+              <span>Enter the studio password when prompted</span>
             </li>
             <li className="flex items-start">
               <div className="w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">4</div>
-              <span>Share the studio link with remote guests</span>
+              <span>Allow microphone access in Chrome</span>
             </li>
             <li className="flex items-start">
               <div className="w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">5</div>
+              <span>Share the studio link with remote guests</span>
+            </li>
+            <li className="flex items-start">
+              <div className="w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mr-3 mt-0.5">6</div>
               <span>Start your professional broadcast!</span>
             </li>
           </ol>
