@@ -101,8 +101,20 @@ const CurrentWeather = () => {
   useEffect(() => {
     const updateWeatherData = () => {
       const newData = getCurrentWeatherData();
-      setWeatherData(newData);
-      setLastUpdate(new Date());
+      // Update timestamps to Liberia time
+      const liberiaTimestamp = nowMonrovia();
+      if (isServerTimeSynced) {
+        liberiaTimestamp.setTime(liberiaTimestamp.getTime() + serverTimeOffset);
+      }
+      
+      // Update all weather data with Liberia timestamp
+      const updatedData = newData.map(weather => ({
+        ...weather,
+        updated: formatMonroviaFull(liberiaTimestamp)
+      }));
+      
+      setWeatherData(updatedData);
+      setLastUpdate(liberiaTimestamp);
       setNextRotation(calculateNextRotation());
     };
 
