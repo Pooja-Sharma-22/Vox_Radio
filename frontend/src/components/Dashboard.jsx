@@ -47,8 +47,6 @@ const Dashboard = () => {
         return <VoxRadioProgramLog />;
       case 'cleanfeed':
         return <CleanfeedStudio />;
-      case 'settings':
-        return <CleanfeedSettings />;
       case 'whatsapp':
         return <WhatsAppSection />;
       case 'submit-testimony':
