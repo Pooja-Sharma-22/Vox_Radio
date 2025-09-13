@@ -33,6 +33,9 @@ const liberianForecastData = [
 const WeatherForecast = () => {
   const [forecastData, setForecastData] = useState(liberianForecastData);
   const [forecastLastUpdate, setForecastLastUpdate] = useState(new Date());
+  const [currentLiberiaTime, setCurrentLiberiaTime] = useState(new Date());
+  const [serverTimeOffset, setServerTimeOffset] = useState(0);
+  const [isServerTimeSynced, setIsServerTimeSynced] = useState(false);
 
   // Calculate next forecast update time
   const calculateNextForecastUpdate = () => {
