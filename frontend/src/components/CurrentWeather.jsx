@@ -5,6 +5,8 @@ import { Button } from './ui/button';
 import { formatMonrovia, formatMonroviaFull, nowMonrovia } from '../utils/timeUtils';
 import { TIME_CONFIG } from '../config/timeConfig';
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+
 const CurrentWeather = () => {
   const [weatherData, setWeatherData] = useState(getCurrentWeatherData());
   const [lastUpdate, setLastUpdate] = useState(new Date());
@@ -12,9 +14,6 @@ const CurrentWeather = () => {
   const [currentLiberiaTime, setCurrentLiberiaTime] = useState(new Date());
   const [serverTimeOffset, setServerTimeOffset] = useState(0);
   const [isServerTimeSynced, setIsServerTimeSynced] = useState(false);
-
-  // Backend URL from environment
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
   // Sync with server time on mount
   useEffect(() => {
