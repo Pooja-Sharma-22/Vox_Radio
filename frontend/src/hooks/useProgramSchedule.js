@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
-import { TIME_CONFIG } from '../config/timeConfig.js';
+import { TIME_CONFIG } from '../config/timeConfig';
 import { 
   nowMonrovia, 
   isLiveNow, 
   getNextProgram, 
   getCountdownMinutes,
   formatCountdown 
-} from '../utils/timeUtils.js';
+} from '../utils/timeUtils';
 
 // Backend URL from environment
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
