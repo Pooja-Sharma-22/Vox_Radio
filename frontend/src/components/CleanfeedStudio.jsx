@@ -175,15 +175,21 @@ const CleanfeedStudio = () => {
           {isLoading ? (
             <>
               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-              Opening Studio...
+              Opening in Chrome...
             </>
           ) : (
             <>
               <Mic className="mr-2" size={20} />
-              Launch Cleanfeed Studio
+              Launch in Google Chrome
             </>
           )}
         </Button>
+        
+        <div className="mt-3 text-center">
+          <p className="text-xs text-gray-500">
+            Opens in Google Chrome for optimal Cleanfeed experience
+          </p>
+        </div>
       </div>
 
       {/* Features & Instructions */}
