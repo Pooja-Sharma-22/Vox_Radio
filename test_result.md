@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Fix frontend compilation error, implement scrolling marquee for program information in header, and complete the simplification of live program display with animated audio waves."
+user_problem_statement: "Remove settings tab and implement VDO.Ninja integration for remote broadcast with director/guest links, audio parameters, and presenter instructions."
 
 frontend:
   - task: "Fix frontend compilation error in FullPageSchedule.jsx"
