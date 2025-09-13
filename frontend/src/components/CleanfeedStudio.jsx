@@ -257,8 +257,28 @@ const CleanfeedStudio = () => {
         </div>
       </div>
 
+      {/* Chrome Recommendation */}
+      <div className="mt-6 bg-blue-50 border-l-4 border-blue-400 p-4">
+        <div className="flex">
+          <div className="ml-3">
+            <h3 className="text-sm font-medium text-blue-800">🌐 Browser Recommendation</h3>
+            <div className="mt-2 text-sm text-blue-700">
+              <p className="mb-2">
+                <strong>Google Chrome is strongly recommended</strong> for the best Cleanfeed experience.
+              </p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Optimized audio quality and low latency</li>
+                <li>Better WebRTC performance for real-time communication</li>
+                <li>Reliable microphone and camera access</li>
+                <li>Cleanfeed's preferred browser for professional broadcasting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Tips */}
-      <div className="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4">
+      <div className="mt-4 bg-yellow-50 border-l-4 border-yellow-400 p-4">
         <div className="flex">
           <div className="ml-3">
             <h3 className="text-sm font-medium text-yellow-800">Pro Tips</h3>
@@ -268,6 +288,7 @@ const CleanfeedStudio = () => {
                 <li>Test your setup before going live</li>
                 <li>Keep the studio window open during broadcasts</li>
                 <li>Share the password securely with guests only</li>
+                <li>Set Chrome as your default browser for one-click access</li>
               </ul>
             </div>
           </div>
