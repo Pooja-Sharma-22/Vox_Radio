@@ -92,6 +92,19 @@ const Navigation = () => {
                 </>
               )}
             </Button>
+
+            <Button
+              onClick={openCleanfeedStudio}
+              className="
+                bg-gradient-to-r from-blue-500 to-blue-600 
+                hover:from-blue-600 hover:to-blue-700 
+                text-white font-bold py-2 px-4 rounded-lg
+                transform transition-all duration-200 hover:scale-105 hover:shadow-lg
+              "
+            >
+              <Mic className="mr-2" size={20} />
+              Studio
+            </Button>
             
             {isRadioPlaying && (
               <div className="text-xs text-orange-400 animate-bounce hidden sm:block">
