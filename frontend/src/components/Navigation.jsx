@@ -10,6 +10,20 @@ const Navigation = () => {
   const openRadioStream = () => {
     const radioUrl = process.env.REACT_APP_RADIO_STREAM_URL || 'https://radio.galcom.org/?station=VOXRadio';
     
+    const streamWindow = window.open(
+      radioUrl,
+      'VoxRadioStream',
+      'width=400,height=600,scrollbars=yes,resizable=yes'
+    );
+    
+    if (streamWindow) {
+      streamWindow.focus();
+    }
+  };
+
+  const openCleanfeedStudio = () => {
+    const studioUrl = process.env.REACT_APP_CLEANFEED_STUDIO_URL || 'https://cleanfeed.net/studio?voxradiolib';
+    
     // Calculate center position for popup
     const screenWidth = window.screen.width;
     const screenHeight = window.screen.height;
