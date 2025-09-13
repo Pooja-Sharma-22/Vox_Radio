@@ -43,7 +43,7 @@ const CleanfeedStudio = () => {
     };
 
     loadSettings();
-  }, [BACKEND_URL]);
+  }, []); // Remove BACKEND_URL from dependency array since it's constant
 
   const openCleanfeedStudio = () => {
     setIsLoading(true);
