@@ -12,16 +12,67 @@ const CleanfeedStudio = () => {
   const openCleanfeedStudio = () => {
     setIsLoading(true);
     
-    // Open Cleanfeed Studio in a new window
-    const studioWindow = window.open(
-      studioUrl,
-      'CleanfeedStudio',
-      'width=1200,height=800,scrollbars=yes,resizable=yes,status=yes,menubar=no,toolbar=no'
-    );
+    // Try to open in Chrome specifically
+    const openInChrome = () => {
+      // Method 1: Try Chrome protocol (works on some systems)
+      try {
+        window.location.href = `googlechrome://${studioUrl}`;
+        return true;
+      } catch (error) {
+        console.log('Chrome protocol method failed:', error);
+        return false;
+      }
+    };
 
-    // Focus the new window
-    if (studioWindow) {
-      studioWindow.focus();
+    // Method 2: Use window.open with Chrome-optimized parameters
+    const openWithWindowOpen = () => {
+      const studioWindow = window.open(
+        studioUrl,
+        'CleanfeedStudio',
+        'width=1200,height=800,scrollbars=yes,resizable=yes,status=yes,menubar=no,toolbar=no,location=yes'
+      );
+
+      if (studioWindow) {
+        studioWindow.focus();
+        return true;
+      }
+      return false;
+    };
+
+    // Method 3: Create a temporary link and click it (sometimes better for Chrome detection)
+    const openWithTempLink = () => {
+      const tempLink = document.createElement('a');
+      tempLink.href = studioUrl;
+      tempLink.target = '_blank';
+      tempLink.rel = 'noopener noreferrer';
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+      return true;
+    };
+
+    // Try methods in order of preference
+    let opened = false;
+    
+    // First try Chrome protocol
+    if (!opened) {
+      opened = openInChrome();
+    }
+    
+    // If that fails, try window.open
+    if (!opened) {
+      opened = openWithWindowOpen();
+    }
+    
+    // If that fails, use temp link method
+    if (!opened) {
+      opened = openWithTempLink();
+    }
+
+    // Show user instruction if we can't guarantee Chrome opening
+    if (opened) {
+      // Show a toast or notification about Chrome preference
+      console.log('Cleanfeed Studio opened - if not in Chrome, please copy the URL to Chrome for best experience');
     }
 
     // Reset loading state after a short delay
