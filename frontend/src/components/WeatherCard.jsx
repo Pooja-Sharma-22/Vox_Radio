@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent } from './ui/card';
 import { Thermometer, Droplets, Wind, CloudRain, Clock, Zap } from 'lucide-react';
+import { formatMonrovia, formatMonroviaFull } from '../utils/timeUtils';
 
 const WeatherCard = ({ weather }) => {
   const getRainColor = (probability) => {
