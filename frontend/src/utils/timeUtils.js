@@ -5,14 +5,19 @@ import { TIME_CONFIG, DEV_CONFIG } from '../config/timeConfig';
  * @returns {Date} Current time adjusted for Monrovia
  */
 export const nowMonrovia = () => {
-  const now = new Date();
-  
-  // Apply dev time offset if in simulation mode
-  if (DEV_CONFIG.SIMULATE_TIME) {
-    now.setMinutes(now.getMinutes() + DEV_CONFIG.TIME_OFFSET_MINUTES);
+  try {
+    const now = new Date();
+    
+    // Apply dev time offset if in simulation mode
+    if (DEV_CONFIG.SIMULATE_TIME) {
+      now.setMinutes(now.getMinutes() + DEV_CONFIG.TIME_OFFSET_MINUTES);
+    }
+    
+    return now;
+  } catch (error) {
+    console.error('Error in nowMonrovia:', error);
+    return new Date();
   }
-  
-  return now;
 };
 
 /**
