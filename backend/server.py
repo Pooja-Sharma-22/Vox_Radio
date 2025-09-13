@@ -99,6 +99,82 @@ async def get_server_time():
             "offset": "+00:00"
         }
 
+# Cleanfeed Settings Management
+@api_router.get("/cleanfeed-settings")
+async def get_cleanfeed_settings():
+    """Get Cleanfeed public settings (excludes secrets)"""
+    try:
+        if db is None:
+            return {
+                "cleanfeedGuestUrl": "https://cleanfeed.net/k?iUc5ijKCFYUj",
+                "presenterInstructions": """You're invited to join our live broadcast on Cleanfeed.
+1) Click this guest link: {{cleanfeedGuestUrl}}
+2) When the page opens, click "Start" and allow microphone access.
+3) Use headphones (no speakers) to avoid echo.
+4) Use Chrome or Edge on computer, or Safari on iPhone/iPad.
+5) If you see a waiting screen (Green Room), please wait to be admitted by the studio."""
+            }
+        
+        settings = await db.cleanfeed_settings.find_one({"type": "public"})
+        if not settings:
+            # Return defaults
+            return {
+                "cleanfeedGuestUrl": "https://cleanfeed.net/k?iUc5ijKCFYUj",
+                "presenterInstructions": """You're invited to join our live broadcast on Cleanfeed.
+1) Click this guest link: {{cleanfeedGuestUrl}}
+2) When the page opens, click "Start" and allow microphone access.
+3) Use headphones (no speakers) to avoid echo.
+4) Use Chrome or Edge on computer, or Safari on iPhone/iPad.
+5) If you see a waiting screen (Green Room), please wait to be admitted by the studio."""
+            }
+        
+        return {
+            "cleanfeedGuestUrl": settings.get("cleanfeedGuestUrl", "https://cleanfeed.net/k?iUc5ijKCFYUj"),
+            "presenterInstructions": settings.get("presenterInstructions", """You're invited to join our live broadcast on Cleanfeed.
+1) Click this guest link: {{cleanfeedGuestUrl}}
+2) When the page opens, click "Start" and allow microphone access.
+3) Use headphones (no speakers) to avoid echo.
+4) Use Chrome or Edge on computer, or Safari on iPhone/iPad.
+5) If you see a waiting screen (Green Room), please wait to be admitted by the studio.""")
+        }
+    except Exception as e:
+        logging.error(f"Error getting Cleanfeed settings: {e}")
+        return {
+            "cleanfeedGuestUrl": "https://cleanfeed.net/k?iUc5ijKCFYUj",
+            "presenterInstructions": """You're invited to join our live broadcast on Cleanfeed.
+1) Click this guest link: {{cleanfeedGuestUrl}}
+2) When the page opens, click "Start" and allow microphone access.
+3) Use headphones (no speakers) to avoid echo.
+4) Use Chrome or Edge on computer, or Safari on iPhone/iPad.
+5) If you see a waiting screen (Green Room), please wait to be admitted by the studio."""
+        }
+
+@api_router.post("/cleanfeed-settings")
+async def save_cleanfeed_settings(settings: dict):
+    """Save Cleanfeed settings (public only, secrets handled separately)"""
+    try:
+        if db is None:
+            return {"success": False, "error": "Database not available"}
+        
+        # Only save public settings
+        public_settings = {
+            "type": "public",
+            "cleanfeedGuestUrl": settings.get("cleanfeedGuestUrl", "https://cleanfeed.net/k?iUc5ijKCFYUj"),
+            "presenterInstructions": settings.get("presenterInstructions", ""),
+            "updated": datetime.utcnow().isoformat()
+        }
+        
+        await db.cleanfeed_settings.replace_one(
+            {"type": "public"},
+            public_settings,
+            upsert=True
+        )
+        
+        return {"success": True}
+    except Exception as e:
+        logging.error(f"Error saving Cleanfeed settings: {e}")
+        return {"success": False, "error": str(e)}
+
 @api_router.post("/status", response_model=StatusCheck)
 async def create_status_check(input: StatusCheckCreate):
     try:
