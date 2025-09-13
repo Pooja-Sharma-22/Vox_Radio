@@ -27,12 +27,22 @@ export const nowMonrovia = () => {
  * @returns {string} Formatted time string
  */
 export const formatMonrovia = (dateOrIso, includeLabel = true) => {
-  const date = typeof dateOrIso === 'string' ? new Date(dateOrIso) : dateOrIso;
-  
-  const formatter = new Intl.DateTimeFormat('en-US', TIME_CONFIG.MONROVIA_FORMAT_OPTIONS);
-  const timeString = formatter.format(date);
-  
-  return includeLabel ? `${timeString} ${TIME_CONFIG.LABEL_TZ}` : timeString;
+  try {
+    const date = typeof dateOrIso === 'string' ? new Date(dateOrIso) : dateOrIso;
+    
+    if (!date || isNaN(date.getTime())) {
+      console.warn('Invalid date provided to formatMonrovia:', dateOrIso);
+      return includeLabel ? `--:-- ${TIME_CONFIG.LABEL_TZ}` : '--:--';
+    }
+    
+    const formatter = new Intl.DateTimeFormat('en-US', TIME_CONFIG.MONROVIA_FORMAT_OPTIONS);
+    const timeString = formatter.format(date);
+    
+    return includeLabel ? `${timeString} ${TIME_CONFIG.LABEL_TZ}` : timeString;
+  } catch (error) {
+    console.error('Error in formatMonrovia:', error);
+    return includeLabel ? `--:-- ${TIME_CONFIG.LABEL_TZ}` : '--:--';
+  }
 };
 
 /**
