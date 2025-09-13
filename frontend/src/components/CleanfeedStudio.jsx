@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Mic, Radio, Users, Copy, Check, ExternalLink, Shield, ChevronDown, ChevronUp, Settings, Share, Mail, MessageCircle, X, HelpCircle } from 'lucide-react';
 import { Button } from './ui/button';
+import VDONinjaStudio from './VDONinjaStudio';
 
 const CleanfeedStudio = () => {
   const [passwordCopied, setPasswordCopied] = useState(false);
