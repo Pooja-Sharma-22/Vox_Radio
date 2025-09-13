@@ -24,50 +24,14 @@ const Navigation = () => {
   const openCleanfeedStudio = () => {
     const studioUrl = process.env.REACT_APP_CLEANFEED_STUDIO_URL || 'https://cleanfeed.net/studio?voxradiolib';
     
-    // Calculate center position for popup
-    const screenWidth = window.screen.width;
-    const screenHeight = window.screen.height;
-    const popupWidth = Math.min(400, screenWidth - 40);
-    const popupHeight = Math.min(300, screenHeight - 40);
-    const left = (screenWidth - popupWidth) / 2;
-    const top = (screenHeight - popupHeight) / 2;
-    
-    // Open popup with specific features for radio streaming
-    const radioWindow = window.open(
-      radioUrl,
-      'VoxRadioStream',
-      `
-        width=${popupWidth},
-        height=${popupHeight},
-        left=${left},
-        top=${top},
-        scrollbars=no,
-        resizable=yes,
-        toolbar=no,
-        menubar=no,
-        location=no,
-        directories=no,
-        status=yes,
-        copyhistory=no
-      `.replace(/\s/g, '')
+    const studioWindow = window.open(
+      studioUrl,
+      'CleanfeedStudio',
+      'width=1200,height=800,scrollbars=yes,resizable=yes,status=yes,menubar=no,toolbar=no'
     );
-    
-    if (radioWindow) {
-      setIsRadioPlaying(true);
-      
-      // Check if window is closed to update button state
-      const checkClosed = setInterval(() => {
-        if (radioWindow.closed) {
-          setIsRadioPlaying(false);
-          clearInterval(checkClosed);
-        }
-      }, 1000);
-      
-      // Focus the popup window
-      radioWindow.focus();
-    } else {
-      // Fallback if popup is blocked
-      alert('Please allow popups for this site to listen to Vox Radio live stream');
+
+    if (studioWindow) {
+      studioWindow.focus();
     }
   };
 
