@@ -42,7 +42,7 @@ const CleanfeedSettings = () => {
     };
 
     loadSettings();
-  }, [BACKEND_URL]);
+  }, []); // Remove BACKEND_URL from dependency array since it's constant
 
   const handleSettingsChange = (field, value) => {
     setSettings(prev => ({
