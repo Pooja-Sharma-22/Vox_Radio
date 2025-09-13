@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Mic, Radio, Users, Copy, Check, ExternalLink, Shield } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Mic, Radio, Users, Copy, Check, ExternalLink, Shield, ChevronDown, ChevronUp, Settings, Share, Mail, MessageCircle } from 'lucide-react';
 import { Button } from './ui/button';
 
 const CleanfeedStudio = () => {
