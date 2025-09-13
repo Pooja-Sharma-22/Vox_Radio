@@ -132,16 +132,24 @@ const CleanfeedStudio = () => {
   );
 
   return (
-    <div className="p-3 sm:p-6">
-      <div className="mb-6">
-        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 flex items-center">
-          <Mic className="mr-3 text-blue-600" size={28} />
-          Remote Broadcast (Cleanfeed)
-        </h2>
-        <p className="text-sm sm:text-base text-gray-600">
-          Professional remote broadcast studio for interviews and live shows
-        </p>
-      </div>
+    <div className="space-y-8">
+      {/* VDO.Ninja Integration */}
+      <VDONinjaStudio />
+      
+      {/* Divider */}
+      <div className="border-t border-gray-300"></div>
+      
+      {/* Cleanfeed Integration (existing) */}
+      <div className="p-3 sm:p-6">
+        <div className="mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 flex items-center">
+            <Mic className="mr-3 text-blue-600" size={28} />
+            Remote Broadcast (Cleanfeed)
+          </h2>
+          <p className="text-sm sm:text-base text-gray-600">
+            Professional remote broadcast studio for interviews and live shows
+          </p>
+        </div>
 
       {/* Main Studio Controls */}
       <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-4 sm:p-6 mb-6 border border-blue-200">
