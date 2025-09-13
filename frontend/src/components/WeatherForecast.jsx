@@ -65,7 +65,7 @@ const WeatherForecast = () => {
     };
 
     syncServerTime();
-  }, [BACKEND_URL]);
+  }, []); // Remove BACKEND_URL from dependency array since it's constant
 
   // Update Liberia time every minute
   useEffect(() => {
