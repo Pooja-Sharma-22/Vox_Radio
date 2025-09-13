@@ -105,62 +105,66 @@
 user_problem_statement: "Remove settings tab and implement VDO.Ninja integration for remote broadcast with director/guest links, audio parameters, and presenter instructions."
 
 frontend:
-  - task: "Fix frontend compilation error in FullPageSchedule.jsx"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/components/FullPageSchedule.jsx"
+  - task: "Remove settings tab from TabNavigation.jsx"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/TabNavigation.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-        -working: true
+        -working: "NA"
         -agent: "main"
-        -comment: "Successfully fixed import error by replacing deleted EnhancedProgramSchedule import with VoxRadioProgramLog component. Application now compiles and loads successfully."
+        -comment: "Need to remove the settings tab from tab navigation as requested by user"
 
-  - task: "Implement scrolling marquee for program information"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/components/DashboardHeader.jsx"
-    stuck_count: 0
-    priority: "high" 
-    needs_retesting: false
-    status_history:
-        -working: true
-        -agent: "main"
-        -comment: "Successfully implemented scrolling marquee showing complete program schedule information at bottom of header. Includes CSS animations in index.css with 60s linear infinite scroll displaying all programs with day, time, program name, and presenter details."
-        -working: true
-        -agent: "testing"
-        -comment: "✅ VERIFIED: Scrolling marquee is visible and working perfectly. Contains complete program schedule data (7916 characters) with all expected program information including SUNDAY, MONDAY, Music, and presenter details. Animation works smoothly on both desktop and mobile viewports."
-
-  - task: "Simplify live program display with animated audio waves"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/components/DashboardHeader.jsx"
+  - task: "Remove CleanfeedSettings from Dashboard.jsx"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/Dashboard.jsx"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
-        -working: true
+        -working: "NA"
         -agent: "main"
-        -comment: "Successfully simplified LIVE NOW display with animated audio wave bars on both sides. Removed green banner styling and replaced with yellow animated pulse bars that create a professional audio visualization effect."
-        -working: true
-        -agent: "testing"
-        -comment: "✅ VERIFIED: LIVE NOW section displays perfectly with 10 animated audio wave bars (yellow bg-yellow-300 with animate-pulse). Shows current program 'INTERNATIONAL KAPOA SECURE LIBERIA with Maxim Somah | 00:30-04:30'. Animation works on both desktop and mobile (390x844). Professional audio visualization effect achieved."
+        -comment: "Need to remove CleanfeedSettings component import and switch case from Dashboard"
 
-  - task: "Display NEXT PROGRAM information at top of header"
-    implemented: true
-    working: true
-    file: "/app/frontend/src/components/DashboardHeader.jsx"
+  - task: "Create VDONinjaStudio.jsx component"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/VDONinjaStudio.jsx"
     stuck_count: 0
-    priority: "medium"
-    needs_retesting: false
+    priority: "high"
+    needs_retesting: true
     status_history:
-        -working: true
+        -working: "NA"
         -agent: "main"
-        -comment: "Successfully implemented NEXT PROGRAM display showing upcoming program name, presenter, and time slot. Updates dynamically based on current time and program schedule from database."
-        -working: true
-        -agent: "testing"
-        -comment: "✅ VERIFIED: NEXT PROGRAM information displays correctly showing 'The Quiet Storm with New Life Africa | 05:00-08:00'. Updates dynamically based on current Liberia time (03:56:13AM displayed correctly). Real-time update mechanism working with 5-second intervals."
+        -comment: "Need to create new VDO.Ninja studio component with director/guest links, audio parameters, and presenter instructions"
+
+  - task: "Integrate VDO.Ninja into Studio tab"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/components/CleanfeedStudio.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Need to add VDO.Ninja integration card to the existing Studio tab alongside Cleanfeed"
+
+backend:
+  - task: "Create VDO.Ninja settings endpoints"
+    implemented: false
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Need to create GET and POST endpoints for VDO.Ninja settings management including director/guest URLs and audio parameters"
 
 metadata:
   created_by: "main_agent"
