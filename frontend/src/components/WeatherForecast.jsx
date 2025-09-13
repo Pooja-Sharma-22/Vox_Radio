@@ -37,9 +37,59 @@ const WeatherForecast = () => {
   const [serverTimeOffset, setServerTimeOffset] = useState(0);
   const [isServerTimeSynced, setIsServerTimeSynced] = useState(false);
 
-  // Calculate next forecast update time
+  // Backend URL from environment
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+
+  // Sync with server time on mount
+  useEffect(() => {
+    const syncServerTime = async () => {
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/server-time`);
+        if (response.ok) {
+          const serverTime = await response.json();
+          const serverUTC = new Date(serverTime.utc);
+          const clientUTC = new Date();
+          const offset = serverUTC.getTime() - clientUTC.getTime();
+          
+          setServerTimeOffset(offset);
+          setIsServerTimeSynced(true);
+          console.log('Weather forecast: Server time synced, offset:', offset, 'ms');
+        } else {
+          console.warn('Weather forecast: Failed to sync server time, using client time');
+          setIsServerTimeSynced(false);
+        }
+      } catch (error) {
+        console.warn('Weather forecast: Server time sync failed:', error.message);
+        setIsServerTimeSynced(false);
+      }
+    };
+
+    syncServerTime();
+  }, [BACKEND_URL]);
+
+  // Update Liberia time every minute
+  useEffect(() => {
+    const updateLiberiaTime = () => {
+      const now = nowMonrovia();
+      if (isServerTimeSynced) {
+        now.setTime(now.getTime() + serverTimeOffset);
+      }
+      setCurrentLiberiaTime(now);
+    };
+
+    updateLiberiaTime();
+    const timer = setInterval(updateLiberiaTime, 60000);
+
+    return () => clearInterval(timer);
+  }, [serverTimeOffset, isServerTimeSynced]);
+
+  // Calculate next forecast update time in Liberia time
   const calculateNextForecastUpdate = () => {
-    const now = new Date();
+    const now = nowMonrovia();
+    if (isServerTimeSynced) {
+      now.setTime(now.getTime() + serverTimeOffset);
+    }
+    
     const minutes = now.getMinutes();
     const nextUpdateMinute = Math.ceil((minutes + 1) / 30) * 30;
     const nextUpdateTime = new Date(now);
@@ -52,7 +102,7 @@ const WeatherForecast = () => {
     }
     
     nextUpdateTime.setSeconds(0);
-    return nextUpdateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return formatMonrovia(nextUpdateTime, false);
   };
 
   // Generate updated forecast data with slight variations
