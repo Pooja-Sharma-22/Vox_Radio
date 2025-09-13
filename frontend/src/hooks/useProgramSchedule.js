@@ -19,6 +19,20 @@ export const useProgramSchedule = (programScheduleData) => {
   const [serverTimeOffset, setServerTimeOffset] = useState(0);
   const [isServerTimeSynced, setIsServerTimeSynced] = useState(false);
 
+  // Safety check for programScheduleData
+  if (!programScheduleData || !Array.isArray(programScheduleData)) {
+    console.warn('useProgramSchedule: Invalid or missing programScheduleData');
+    return {
+      currentProgram: null,
+      nextProgram: null,
+      countdown: null,
+      isProgramLive: () => false,
+      currentTime: new Date(),
+      isServerTimeSynced: false,
+      serverTimeOffset: 0
+    };
+  }
+
   // Sync with server time on mount
   useEffect(() => {
     const syncServerTime = async () => {
