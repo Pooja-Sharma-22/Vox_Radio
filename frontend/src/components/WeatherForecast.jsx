@@ -39,9 +39,6 @@ const WeatherForecast = () => {
   const [serverTimeOffset, setServerTimeOffset] = useState(0);
   const [isServerTimeSynced, setIsServerTimeSynced] = useState(false);
 
-  // Backend URL from environment
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
-
   // Sync with server time on mount
   useEffect(() => {
     const syncServerTime = async () => {
