@@ -40,7 +40,7 @@ const VDONinjaStudio = () => {
     };
 
     loadSettings();
-  }, [BACKEND_URL]);
+  }, []); // Remove BACKEND_URL from dependency array since it's constant
 
   // Compose URLs with parameters
   const composeUrls = () => {
