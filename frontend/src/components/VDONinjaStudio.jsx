@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Mic, Radio, Users, Copy, Check, ExternalLink, Shield, ChevronDown, ChevronUp, Settings, Share, Mail, MessageCircle, X, HelpCircle, Volume2 } from 'lucide-react';
 import { Button } from './ui/button';
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+
 const VDONinjaStudio = () => {
   const [settings, setSettings] = useState({
     vdoDirectorUrl: '',
