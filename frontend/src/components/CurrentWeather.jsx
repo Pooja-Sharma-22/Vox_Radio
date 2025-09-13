@@ -138,21 +138,58 @@ const CurrentWeather = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Format current Liberia time for display
+  const currentTimeDisplay = useMemo(() => {
+    return formatMonrovia(currentLiberiaTime, false);
+  }, [currentLiberiaTime]);
+
+  // Format last update time for display
+  const lastUpdateDisplay = useMemo(() => {
+    return formatMonrovia(lastUpdate, true);
+  }, [lastUpdate]);
+
   return (
     <div className="p-3 sm:p-6">
+      {/* Liberia Time Banner */}
+      <div className="mb-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse mr-3"></div>
+            <div>
+              <div className="text-sm font-bold text-orange-900">
+                Current Time: {currentTimeDisplay} GMT
+              </div>
+              <div className="text-xs text-orange-600">
+                Liberia (West Africa) • All weather times in GMT
+              </div>
+            </div>
+          </div>
+          <div className="text-right">
+            {isServerTimeSynced ? (
+              <div className="text-xs text-green-600 font-medium">● Server Synced</div>
+            ) : (
+              <div className="text-xs text-yellow-600 font-medium">○ Local Time</div>
+            )}
+          </div>
+        </div>
+      </div>
+
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6">
         <div className="mb-3 sm:mb-0">
           <h3 className="text-lg sm:text-2xl font-bold text-gray-900 flex items-center">
             <span className="mr-2 sm:mr-3">🌤️</span>
-            Current Weather - Liberia
+            Current Weather - Liberia (West Africa)
           </h3>
           <p className="text-xs sm:text-sm text-gray-600 mt-1">
             Showing: <span className="font-medium text-orange-600">{getCurrentSetInfo()}</span>
           </p>
         </div>
         <div className="text-left sm:text-right">
-          <div className="text-xs sm:text-sm text-gray-500">
-            Last updated: {lastUpdate.toLocaleString()}
+          <div 
+            className="text-xs sm:text-sm text-gray-500"
+            aria-label={`Last updated at ${formatMonroviaFull(lastUpdate)} Africa/Monrovia time`}
+          >
+            Last updated: {lastUpdateDisplay}
           </div>
           <div className="text-xs text-orange-600 mt-1">
             Next rotation: {nextRotation}
