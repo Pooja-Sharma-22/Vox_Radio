@@ -143,13 +143,18 @@ const WeatherForecast = () => {
   }, []);
 
   const getDateString = (daysAhead) => {
-    const date = new Date();
+    const date = nowMonrovia();
+    if (isServerTimeSynced) {
+      date.setTime(date.getTime() + serverTimeOffset);
+    }
     date.setDate(date.getDate() + daysAhead);
-    return date.toLocaleDateString('en-US', { 
+    
+    return new Intl.DateTimeFormat('en-US', { 
       weekday: 'long', 
       month: 'short', 
-      day: 'numeric' 
-    });
+      day: 'numeric',
+      timeZone: TIME_CONFIG.APP_TZ
+    }).format(date);
   };
 
   return (
