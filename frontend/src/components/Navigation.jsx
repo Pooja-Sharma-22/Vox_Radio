@@ -24,14 +24,35 @@ const Navigation = () => {
   const openCleanfeedStudio = () => {
     const studioUrl = process.env.REACT_APP_CLEANFEED_STUDIO_URL || 'https://cleanfeed.net/studio?voxradiolib';
     
-    const studioWindow = window.open(
-      studioUrl,
-      'CleanfeedStudio',
-      'width=1200,height=800,scrollbars=yes,resizable=yes,status=yes,menubar=no,toolbar=no'
-    );
+    // Try to open in Chrome specifically
+    const openInChrome = () => {
+      try {
+        // Method 1: Chrome protocol
+        window.location.href = `googlechrome://${studioUrl}`;
+        return true;
+      } catch (error) {
+        return false;
+      }
+    };
 
-    if (studioWindow) {
-      studioWindow.focus();
+    // Fallback method with optimized parameters for Chrome
+    const openWithFallback = () => {
+      const studioWindow = window.open(
+        studioUrl,
+        'CleanfeedStudio', 
+        'width=1200,height=800,scrollbars=yes,resizable=yes,status=yes,location=yes,toolbar=yes'
+      );
+
+      if (studioWindow) {
+        studioWindow.focus();
+        return true;
+      }
+      return false;
+    };
+
+    // Try Chrome protocol first, then fallback
+    if (!openInChrome()) {
+      openWithFallback();
     }
   };
 
