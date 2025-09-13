@@ -42,7 +42,83 @@ class StatusCheck(BaseModel):
 class StatusCheckCreate(BaseModel):
     client_name: str
 
-# Add your routes to the router instead of directly to app
+# VDO.Ninja Settings Management
+@api_router.get("/vdo-ninja-settings")
+async def get_vdo_ninja_settings():
+    """Get VDO.Ninja settings"""
+    try:
+        if db is None:
+            # Return default settings when DB is not available
+            return {
+                "vdoDirectorUrl": "",
+                "vdoGuestUrl": "",
+                "audioOnly": True,
+                "proAudio": True,
+                "cleanUI": True,
+                "audioBitrateKbps": 128
+            }
+        
+        settings = await db.vdo_ninja_settings.find_one({"type": "default"})
+        if settings:
+            return {
+                "vdoDirectorUrl": settings.get("vdoDirectorUrl", ""),
+                "vdoGuestUrl": settings.get("vdoGuestUrl", ""),
+                "audioOnly": settings.get("audioOnly", True),
+                "proAudio": settings.get("proAudio", True),
+                "cleanUI": settings.get("cleanUI", True),
+                "audioBitrateKbps": settings.get("audioBitrateKbps", 128)
+            }
+        else:
+            return {
+                "vdoDirectorUrl": "",
+                "vdoGuestUrl": "",
+                "audioOnly": True,
+                "proAudio": True,
+                "cleanUI": True,
+                "audioBitrateKbps": 128
+            }
+    except Exception as e:
+        logging.error(f"Error getting VDO.Ninja settings: {e}")
+        return {
+            "vdoDirectorUrl": "",
+            "vdoGuestUrl": "",
+            "audioOnly": True,
+            "proAudio": True,
+            "cleanUI": True,
+            "audioBitrateKbps": 128
+        }
+
+@api_router.post("/vdo-ninja-settings")
+async def save_vdo_ninja_settings(settings: dict):
+    """Save VDO.Ninja settings"""
+    try:
+        if db is None:
+            return {"message": "Settings saved (DB unavailable)", "success": False}
+        
+        # Prepare settings document
+        settings_doc = {
+            "type": "default",
+            "vdoDirectorUrl": settings.get("vdoDirectorUrl", ""),
+            "vdoGuestUrl": settings.get("vdoGuestUrl", ""),
+            "audioOnly": settings.get("audioOnly", True),
+            "proAudio": settings.get("proAudio", True),
+            "cleanUI": settings.get("cleanUI", True),
+            "audioBitrateKbps": settings.get("audioBitrateKbps", 128),
+            "updated_at": datetime.now(timezone.utc)
+        }
+        
+        # Replace existing settings or create new one
+        await db.vdo_ninja_settings.replace_one(
+            {"type": "default"},
+            settings_doc,
+            upsert=True
+        )
+        
+        return {"message": "VDO.Ninja settings saved successfully", "success": True}
+    except Exception as e:
+        logging.error(f"Error saving VDO.Ninja settings: {e}")
+        return {"message": "Error saving settings", "success": False}
+
 @api_router.get("/")
 async def root():
     return {"message": "Vox Radio Dashboard API", "status": "running"}
