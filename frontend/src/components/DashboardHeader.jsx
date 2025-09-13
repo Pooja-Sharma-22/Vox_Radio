@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { useProgramSchedule } from '../hooks/useProgramSchedule.js';
-import { formatMonrovia } from '../utils/timeUtils.js';
-import { TIME_CONFIG } from '../config/timeConfig.js';
+import { useProgramSchedule } from '../hooks/useProgramSchedule';
+import { formatMonrovia } from '../utils/timeUtils';
+import { TIME_CONFIG } from '../config/timeConfig';
 
 const DashboardHeader = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
