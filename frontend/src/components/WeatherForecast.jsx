@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { formatMonrovia, formatMonroviaFull, nowMonrovia } from '../utils/timeUtils';
 import { TIME_CONFIG } from '../config/timeConfig';
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+
 // 2-day forecast data for Liberian counties and cities
 const liberianForecastData = [
   // Tomorrow's forecast
