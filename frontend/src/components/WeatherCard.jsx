@@ -66,8 +66,12 @@ const WeatherCard = ({ weather }) => {
           </div>
         </div>
         
-        <p className="text-xs text-gray-500 mt-2 sm:mt-3 pt-2 sm:pt-3 border-t">
-          Updated: {weather.updated}
+        <p 
+          className="text-xs text-gray-500 mt-2 sm:mt-3 pt-2 sm:pt-3 border-t"
+          aria-label={`Updated at ${formatMonroviaFull(weather.updated)} Liberia time`}
+          title={`Full timestamp: ${formatMonroviaFull(weather.updated)} (Africa/Monrovia)`}
+        >
+          Updated: {formatMonrovia(weather.updated, true)}
         </p>
       </CardContent>
     </Card>
