@@ -1,6 +1,19 @@
 // All Liberian cities for weather rotation (rotates every 15 minutes) - All temperatures in Fahrenheit
-// Create timestamp once to prevent infinite re-renders
-const weatherTimestamp = new Date().toLocaleString();
+// Create timestamp in Liberia time (Africa/Monrovia, UTC+0)
+const createLiberiaTimestamp = () => {
+  const now = new Date();
+  return new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Africa/Monrovia',
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  }).format(now) + ' GMT';
+};
+
+const weatherTimestamp = createLiberiaTimestamp();
 
 // Rain prediction data for Liberian regions
 const generateRainPrediction = () => {
