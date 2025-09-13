@@ -159,6 +159,30 @@ const WeatherForecast = () => {
 
   return (
     <div className="p-6">
+      {/* Liberia Time Banner */}
+      <div className="mb-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center">
+            <div className="w-3 h-3 bg-orange-500 rounded-full animate-pulse mr-3"></div>
+            <div>
+              <div className="text-sm font-bold text-orange-900">
+                Current Time: {formatMonrovia(currentLiberiaTime, false)} GMT
+              </div>
+              <div className="text-xs text-orange-600">
+                Liberia (West Africa) • All forecast times in GMT
+              </div>
+            </div>
+          </div>
+          <div className="text-right">
+            {isServerTimeSynced ? (
+              <div className="text-xs text-green-600 font-medium">● Server Synced</div>
+            ) : (
+              <div className="text-xs text-yellow-600 font-medium">○ Local Time</div>
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
@@ -171,11 +195,14 @@ const WeatherForecast = () => {
           </p>
         </div>
         <div className="text-right">
-          <div className="text-sm text-gray-500">
-            Last updated: {forecastLastUpdate.toLocaleString()}
+          <div 
+            className="text-sm text-gray-500"
+            aria-label={`Last updated at ${formatMonroviaFull(forecastLastUpdate)} Africa/Monrovia time`}
+          >
+            Last updated: {formatMonrovia(forecastLastUpdate, true)}
           </div>
           <div className="text-xs text-blue-600 mt-1">
-            Next update: {calculateNextForecastUpdate()}
+            Next update: {calculateNextForecastUpdate()} GMT
           </div>
         </div>
       </div>
