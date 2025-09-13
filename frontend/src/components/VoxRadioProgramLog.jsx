@@ -2,9 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Search, Download, Calendar, Clock, Filter, Users, Play, Book, MessageCircle, Star, Wifi, WifiOff } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { useProgramSchedule } from '../hooks/useProgramSchedule.js';
-import { formatMonrovia, formatMonroviaFull } from '../utils/timeUtils.js';
-import { TIME_CONFIG } from '../config/timeConfig.js';
+import { useProgramSchedule } from '../hooks/useProgramSchedule';
+import { formatMonrovia, formatMonroviaFull } from '../utils/timeUtils';
+import { TIME_CONFIG } from '../config/timeConfig';
 
 // Complete program schedule data from the Excel file
 const programScheduleData = [
