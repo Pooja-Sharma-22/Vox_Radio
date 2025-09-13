@@ -4,7 +4,6 @@ import DashboardHeader from './DashboardHeader';
 import ProgramSchedule from './ProgramSchedule';
 import VoxRadioProgramLog from './VoxRadioProgramLog';
 import CleanfeedStudio from './CleanfeedStudio';
-import CleanfeedSettings from './CleanfeedSettings';
 import TabNavigation from './TabNavigation';
 import CurrentWeather from './CurrentWeather';
 import WeatherForecast from './WeatherForecast';
