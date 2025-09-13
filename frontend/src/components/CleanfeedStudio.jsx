@@ -28,8 +28,6 @@ const CleanfeedStudio = () => {
 5) If you see a waiting screen (Green Room), please wait to be admitted by the studio.`
   });
 
-  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
-
   // Load Cleanfeed settings on component mount
   useEffect(() => {
     const loadSettings = async () => {
