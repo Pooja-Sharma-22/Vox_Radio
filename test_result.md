@@ -173,13 +173,16 @@ metadata:
   run_ui: true
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Remove settings tab from TabNavigation.jsx"
+    - "Remove CleanfeedSettings from Dashboard.jsx" 
+    - "Create VDONinjaStudio.jsx component"
+    - "Create VDO.Ninja settings endpoints"
+    - "Integrate VDO.Ninja into Studio tab"
   stuck_tasks: []
   test_all: false
-  test_priority: "completed"
+  test_priority: "high_first"
 
 agent_communication:
     -agent: "main"
-    -message: "Successfully completed all critical fixes and header improvements: 1) Fixed frontend compilation error by updating FullPageSchedule.jsx imports 2) Implemented scrolling marquee showing complete program schedule at bottom of header 3) Simplified LIVE NOW display with animated audio wave bars for professional effect 4) Added NEXT PROGRAM information display that updates dynamically. All implementations are complete and tested via screenshot verification - application loads successfully."
-    -agent: "testing"
-    -message: "Comprehensive testing completed successfully. All header features working perfectly: scrolling marquee displays complete program schedule (7916 chars), LIVE NOW section shows current program with 10 animated audio wave bars, NEXT PROGRAM updates correctly, current time displays in Liberia timezone. All navigation tabs functional, mobile responsiveness excellent, FullPageSchedule loads correctly with VoxRadioProgramLog component. Real-time updates working with 5-second intervals. All core dashboard functions accessible and working properly."
+    -message: "Starting VDO.Ninja integration implementation. Will remove settings tab, create VDO.Ninja studio component with director/guest links and audio parameters, add backend endpoints for settings persistence, and integrate into existing Studio tab alongside Cleanfeed. Focus on mobile-first design with English-only labels."
