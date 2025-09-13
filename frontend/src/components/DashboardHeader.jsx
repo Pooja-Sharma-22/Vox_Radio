@@ -162,12 +162,18 @@ const DashboardHeader = () => {
 ];
 
   // Use the program schedule hook for proper Monrovia time handling
+  const hookResult = useProgramSchedule(programScheduleData);
   const { 
     currentProgram, 
     nextProgram, 
     countdown,
     isServerTimeSynced 
-  } = useProgramSchedule(programScheduleData);
+  } = hookResult || {
+    currentProgram: null,
+    nextProgram: null,
+    countdown: null,
+    isServerTimeSynced: false
+  };
 
   // Update current time every second for display
   useEffect(() => {
