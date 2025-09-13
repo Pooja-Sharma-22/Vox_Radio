@@ -1,66 +1,67 @@
 <analysis>
-The AI engineer successfully transformed the Vox Radio dashboard, iteratively adding complex features and refining the UI. Key initial efforts included mobile responsiveness, real-time weather, a live stream, local storage-backed forms, and a dynamic program schedule. Persistent React re-render loops in components like , , and  were debugged using  and refactored date instantiations. A significant pivot involved integrating a user-provided HTML schedule, leading to the Enhanced Schedule component, which evolved to include search and favorites. The engineer later fully rewrote this component to match a Kioo Radio-inspired table layout and removed Show Player functionality.
+The previous AI engineer successfully initiated the Vox Radio dashboard, incrementally adding features and refactoring existing ones based on continuous user feedback. The journey began with foundational elements like mobile responsiveness, real-time weather, a live stream, and functional forms. Early challenges included resolving persistent React re-render loops and integrating a user-provided HTML schedule. This led to the creation and subsequent removal of the Enhanced Schedule, replaced by a comprehensive Vox Radio 24/7 Program Log.
 
-Subsequent work included converting the schedule to a 24-hour format, adding a 2-day weather forecast for Liberian cities, and removing the Made with Emergent logo. Debugging efforts revealed and fixed a recurring infinite re-render loop related to  objects and timezone issues. The user then requested a comprehensive Vox Radio 24/7 Program Log based on an uploaded Excel file, which the engineer fully implemented, including color-coding, advanced search, upcoming programs, and download functionality. The most recent task involved removing the Enhanced Schedule, simplifying the live program banner with animated audio waves, and implementing a new scrolling marquee for program info in the header, which is currently blocked by an import error after deleting the old  component.
+Significant work involved converting the schedule to a 24-hour format, adding a 2-day weather forecast, and implementing a new scrolling marquee for program info, which was later removed at the user's request. The engineer tackled multiple rounds of deployment errors, identifying and fixing package manager issues, environment variable misconfigurations, and hardcoded URLs. Recent efforts focused on implementing detailed rain predictions for Liberia, ensuring all program log times display in  timezone, and integrating Cleanfeed.net studio access. The latest iteration involves a more advanced Cleanfeed integration, including dedicated settings, studio controls, and secure handling of credentials, which is currently in progress.
 </analysis>
 
 <product_requirements>
-The objective is to develop a pixel-perfect, mobile-responsive dashboard for Vox Radio that mirrors the Kioo Radio presenters' dashboard, adhering to an orange/black theme. The application needs to display real-time Liberian weather (convertible to Fahrenheit), offer a live radio stream, and integrate functional forms (Submit Testimony, Log Phone Call, WhatsApp Management) with local storage and real-time notifications. A prominent, animated Liberia time display is crucial. The core functionality includes a dynamic program schedule, evolving from a scrolling marquee to a comprehensive 7-day view with search and favorites. AI Analytics and Flight Information features were explicitly removed. Recent requirements involved redesigning the program display to match the Kioo Radio programs page, featuring real-time highlighting of the current program and presenter, a 24-hour clock format, and a 2-day weather forecast for Liberian cities with a 30-minute refresh, initially on the dashboard then moved to a separate page. All Show Player functionality was to be removed. Finally, a comprehensive Vox Radio 24/7 Program Log system, based on an Excel file, was requested, featuring live Now Playing banners, color-coded weekly schedules, search, filters, upcoming programs, and download capabilities. The latest request is to simplify the live program display under the header with audio waves, remove the old Enhanced Schedule, and implement a new scrolling marquee for program details.
+The goal is to develop a mobile-responsive Vox Radio dashboard, mirroring the Kioo Radio design with an orange/black theme. It must display real-time Liberian weather (Fahrenheit, with detailed rain predictions), offer a live radio stream, and integrate local storage-backed forms (Submit Testimony, Log Phone Call, WhatsApp Management) with real-time notifications. Key features include an animated Liberia time display, a dynamic program schedule evolving into a comprehensive Vox Radio 24/7 Program Log with 24-hour format, color-coding, search, filters, upcoming programs, and download capabilities. This program log and all weather updates must display times in  (UTC+0), featuring a LIVE NOW indicator and a NEXT UP countdown. The application also requires a Cleanfeed.net integration for remote broadcast studio access, including quick launch, guest link sharing, presenter instructions, and a settings panel for configuration. Initially, AI Analytics and Flight Information were explicitly removed. The design should prioritize mobile-first principles.
 </product_requirements>
 
 <key_technical_concepts>
-- React: Frontend framework for building UI components.
-- Shadcn UI: A collection of reusable UI components.
-- Tailwind CSS: Utility-first CSS framework for styling and responsive design.
-- React Router DOM: For handling client-side routing.
-- LocalStorage: Used for client-side data persistence (e.g., form submissions).
-- React Hooks (, , ): Fundamental for state management, side effects, and performance optimization.
-- : Python library for reading and writing Excel files (used in backend data processing).
+- React: Core frontend framework.
+- Shadcn UI & Tailwind CSS: For UI components and styling.
+- React Hooks: State management (, ) and performance ().
+- LocalStorage: Client-side data persistence.
+- Python/FastAPI: Backend API development.
+- : Python library for Excel processing.
+- : Native JavaScript API for timezone-aware date formatting.
+- Environment Variables: Secure configuration for URLs, API keys, and sensitive data.
 </key_technical_concepts>
 
 <code_architecture>
-The application follows a standard React project structure, primarily organized within the  directory, with a Python/FastAPI backend in .
+The application uses a React frontend () and a Python/FastAPI backend ().
 
 
 
--   ****: Serves as the main routing file. It was modified to remove the  component and the  route.
--   ****: Global CSS file, recently updated to include  for the new marquee scrolling animation in the header.
--   ****: The main layout component. It was modified to remove the Show Player functionality, manage tab state, include the  component, and later remove the  component.
--   ****: Displays the main title and real-time information. It was modified to display the presenter name and program under Vox Radio Presenters Dashboard, to remove the Real-time updates and management tools subtitle, to incorporate and then simplify the LIVE NOW program highlighting (changing from red banner to orange audio waves), and most recently to include a scrolling marquee for current/next program info. Debugging code for re-renders and timezone issues was added and later cleaned up.
--   ****: Displays current weather. Modified to convert temperature to Fahrenheit, and later enhanced to include a 2-day forecast for Liberian counties and cities with 30-minute refresh. This 2-day forecast section was then moved to a new  component to clean up .
--   ****: (Deleted) This component was initially created and later completely rewritten to integrate user's HTML schedule, then expanded for 7-day view, search, and favorites, adopting a Kioo Radio-inspired table layout. It was ultimately removed and replaced by .
--   ****: Created for a dedicated schedule view, it was modified for display and navigation. It currently causes a compilation error due to a lingering import of the deleted .
--   ****: Contains navigation elements. It was examined to confirm Listen Live functionality was present and separate from Show Player.
--   ****: Manages the tab interface. Modified to add and later remove the Enhanced Schedule tab, then added Weather Forecast and Program Log tabs.
--   ****: (Created) This new component now houses the detailed 2-day weather forecast for Liberian counties and cities with auto-refresh functionality, separated from the  component.
--   ****: (Created) This is the new, comprehensive program log component, replacing the . It displays a color-coded weekly schedule from an Excel file, with search, filters, upcoming programs, and download functionality. The green Now Playing banner was recently removed from this component.
--   ****: Stores mock data. Updated weather data to Fahrenheit.
--   ****: A utility file. A function  was added here to help retrieve live program details for display.
--   ****: The main HTML file. The Made with Emergent logo reference was removed from this file.
+-   ****: Main routing file, adjusted for new components and route removals.
+-   ****: Global CSS, includes animation keyframes (later moved/removed).
+-   ****: Main layout, handles tab states, includes core components. Recently updated for CleanfeedSettings.jsx import.
+-   ****: Displays live program info, Liberia time, and next program. Heavily modified for marquee, audio waves, and Liberia timezone display, and program data synchronization.
+-   ****: Displays current weather. Modified for mobile-first, rain predictions, and Liberia timezone display, including server sync.
+-   ****: (Deleted) Replaced by .
+-   ****: Fixed import error (was referencing deleted ).
+-   ****: Top navigation, includes Listen Live and Studio buttons.
+-   ****: Manages tab interface, updated for new tabs (Weather Forecast, Program Log, Studio, Settings - though settings tab was later removed).
+-   ****: (Created, Modified) Houses the 2-day weather forecast, updated for Liberia timezone.
+-   ****: (Created, Modified) Comprehensive program log with color-coding, search, filters, updated with Liberia timezone and new presenter/category data.
+-   ****: (Modified) Displays individual city weather, enhanced for rain predictions and Liberia time.
+-   ****: (Created, Modified) Component for Cleanfeed studio access, designed with Chrome optimization, guest link sharing, and presenter instructions.
+-   ****: (Created) Designed for Cleanfeed integration settings, including host credentials and guest link configuration.
+-   ****: (Created) Centralized configuration for  timezone.
+-   ****: (Created) Utility functions for Liberia timezone calculations and formatting.
+-   ****: (Created) Custom hook for managing program schedule logic, including  and  calculations based on Liberia time.
+-   ****: Stores mock weather data, updated for rain predictions and Liberia time.
+-   **, , , **: Environment variables and package manager configurations for deployment stability.
+-   ****: FastAPI backend, updated with a  endpoint, enhanced error handling, and production configurations for MongoDB.
 </code_architecture>
 
 <pending_tasks>
-- Fix the frontend compilation error in  which is attempting to import the now-deleted  component.
-- Implement the scrolling marquee for program, day, and presenter information in the .
-- Display the NEXT PROGRAM information based on the program database at the top of the header.
+- Continue implementing the advanced Cleanfeed integration, specifically setting up the backend for settings management and completing the client-side  component.
+- Integrate  component into the .
+- Update environment variables for Cleanfeed configuration.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary, the AI engineer was implementing a series of changes requested by the user. The primary goal was to refactor the display of program information within the dashboard header.
+Immediately before this summary request, the AI engineer was actively working on a comprehensive Cleanfeed integration, following a detailed user specification. This involved:
+1.  **Enhancing Backend**: Modifying  to support Cleanfeed settings, likely for secure storage of host credentials.
+2.  **Developing **: This component was being refactored to include features like opening the host studio, copying guest links, sharing via WhatsApp/Email, displaying presenter instructions (with token replacement), a user checklist, and troubleshooting tips. It also includes Chrome-specific optimizations for launching.
+3.  **Creating **: A new component was created to manage Cleanfeed configurations, including guest URL, presenter instructions, and placeholder fields for admin-only host credentials.
+4.  **Integrating into Dashboard**: Attempts were made to add the  component to the main .
 
-First, the existing Enhanced Schedule component and its related content were removed from the application, including the file , along with updates to , , and  to remove references to it.
-
-Next, the green Now Playing banner from the  component was removed.
-
-Following this, significant modifications were made to  to accommodate the new requirements:
-- The current program and presenter display was updated.
-- A new scrolling marquee effect for program, day, and presenter information was being integrated.
-- Logic to display the NEXT PROGRAM at the top of the header was being added.
-- The necessary CSS keyframes for the marquee animation were added to .
-
-After these code changes, the AI engineer attempted to take a screenshot to verify the implementation. This resulted in a frontend compilation error, specifically indicating that  is still trying to import the  component, which has already been deleted. This error is currently blocking further verification and indicates that the cleanup of the old Enhanced Schedule was not fully complete.
+The last recorded action (Chat Message 521) indicates the AI was working on Step 7: Update Environment Variables for Cleanfeed, which suggests setting up  and  based on the new detailed requirements, and possibly also handling the host credentials securely. The  tab was initially added to  but then explicitly requested to be removed.
 </current_work>
 
 <optional_next_step>
-Fix the import error in  by removing its reference to the deleted .
+Continue with Step 7: Update Environment Variables for Cleanfeed and then integrate the  component into the .
 </optional_next_step>
