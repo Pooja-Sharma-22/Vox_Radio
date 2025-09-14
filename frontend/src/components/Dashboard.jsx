@@ -46,6 +46,8 @@ const Dashboard = () => {
         return <WeatherForecast />;
       case 'program-log':
         return <VoxRadioProgramLog />;
+      case 'broadcast-clocks':
+        return <BroadcastClocks />;
       case 'cleanfeed':
         return <CleanfeedStudio />;
       case 'whatsapp':
