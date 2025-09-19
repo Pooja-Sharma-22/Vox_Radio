@@ -156,7 +156,7 @@ export const allLiberianCities = [
       }
     }
   ],
-  // Set 3 - Northern Cities
+  // Set 3 - Northern Cities & Nimba
   [
     {
       city: "Voinjama",
@@ -174,6 +174,36 @@ export const allLiberianCities = [
       }
     },
     {
+      city: "Ganta",
+      country: "Liberia",
+      temperature: 78,
+      condition: "Cool",
+      humidity: "70%",
+      windSpeed: "5 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 60,
+        nextRainIn: "4 hours",
+        intensity: "Light",
+        duration: "1-2 hours"
+      }
+    },
+    {
+      city: "Sanniquellie",
+      country: "Liberia",
+      temperature: 76,
+      condition: "Misty",
+      humidity: "81%",
+      windSpeed: "4 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 80,
+        nextRainIn: "1.5 hours",
+        intensity: "Moderate",
+        duration: "2-3 hours"
+      }
+    },
+    {
       city: "Kolahun",
       country: "Liberia",
       temperature: 75, // Changed from 24°C to 75°F
@@ -186,36 +216,6 @@ export const allLiberianCities = [
         nextRainIn: "2 hours",
         intensity: "Moderate",
         duration: "2-3 hours"
-      }
-    },
-    {
-      city: "Foya",
-      country: "Liberia",
-      temperature: 79, // Changed from 26°C to 79°F
-      condition: "Partly Cloudy",
-      humidity: "68%",
-      windSpeed: "6 mph", // Changed from 10 km/h to mph
-      updated: weatherTimestamp,
-      rainPrediction: {
-        probability: 55,
-        nextRainIn: "6 hours",
-        intensity: "Light",
-        duration: "1 hour"
-      }
-    },
-    {
-      city: "Zorzor",
-      country: "Liberia",
-      temperature: 73, // Changed from 23°C to 73°F
-      condition: "Cool",
-      humidity: "75%",
-      windSpeed: "4 mph", // Changed from 7 km/h to mph
-      updated: weatherTimestamp,
-      rainPrediction: {
-        probability: 70,
-        nextRainIn: "3 hours",
-        intensity: "Light",
-        duration: "1-2 hours"
       }
     }
   ],
