@@ -583,6 +583,66 @@ export const allLiberianCities = [
         intensity: "Light",
         duration: "1-2 hours"
       }
+    },
+    {
+      city: "Bong Mines",
+      country: "Liberia",
+      temperature: 77,
+      condition: "Misty",
+      humidity: "83%",
+      windSpeed: "6 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 75,
+        nextRainIn: "2 hours",
+        intensity: "Moderate",
+        duration: "2-3 hours"
+      }
+    },
+    {
+      city: "Bomi Hills",
+      country: "Liberia",
+      temperature: 79,
+      condition: "Overcast",
+      humidity: "74%",
+      windSpeed: "6 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 80,
+        nextRainIn: "1 hour",
+        intensity: "Moderate",
+        duration: "2-3 hours"
+      }
+    },
+    {
+      city: "Mount Coffee",
+      country: "Liberia",
+      temperature: 80,
+      condition: "Partly Cloudy",
+      humidity: "75%",
+      windSpeed: "7 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 55,
+        nextRainIn: "4 hours",
+        intensity: "Light",
+        duration: "1-2 hours"
+      }
+    },
+    {
+      city: "Totota",
+      country: "Liberia",
+      temperature: 79,
+      condition: "Humid",
+      humidity: "78%",
+      windSpeed: "5 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 70,
+        nextRainIn: "2.5 hours",
+        intensity: "Moderate",
+        duration: "2 hours"
+      }
     }
   ]
 ];
