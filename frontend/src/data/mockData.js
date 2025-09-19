@@ -93,8 +93,23 @@ export const allLiberianCities = [
       }
     }
   ],
-  // Set 2 - Coastal Cities
+  // Set 2 - Coastal Cities & Grand Bassa
   [
+    {
+      city: "Buchanan",
+      country: "Liberia",
+      temperature: 84, // Changed from 29°C to 84°F
+      condition: "Clear",
+      humidity: "82%",
+      windSpeed: "9 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 85,
+        nextRainIn: "1 hour",
+        intensity: "Heavy",
+        duration: "2-3 hours"
+      }
+    },
     {
       city: "Harper",
       country: "Liberia",
@@ -126,33 +141,18 @@ export const allLiberianCities = [
       }
     },
     {
-      city: "Grand Bassa",
+      city: "Barclayville",
       country: "Liberia",
-      temperature: 82, // Changed from 28°C to 82°F
-      condition: "Clear",
-      humidity: "77%",
-      windSpeed: "9 mph", // Changed from 14 km/h to mph
+      temperature: 85,
+      condition: "Humid",
+      humidity: "87%",
+      windSpeed: "9 mph",
       updated: weatherTimestamp,
       rainPrediction: {
-        probability: 65,
-        nextRainIn: "5 hours",
+        probability: 75,
+        nextRainIn: "2 hours",
         intensity: "Moderate",
-        duration: "1-2 hours"
-      }
-    },
-    {
-      city: "River Cess",
-      country: "Liberia",
-      temperature: 81, // Changed from 27°C to 81°F
-      condition: "Light Rain",
-      humidity: "88%",
-      windSpeed: "7 mph", // Changed from 11 km/h to mph
-      updated: weatherTimestamp,
-      rainPrediction: {
-        probability: 95,
-        nextRainIn: "Currently raining",
-        intensity: "Light",
-        duration: "Ongoing (1-2 more hours)"
+        duration: "2-3 hours"
       }
     }
   ],
