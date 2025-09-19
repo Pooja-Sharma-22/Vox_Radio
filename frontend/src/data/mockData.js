@@ -282,8 +282,23 @@ export const allLiberianCities = [
       }
     }
   ],
-  // Set 5 - Mining/Rural Areas
+  // Set 5 - Mining Areas & Rural Counties
   [
+    {
+      city: "Kakata",
+      country: "Liberia",
+      temperature: 81, // Changed from 27°C to 81°F
+      condition: "Overcast",
+      humidity: "71%",
+      windSpeed: "6 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 90,
+        nextRainIn: "30 minutes",
+        intensity: "Heavy",
+        duration: "2-4 hours"
+      }
+    },
     {
       city: "Yekepa",
       country: "Liberia",
@@ -300,18 +315,18 @@ export const allLiberianCities = [
       }
     },
     {
-      city: "Bong Mines",
+      city: "Careysburg",
       country: "Liberia",
-      temperature: 77, // Changed from 25°C to 77°F
-      condition: "Misty",
-      humidity: "83%",
-      windSpeed: "6 mph", // Changed from 9 km/h to mph
+      temperature: 83,
+      condition: "Warm",
+      humidity: "77%",
+      windSpeed: "7 mph",
       updated: weatherTimestamp,
       rainPrediction: {
-        probability: 75,
-        nextRainIn: "2 hours",
+        probability: 65,
+        nextRainIn: "3 hours",
         intensity: "Moderate",
-        duration: "2-3 hours"
+        duration: "1-2 hours"
       }
     },
     {
@@ -327,21 +342,6 @@ export const allLiberianCities = [
         nextRainIn: "3.5 hours",
         intensity: "Light",
         duration: "1-2 hours"
-      }
-    },
-    {
-      city: "Bomi Hills",
-      country: "Liberia",
-      temperature: 79, // Changed from 26°C to 79°F
-      condition: "Overcast",
-      humidity: "74%",
-      windSpeed: "6 mph", // Changed from 10 km/h to mph
-      updated: weatherTimestamp,
-      rainPrediction: {
-        probability: 80,
-        nextRainIn: "1 hour",
-        intensity: "Moderate",
-        duration: "2-3 hours"
       }
     }
   ]
