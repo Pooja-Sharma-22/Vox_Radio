@@ -313,7 +313,7 @@ const WeatherForecast = () => {
             <span className="mr-3">📅</span>
             {getDateString(2)}
           </h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {forecastData[1].locations.map((location, index) => (
               <div key={index} className="bg-white rounded-lg shadow-md p-5 border border-gray-200 hover:shadow-lg transition-shadow">
                 <div className="text-center">
