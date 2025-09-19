@@ -233,10 +233,10 @@ const WeatherForecast = () => {
         <div>
           <h3 className="text-2xl font-bold text-gray-900 flex items-center">
             <span className="mr-3">🌈</span>
-            2-Day Weather Forecast - Counties & Cities
+            2-Day Weather Forecast - Complete Liberia Coverage
           </h3>
           <p className="text-sm text-gray-600 mt-1">
-            Extended weather predictions for major Liberian counties and cities
+            Extended weather predictions for all major counties and cities across Liberia (20 locations)
           </p>
         </div>
         <div className="text-right">
