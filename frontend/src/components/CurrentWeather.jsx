@@ -219,27 +219,27 @@ const CurrentWeather = () => {
           <div className="p-2 bg-white rounded border">
             <div className="font-medium text-gray-900">:00 - :14</div>
             <div className="text-gray-600">Major Cities & Greater Monrovia</div>
-            <div className="text-gray-500">Monrovia, Gbarnga, Bensonville, Caldwell</div>
+            <div className="text-gray-500">Monrovia, Gbarnga, Bensonville, Caldwell, Kakata, Harbel, Careysburg, Marshall</div>
           </div>
           <div className="p-2 bg-white rounded border">
             <div className="font-medium text-gray-900">:15 - :29</div>
             <div className="text-gray-600">Coastal Cities & Grand Bassa</div>
-            <div className="text-gray-500">Buchanan, Harper, Greenville, Barclayville</div>
+            <div className="text-gray-500">Buchanan, Harper, Greenville, Barclayville, Grand Bassa, River Cess, Edina, Sasstown</div>
           </div>
           <div className="p-2 bg-white rounded border">
             <div className="font-medium text-gray-900">:30 - :44</div>
             <div className="text-gray-600">Northern Cities & Nimba</div>
-            <div className="text-gray-500">Voinjama, Ganta, Sanniquellie, Kolahun</div>
+            <div className="text-gray-500">Voinjama, Ganta, Sanniquellie, Kolahun, Foya, Zorzor, Yekepa, Tappita</div>
           </div>
           <div className="p-2 bg-white rounded border">
             <div className="font-medium text-gray-900">:45 - :59</div>
             <div className="text-gray-600">Central/Eastern Cities</div>
-            <div className="text-gray-500">Zwedru, Robertsport, Bopolu, Tubmanburg</div>
+            <div className="text-gray-500">Zwedru, Robertsport, Bopolu, Tubmanburg, Pleebo, Fish Town, Sapo, Juarzon</div>
           </div>
           <div className="p-2 bg-white rounded border">
             <div className="font-medium text-gray-900">Next Hour</div>
             <div className="text-gray-600">Mining Areas & Rural Counties</div>
-            <div className="text-gray-500">Kakata, Yekepa, Careysburg, Harbel</div>
+            <div className="text-gray-500">Kakata, Yekepa, Careysburg, Harbel, Bong Mines, Bomi Hills, Mount Coffee, Totota</div>
           </div>
         </div>
       </div>
