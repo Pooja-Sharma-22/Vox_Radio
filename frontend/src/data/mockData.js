@@ -237,16 +237,31 @@ export const allLiberianCities = [
       }
     },
     {
-      city: "Pleebo",
+      city: "Robertsport",
       country: "Liberia",
-      temperature: 84, // Changed from 29°C to 84°F
-      condition: "Humid",
-      humidity: "87%",
-      windSpeed: "9 mph", // Changed from 15 km/h to mph
+      temperature: 82, // Changed from 28°C to 82°F
+      condition: "Windy",
+      humidity: "79%",
+      windSpeed: "12 mph", // Changed from 20 km/h to mph
       updated: weatherTimestamp,
       rainPrediction: {
-        probability: 80,
-        nextRainIn: "1.5 hours",
+        probability: 70,
+        nextRainIn: "2.5 hours",
+        intensity: "Moderate",
+        duration: "1-3 hours"
+      }
+    },
+    {
+      city: "Bopolu",
+      country: "Liberia",
+      temperature: 80,
+      condition: "Overcast",
+      humidity: "74%",
+      windSpeed: "6 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 85,
+        nextRainIn: "1 hour",
         intensity: "Heavy",
         duration: "2-4 hours"
       }
@@ -264,21 +279,6 @@ export const allLiberianCities = [
         nextRainIn: "4 hours",
         intensity: "Moderate",
         duration: "1-2 hours"
-      }
-    },
-    {
-      city: "Robertsport",
-      country: "Liberia",
-      temperature: 82, // Changed from 28°C to 82°F
-      condition: "Windy",
-      humidity: "79%",
-      windSpeed: "12 mph", // Changed from 20 km/h to mph
-      updated: weatherTimestamp,
-      rainPrediction: {
-        probability: 70,
-        nextRainIn: "2.5 hours",
-        intensity: "Moderate",
-        duration: "1-3 hours"
       }
     }
   ],
