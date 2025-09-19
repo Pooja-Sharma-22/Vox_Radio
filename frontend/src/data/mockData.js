@@ -121,6 +121,36 @@ export const allLiberianCities = [
         intensity: "Light",
         duration: "1-2 hours"
       }
+    },
+    {
+      city: "Careysburg",
+      country: "Liberia",
+      temperature: 83,
+      condition: "Warm",
+      humidity: "77%",
+      windSpeed: "7 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 65,
+        nextRainIn: "3 hours",
+        intensity: "Moderate",
+        duration: "1-2 hours"
+      }
+    },
+    {
+      city: "Marshall",
+      country: "Liberia",
+      temperature: 85,
+      condition: "Sunny",
+      humidity: "74%",
+      windSpeed: "8 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 55,
+        nextRainIn: "5 hours",
+        intensity: "Light",
+        duration: "1 hour"
+      }
     }
   ],
   // Set 2 - Coastal Cities & Grand Bassa
