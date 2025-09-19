@@ -184,6 +184,36 @@ export const allLiberianCities = [
         intensity: "Moderate",
         duration: "2-3 hours"
       }
+    },
+    {
+      city: "Grand Bassa",
+      country: "Liberia",
+      temperature: 82,
+      condition: "Clear",
+      humidity: "77%",
+      windSpeed: "9 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 65,
+        nextRainIn: "5 hours",
+        intensity: "Moderate",
+        duration: "1-2 hours"
+      }
+    },
+    {
+      city: "River Cess",
+      country: "Liberia",
+      temperature: 81,
+      condition: "Light Rain",
+      humidity: "88%",
+      windSpeed: "7 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 95,
+        nextRainIn: "Currently raining",
+        intensity: "Light",
+        duration: "Ongoing (1-2 more hours)"
+      }
     }
   ],
   // Set 3 - Northern Cities & Nimba
