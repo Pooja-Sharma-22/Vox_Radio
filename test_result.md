@@ -168,14 +168,14 @@ frontend:
   - task: "Expand weather coverage with additional cities"
     implemented: true
     working: true
-    file: "/app/frontend/src/data/mockData.js, /app/frontend/src/components/CurrentWeather.jsx"
+    file: "/app/frontend/src/data/mockData.js, /app/frontend/src/components/CurrentWeather.jsx, /app/frontend/src/components/WeatherForecast.jsx"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         -working: true
         -agent: "main"
-        -comment: "Successfully implemented expanded weather coverage with 7 additional Liberian cities (Bensonville, Ganta, Barclayville, Bopolu, Careysburg, Sanniquellie, Caldwell) integrated into the existing 15-minute auto-rotation system. Updated regional groupings and rotation schedule display. System verified working via screenshots showing proper city rotation and updated schedule."
+        -comment: "COMPLETED: Successfully implemented comprehensive weather coverage expansion. Current Weather: Added 7 new cities to 15-minute auto-rotation system with updated regional groupings. Weather Forecast: Expanded from 6 to 20 locations covering all major Liberian counties and cities with 2-day forecasts. Both systems verified working via screenshots. Complete national coverage achieved across all 15 counties of Liberia."
 
 backend:
   - task: "Create VDO.Ninja settings endpoints"
