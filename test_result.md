@@ -165,6 +165,18 @@ frontend:
         -agent: "main"
         -comment: "Fixed BACKEND_URL dependency issues in multiple components but persistent infinite re-render errors remain. Application is functional but logs show continuous 'Maximum update depth exceeded' errors. Issue affects user experience but core functionality works."
 
+  - task: "Expand weather coverage with additional cities"
+    implemented: false
+    working: "NA"
+    file: "/app/frontend/src/data/mockData.js, /app/frontend/src/components/CurrentWeather.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "Starting implementation to add 8 additional Liberian cities (Robertsport, Bensonville, Ganta, Barclayville, Bopolu, Careysburg, Sanniquellie, Caldwell) to the existing 15-minute auto-rotation weather system."
+
 backend:
   - task: "Create VDO.Ninja settings endpoints"
     implemented: true
