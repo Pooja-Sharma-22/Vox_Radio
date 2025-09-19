@@ -4,30 +4,76 @@ import { TIME_CONFIG } from '../config/timeConfig';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
-// 2-day forecast data for Liberian counties and cities
+// Comprehensive 2-day forecast data for all major Liberian counties and cities
 const liberianForecastData = [
   // Tomorrow's forecast
   {
     day: 'tomorrow',
     locations: [
+      // Major Cities & Greater Monrovia
       { name: 'Monrovia, Montserrado', highTemp: 84, lowTemp: 76, condition: '🌤️ Partly Cloudy', humidity: 78, wind: 8, rain: 25 },
       { name: 'Gbarnga, Bong', highTemp: 81, lowTemp: 72, condition: '☀️ Sunny', humidity: 65, wind: 6, rain: 10 },
+      { name: 'Bensonville, Montserrado', highTemp: 83, lowTemp: 75, condition: '🌤️ Partly Cloudy', humidity: 76, wind: 7, rain: 30 },
+      { name: 'Caldwell, Montserrado', highTemp: 85, lowTemp: 77, condition: '☀️ Sunny', humidity: 74, wind: 8, rain: 20 },
+      
+      // Coastal Cities & Grand Bassa
       { name: 'Buchanan, Grand Bassa', highTemp: 86, lowTemp: 78, condition: '🌧️ Light Rain', humidity: 85, wind: 12, rain: 60 },
       { name: 'Harper, Maryland', highTemp: 88, lowTemp: 79, condition: '🌤️ Partly Cloudy', humidity: 80, wind: 10, rain: 20 },
+      { name: 'Greenville, Sinoe', highTemp: 87, lowTemp: 80, condition: '🌦️ Scattered Showers', humidity: 83, wind: 11, rain: 45 },
+      { name: 'Barclayville, Grand Kru', highTemp: 89, lowTemp: 81, condition: '☁️ Cloudy', humidity: 86, wind: 9, rain: 35 },
+      
+      // Northern Cities & Nimba
       { name: 'Voinjama, Lofa', highTemp: 79, lowTemp: 69, condition: '🌦️ Scattered Showers', humidity: 82, wind: 7, rain: 45 },
-      { name: 'Zwedru, Grand Gedeh', highTemp: 83, lowTemp: 74, condition: '☁️ Cloudy', humidity: 76, wind: 5, rain: 30 }
+      { name: 'Ganta, Nimba', highTemp: 78, lowTemp: 70, condition: '☁️ Cloudy', humidity: 75, wind: 6, rain: 40 },
+      { name: 'Sanniquellie, Nimba', highTemp: 76, lowTemp: 68, condition: '🌧️ Light Rain', humidity: 84, wind: 5, rain: 65 },
+      { name: 'Kolahun, Lofa', highTemp: 77, lowTemp: 67, condition: '🌫️ Foggy', humidity: 88, wind: 4, rain: 50 },
+      
+      // Central/Eastern Cities
+      { name: 'Zwedru, Grand Gedeh', highTemp: 83, lowTemp: 74, condition: '☁️ Cloudy', humidity: 76, wind: 5, rain: 30 },
+      { name: 'Robertsport, Grand Cape Mount', highTemp: 85, lowTemp: 78, condition: '💨 Windy', humidity: 81, wind: 13, rain: 25 },
+      { name: 'Bopolu, Gbarpolu', highTemp: 80, lowTemp: 72, condition: '🌦️ Scattered Showers', humidity: 79, wind: 6, rain: 55 },
+      { name: 'Tubmanburg, Bomi', highTemp: 82, lowTemp: 74, condition: '🌤️ Partly Cloudy', humidity: 77, wind: 8, rain: 35 },
+      
+      // Mining Areas & Rural Counties
+      { name: 'Kakata, Margibi', highTemp: 84, lowTemp: 75, condition: '☁️ Overcast', humidity: 80, wind: 7, rain: 40 },
+      { name: 'Yekepa, Nimba', highTemp: 76, lowTemp: 68, condition: '🌤️ Cool', humidity: 73, wind: 5, rain: 30 },
+      { name: 'Careysburg, Montserrado', highTemp: 85, lowTemp: 76, condition: '☀️ Warm', humidity: 78, wind: 8, rain: 25 },
+      { name: 'Harbel, Margibi', highTemp: 86, lowTemp: 78, condition: '🌤️ Partly Cloudy', humidity: 79, wind: 9, rain: 20 }
     ]
   },
   // Day after tomorrow's forecast
   {
     day: 'dayAfter',
     locations: [
+      // Major Cities & Greater Monrovia
       { name: 'Monrovia, Montserrado', highTemp: 87, lowTemp: 78, condition: '☀️ Sunny', humidity: 72, wind: 9, rain: 15 },
       { name: 'Gbarnga, Bong', highTemp: 85, lowTemp: 75, condition: '🌤️ Partly Cloudy', humidity: 68, wind: 7, rain: 20 },
+      { name: 'Bensonville, Montserrado', highTemp: 86, lowTemp: 77, condition: '☀️ Sunny', humidity: 70, wind: 8, rain: 18 },
+      { name: 'Caldwell, Montserrado', highTemp: 88, lowTemp: 79, condition: '🌤️ Partly Cloudy', humidity: 73, wind: 9, rain: 22 },
+      
+      // Coastal Cities & Grand Bassa
       { name: 'Buchanan, Grand Bassa', highTemp: 89, lowTemp: 80, condition: '🌦️ Scattered Showers', humidity: 83, wind: 11, rain: 40 },
       { name: 'Harper, Maryland', highTemp: 91, lowTemp: 81, condition: '☀️ Sunny', humidity: 75, wind: 12, rain: 10 },
+      { name: 'Greenville, Sinoe', highTemp: 90, lowTemp: 82, condition: '☁️ Cloudy', humidity: 81, wind: 10, rain: 35 },
+      { name: 'Barclayville, Grand Kru', highTemp: 92, lowTemp: 83, condition: '🌤️ Partly Cloudy', humidity: 79, wind: 11, rain: 25 },
+      
+      // Northern Cities & Nimba
       { name: 'Voinjama, Lofa', highTemp: 82, lowTemp: 71, condition: '🌧️ Rain', humidity: 88, wind: 8, rain: 70 },
-      { name: 'Zwedru, Grand Gedeh', highTemp: 86, lowTemp: 76, condition: '⛅ Mostly Cloudy', humidity: 74, wind: 6, rain: 35 }
+      { name: 'Ganta, Nimba', highTemp: 81, lowTemp: 72, condition: '🌦️ Scattered Showers', humidity: 78, wind: 7, rain: 45 },
+      { name: 'Sanniquellie, Nimba', highTemp: 79, lowTemp: 70, condition: '☁️ Cloudy', humidity: 82, wind: 6, rain: 50 },
+      { name: 'Kolahun, Lofa', highTemp: 80, lowTemp: 69, condition: '🌦️ Scattered Showers', humidity: 85, wind: 5, rain: 55 },
+      
+      // Central/Eastern Cities
+      { name: 'Zwedru, Grand Gedeh', highTemp: 86, lowTemp: 76, condition: '⛅ Mostly Cloudy', humidity: 74, wind: 6, rain: 35 },
+      { name: 'Robertsport, Grand Cape Mount', highTemp: 88, lowTemp: 80, condition: '🌤️ Partly Cloudy', humidity: 76, wind: 12, rain: 20 },
+      { name: 'Bopolu, Gbarpolu', highTemp: 83, lowTemp: 74, condition: '☁️ Cloudy', humidity: 77, wind: 7, rain: 45 },
+      { name: 'Tubmanburg, Bomi', highTemp: 85, lowTemp: 76, condition: '☀️ Sunny', humidity: 72, wind: 9, rain: 25 },
+      
+      // Mining Areas & Rural Counties
+      { name: 'Kakata, Margibi', highTemp: 87, lowTemp: 77, condition: '🌤️ Partly Cloudy', humidity: 75, wind: 8, rain: 30 },
+      { name: 'Yekepa, Nimba', highTemp: 79, lowTemp: 70, condition: '☀️ Sunny', humidity: 68, wind: 6, rain: 15 },
+      { name: 'Careysburg, Montserrado', highTemp: 88, lowTemp: 78, condition: '☁️ Cloudy', humidity: 76, wind: 9, rain: 28 },
+      { name: 'Harbel, Margibi', highTemp: 89, lowTemp: 80, condition: '☀️ Sunny', humidity: 74, wind: 10, rain: 12 }
     ]
   }
 ];
