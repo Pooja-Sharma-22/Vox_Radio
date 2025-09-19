@@ -201,11 +201,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Fix infinite re-render loops (persistent issue)"
+    - "Expand weather coverage with additional cities"
   stuck_tasks: 
     - "Fix infinite re-render loops"
   test_all: false
-  test_priority: "medium"
+  test_priority: "high"
 
 agent_communication:
     -agent: "main"
