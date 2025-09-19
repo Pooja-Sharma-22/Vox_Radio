@@ -218,28 +218,28 @@ const CurrentWeather = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 sm:gap-3 text-xs">
           <div className="p-2 bg-white rounded border">
             <div className="font-medium text-gray-900">:00 - :14</div>
-            <div className="text-gray-600">Major Cities</div>
-            <div className="text-gray-500">Monrovia, Gbarnga, Buchanan, Kakata</div>
+            <div className="text-gray-600">Major Cities & Greater Monrovia</div>
+            <div className="text-gray-500">Monrovia, Gbarnga, Bensonville, Caldwell</div>
           </div>
           <div className="p-2 bg-white rounded border">
             <div className="font-medium text-gray-900">:15 - :29</div>
-            <div className="text-gray-600">Coastal Cities</div>
-            <div className="text-gray-500">Harper, Greenville, Grand Bassa, River Cess</div>
+            <div className="text-gray-600">Coastal Cities & Grand Bassa</div>
+            <div className="text-gray-500">Buchanan, Harper, Greenville, Barclayville</div>
           </div>
           <div className="p-2 bg-white rounded border">
             <div className="font-medium text-gray-900">:30 - :44</div>
-            <div className="text-gray-600">Northern Cities</div>
-            <div className="text-gray-500">Voinjama, Kolahun, Foya, Zorzor</div>
+            <div className="text-gray-600">Northern Cities & Nimba</div>
+            <div className="text-gray-500">Voinjama, Ganta, Sanniquellie, Kolahun</div>
           </div>
           <div className="p-2 bg-white rounded border">
             <div className="font-medium text-gray-900">:45 - :59</div>
-            <div className="text-gray-600">Central/Eastern</div>
-            <div className="text-gray-500">Zwedru, Pleebo, Tubmanburg, Robertsport</div>
+            <div className="text-gray-600">Central/Eastern Cities</div>
+            <div className="text-gray-500">Zwedru, Robertsport, Bopolu, Tubmanburg</div>
           </div>
           <div className="p-2 bg-white rounded border">
             <div className="font-medium text-gray-900">Next Hour</div>
-            <div className="text-gray-600">Mining/Rural Areas</div>
-            <div className="text-gray-500">Yekepa, Bong Mines, Harbel, Bomi Hills</div>
+            <div className="text-gray-600">Mining Areas & Rural Counties</div>
+            <div className="text-gray-500">Kakata, Yekepa, Careysburg, Harbel</div>
           </div>
         </div>
       </div>
