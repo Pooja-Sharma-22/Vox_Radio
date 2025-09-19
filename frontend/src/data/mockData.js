@@ -244,6 +244,36 @@ export const allLiberianCities = [
         intensity: "Light",
         duration: "Ongoing (1-2 more hours)"
       }
+    },
+    {
+      city: "Edina",
+      country: "Liberia",
+      temperature: 86,
+      condition: "Coastal Breeze",
+      humidity: "83%",
+      windSpeed: "12 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 60,
+        nextRainIn: "4 hours",
+        intensity: "Light",
+        duration: "1-2 hours"
+      }
+    },
+    {
+      city: "Sasstown",
+      country: "Liberia",
+      temperature: 87,
+      condition: "Hot",
+      humidity: "81%",
+      windSpeed: "8 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 55,
+        nextRainIn: "6 hours",
+        intensity: "Light",
+        duration: "1 hour"
+      }
     }
   ],
   // Set 3 - Northern Cities & Nimba
