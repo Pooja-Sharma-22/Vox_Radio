@@ -277,6 +277,36 @@ export const allLiberianCities = [
         intensity: "Moderate",
         duration: "2-3 hours"
       }
+    },
+    {
+      city: "Foya",
+      country: "Liberia",
+      temperature: 79,
+      condition: "Partly Cloudy",
+      humidity: "68%",
+      windSpeed: "6 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 55,
+        nextRainIn: "6 hours",
+        intensity: "Light",
+        duration: "1 hour"
+      }
+    },
+    {
+      city: "Zorzor",
+      country: "Liberia",
+      temperature: 73,
+      condition: "Cool",
+      humidity: "75%",
+      windSpeed: "4 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 70,
+        nextRainIn: "3 hours",
+        intensity: "Light",
+        duration: "1-2 hours"
+      }
     }
   ],
   // Set 4 - Central/Eastern Cities
