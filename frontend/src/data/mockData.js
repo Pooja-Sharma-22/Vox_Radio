@@ -490,6 +490,36 @@ export const allLiberianCities = [
         intensity: "Moderate",
         duration: "1-2 hours"
       }
+    },
+    {
+      city: "Sapo",
+      country: "Liberia",
+      temperature: 78,
+      condition: "Forest Mist",
+      humidity: "89%",
+      windSpeed: "3 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 85,
+        nextRainIn: "1.5 hours",
+        intensity: "Heavy",
+        duration: "3-4 hours"
+      }
+    },
+    {
+      city: "Juarzon",
+      country: "Liberia",
+      temperature: 83,
+      condition: "Humid",
+      humidity: "82%",
+      windSpeed: "6 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 70,
+        nextRainIn: "3 hours",
+        intensity: "Moderate",
+        duration: "2-3 hours"
+      }
     }
   ],
   // Set 5 - Mining Areas & Rural Counties
