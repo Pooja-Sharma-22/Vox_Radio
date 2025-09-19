@@ -91,6 +91,36 @@ export const allLiberianCities = [
         intensity: "Light",
         duration: "1-2 hours"
       }
+    },
+    {
+      city: "Kakata",
+      country: "Liberia",
+      temperature: 81,
+      condition: "Overcast",
+      humidity: "71%",
+      windSpeed: "6 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 90,
+        nextRainIn: "30 minutes",
+        intensity: "Heavy",
+        duration: "2-4 hours"
+      }
+    },
+    {
+      city: "Harbel",
+      country: "Liberia",
+      temperature: 82,
+      condition: "Warm",
+      humidity: "76%",
+      windSpeed: "7 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 65,
+        nextRainIn: "3.5 hours",
+        intensity: "Light",
+        duration: "1-2 hours"
+      }
     }
   ],
   // Set 2 - Coastal Cities & Grand Bassa
