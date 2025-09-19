@@ -370,6 +370,36 @@ export const allLiberianCities = [
         intensity: "Moderate",
         duration: "1-2 hours"
       }
+    },
+    {
+      city: "Pleebo",
+      country: "Liberia",
+      temperature: 84,
+      condition: "Humid",
+      humidity: "87%",
+      windSpeed: "9 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 80,
+        nextRainIn: "1.5 hours",
+        intensity: "Heavy",
+        duration: "2-4 hours"
+      }
+    },
+    {
+      city: "Fish Town",
+      country: "Liberia",
+      temperature: 85,
+      condition: "Coastal Breeze",
+      humidity: "84%",
+      windSpeed: "11 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 60,
+        nextRainIn: "4 hours",
+        intensity: "Moderate",
+        duration: "1-2 hours"
+      }
     }
   ],
   // Set 5 - Mining Areas & Rural Counties
