@@ -367,6 +367,36 @@ export const allLiberianCities = [
         intensity: "Light",
         duration: "1-2 hours"
       }
+    },
+    {
+      city: "Yekepa",
+      country: "Liberia",
+      temperature: 75,
+      condition: "Cool",
+      humidity: "70%",
+      windSpeed: "5 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 60,
+        nextRainIn: "5 hours",
+        intensity: "Light",
+        duration: "1 hour"
+      }
+    },
+    {
+      city: "Tappita",
+      country: "Liberia",
+      temperature: 80,
+      condition: "Humid",
+      humidity: "78%",
+      windSpeed: "5 mph",
+      updated: weatherTimestamp,
+      rainPrediction: {
+        probability: 75,
+        nextRainIn: "2.5 hours",
+        intensity: "Moderate",
+        duration: "2 hours"
+      }
     }
   ],
   // Set 4 - Central/Eastern Cities
