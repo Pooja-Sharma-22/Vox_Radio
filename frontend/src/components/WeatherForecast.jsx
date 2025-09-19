@@ -150,7 +150,7 @@ const WeatherForecast = () => {
     return formatMonrovia(nextUpdateTime, false);
   };
 
-  // Generate updated forecast data with slight variations
+  // Generate updated forecast data with slight variations for all locations
   const generateUpdatedForecast = () => {
     return liberianForecastData.map(dayData => ({
       ...dayData,
