@@ -30,7 +30,7 @@ const generateRainPrediction = () => {
 };
 
 export const allLiberianCities = [
-  // Set 1 - Major Cities
+  // Set 1 - Major Cities & Greater Monrovia Area
   [
     {
       city: "Monrovia",
@@ -63,33 +63,33 @@ export const allLiberianCities = [
       }
     },
     {
-      city: "Buchanan",
+      city: "Bensonville",
       country: "Liberia",
-      temperature: 84, // Changed from 29°C to 84°F
-      condition: "Clear",
-      humidity: "82%",
-      windSpeed: "9 mph",
+      temperature: 83,
+      condition: "Partly Cloudy",
+      humidity: "76%",
+      windSpeed: "8 mph",
       updated: weatherTimestamp,
       rainPrediction: {
-        probability: 85,
-        nextRainIn: "1 hour",
-        intensity: "Heavy",
-        duration: "2-3 hours"
+        probability: 70,
+        nextRainIn: "2.5 hours",
+        intensity: "Moderate",
+        duration: "1-2 hours"
       }
     },
     {
-      city: "Kakata",
+      city: "Caldwell",
       country: "Liberia",
-      temperature: 81, // Changed from 27°C to 81°F
-      condition: "Overcast",
-      humidity: "71%",
-      windSpeed: "6 mph",
+      temperature: 84,
+      condition: "Warm",
+      humidity: "79%",
+      windSpeed: "7 mph",
       updated: weatherTimestamp,
       rainPrediction: {
-        probability: 90,
-        nextRainIn: "30 minutes",
-        intensity: "Heavy",
-        duration: "2-4 hours"
+        probability: 65,
+        nextRainIn: "3 hours",
+        intensity: "Light",
+        duration: "1-2 hours"
       }
     }
   ],
