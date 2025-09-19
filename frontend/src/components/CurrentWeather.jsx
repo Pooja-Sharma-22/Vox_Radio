@@ -86,11 +86,11 @@ const CurrentWeather = () => {
     const rotationIndex = Math.floor(minutes / 15);
     
     const setNames = [
-      "Major Cities",
-      "Coastal Cities", 
-      "Northern Cities",
+      "Major Cities & Greater Monrovia",
+      "Coastal Cities & Grand Bassa", 
+      "Northern Cities & Nimba",
       "Central/Eastern Cities",
-      "Mining/Rural Areas"
+      "Mining Areas & Rural Counties"
     ];
     
     return setNames[rotationIndex % setNames.length];
