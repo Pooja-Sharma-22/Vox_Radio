@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Remove settings tab and implement VDO.Ninja integration for remote broadcast with director/guest links, audio parameters, and presenter instructions."
+user_problem_statement: "Expand weather coverage to include additional Liberian cities with auto-rotation every 15 minutes: Robertsport, Bensonville, Ganta, Barclayville, Bopolu, Careysburg, Sanniquellie, and Caldwell."
 
 frontend:
   - task: "Remove settings tab from TabNavigation.jsx"
