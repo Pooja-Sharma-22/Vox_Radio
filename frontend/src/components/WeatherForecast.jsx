@@ -358,10 +358,10 @@ const WeatherForecast = () => {
           <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse mt-1"></div>
           <div>
             <p className="text-sm text-yellow-800">
-              <strong>Weather Data Coverage:</strong> This forecast covers major counties and cities across Liberia including Montserrado, Bong, Grand Bassa, Maryland, Lofa, and Grand Gedeh counties.
+              <strong>Complete National Coverage:</strong> This comprehensive forecast covers all 15 counties of Liberia including major cities, coastal areas, mining regions, and rural counties across Montserrado, Bong, Grand Bassa, Maryland, Lofa, Nimba, Grand Gedeh, Grand Cape Mount, Gbarpolu, Bomi, Margibi, Sinoe, and Grand Kru.
             </p>
             <p className="text-xs text-yellow-700 mt-2">
-              Weather predictions are based on West African meteorological patterns and are updated every 30 minutes for accuracy.
+              Weather predictions are based on West African meteorological patterns and updated every 30 minutes. Coverage includes both urban centers and rural areas to provide complete national weather awareness.
             </p>
           </div>
         </div>
