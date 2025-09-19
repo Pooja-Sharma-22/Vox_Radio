@@ -11,7 +11,7 @@ from datetime import datetime
 import time
 
 # Backend URL from frontend environment
-BACKEND_URL = "https://vox-radio.preview.emergentagent.com/api"
+BACKEND_URL = "https://voxlive-desk.preview.emergentagent.com/api"
 
 class BackendTester:
     def __init__(self):
