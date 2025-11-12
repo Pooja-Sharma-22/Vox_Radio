@@ -21,10 +21,10 @@ const Dashboard = () => {
 
   const handleDownloadExcel = () => {
     const data = {
-      weather: 'Current weather data for Liberian cities',
-      testimonies: 'Recent testimonies submitted',
-      phoneCalls: 'Phone call logs',
-      whatsapp: 'WhatsApp message statistics'
+      weather: 'Current weather data for Liberian cities1',
+      testimonies: 'Recent testimonies submitted1',
+      phoneCalls: 'Phone call logs1',
+      whatsapp: 'WhatsApp message statistics1'
     };
     
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
@@ -78,8 +78,8 @@ const Dashboard = () => {
               className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white flex items-center gap-1 sm:gap-2 shadow-lg border border-black text-xs sm:text-sm"
             >
               <Download size={14} className="sm:w-4 sm:h-4" />
-              <span className="hidden sm:inline">Download Report</span>
-              <span className="sm:hidden">Download</span>
+              <span className="hidden sm:inline">Download Report1</span>
+              <span className="sm:hidden">Download1</span>
             </Button>
           </div>
         </div>
